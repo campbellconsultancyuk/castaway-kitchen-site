@@ -212,7 +212,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-family: var(--font-display);
     font-size: clamp(8rem, 20vw, 22rem);
     letter-spacing: 0.02em;
-    ccolor: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.04);
     white-space: nowrap;
     top: 50%;
     left: 50%;
@@ -227,8 +227,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 
 @keyframes revealText {
-  0%   { opacity: 0; transform: translate(-50%, -50%) scale(1.05); }
-  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
   .hero-inner {
     display: grid;
