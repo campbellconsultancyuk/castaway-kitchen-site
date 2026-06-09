@@ -545,12 +545,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   /* ---- RESPONSIVE ---- */
-  @media (max-width: 900px) {
+ @media (max-width: 900px) {
     .hero-inner {
       grid-template-columns: 1fr;
     }
     .hero-badge {
-      display: none;
+      display: flex;
+      justify-content: center;
+      margin-top: var(--space-md);
+    }
+    .hero-badge img {
+      width: 180px;
+      height: 180px;
     }
     .what-grid {
       grid-template-columns: 1fr;
