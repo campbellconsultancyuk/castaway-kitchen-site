@@ -1,0 +1,198 @@
+---
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/menu', label: 'Food & Menu' },
+  { href: '/festivals', label: 'Festivals' },
+  { href: '/private-catering', label: 'Private Catering' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const { pathname } = Astro.url;
+---
+
+<header class="nav-wrapper">
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo" aria-label="Castaway Kitchen home">
+      <img src="/castaway-logo.png" alt="Castaway Kitchen" width="52" height="52" />
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={`nav-link ${pathname === link.href ? 'nav-link--active' : ''}`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <a href="/contact" class="btn btn--primary nav-cta">Book Us</a>
+
+    <!-- Mobile hamburger -->
+    <button class="nav-hamburger" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="mobile-menu" aria-hidden="true">
+    {navLinks.map(link => (
+      <a href={link.href} class="nav-mobile-link">{link.label}</a>
+    ))}
+    <a href="/contact" class="btn btn--primary" style="margin-top: 1rem; text-align: center;">Book Us</a>
+  </div>
+</header>
+
+<style>
+  .nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--black);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .nav-wrapper.scrolled {
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    height: var(--nav-height);
+  }
+
+  .nav-logo img {
+    border-radius: 50%;
+    filter: invert(1);
+    transition: opacity 0.2s;
+  }
+
+  .nav-logo:hover img {
+    opacity: 0.8;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex: 1;
+  }
+
+  .nav-link {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-link:hover,
+  .nav-link--active {
+    color: var(--white);
+  }
+
+  .nav-link--active {
+    color: var(--teal-light);
+  }
+
+  .nav-cta {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: auto;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    transition: all 0.25s ease;
+    transform-origin: center;
+  }
+
+  .nav-hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    padding: var(--space-md);
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .nav-mobile.open {
+    display: flex;
+  }
+
+  .nav-mobile-link {
+    padding: 0.75rem 0;
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: rgba(255,255,255,0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color 0.2s;
+  }
+
+  .nav-mobile-link:hover {
+    color: var(--teal-light);
+  }
+
+  @media (max-width: 900px) {
+    .nav-links,
+    .nav-cta {
+      display: none;
+    }
+    .nav-hamburger {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('open');
+    toggle.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    menu?.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Scroll shadow
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.nav-wrapper');
+    nav?.classList.toggle('scrolled', window.scrollY > 10);
+  });
+</script>

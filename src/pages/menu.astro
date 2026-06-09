@@ -1,0 +1,396 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const menuSections = [
+  {
+    id: 'gyros',
+    title: 'Greek & Mediterranean',
+    emoji: '🥙',
+    description: 'Our roots. Slow-cooked, loaded, and impossible to eat neatly.',
+    items: [
+      { name: 'Classic Chicken Gyros', desc: 'Marinated chicken thigh, tzatziki, tomato, onion, paprika fries in warm flatbread', price: '£X' },
+      { name: 'Pork Gyros', desc: 'Slow-roasted pork, tzatziki, fresh tomato, red onion, mustard in warm flatbread', price: '£X' },
+      { name: 'Halloumi Gyros', desc: 'Grilled halloumi, roasted peppers, tzatziki, tomato, red onion — vegetarian', price: '£X' },
+      { name: 'Loaded Fries', desc: 'Paprika fries, tzatziki, feta, olives, fresh herbs', price: '£X' },
+    ],
+  },
+  {
+    id: 'korean',
+    title: 'Korean Bowls',
+    emoji: '🍜',
+    description: 'Bold, punchy, built for the festival crowd.',
+    items: [
+      { name: 'Gochujang Chicken Bowl', desc: 'Gochujang-glazed chicken, steamed rice, pickled veg, sesame, spring onion', price: '£X' },
+      { name: 'Korean BBQ Beef Bowl', desc: 'Bulgogi-style beef, jasmine rice, kimchi, sesame seeds, gochujang drizzle', price: '£X' },
+      { name: 'Tofu Korean Bowl', desc: 'Crispy tofu, gochujang glaze, pickled cucumber, steamed rice — vegan', price: '£X' },
+    ],
+  },
+  {
+    id: 'poke',
+    title: 'Poke Bowls',
+    emoji: '🐟',
+    description: 'Fresh, fast, and properly put together.',
+    items: [
+      { name: 'Salmon Poke', desc: 'Fresh salmon, sushi rice, edamame, avocado, pickled ginger, sesame dressing', price: '£X' },
+      { name: 'Tuna Poke', desc: 'Ahi tuna, sushi rice, cucumber, mango, crispy shallots, ponzu dressing', price: '£X' },
+      { name: 'Vegan Poke Bowl', desc: 'Marinated tofu, sushi rice, edamame, avocado, pickled daikon — vegan', price: '£X' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Food & Menu"
+  description="Slow-cooked gyros, gochujang Korean bowls and fresh poke. Castaway Kitchen's festival menu — vegetarian & vegan options across all three. Made fresh at every event."
+>
+
+  <!-- HERO -->
+  <section class="page-hero section--dark">
+    <div class="container">
+      <p class="eyebrow">What we're serving</p>
+      <h1 class="display page-hero-title">The Menu</h1>
+      <p class="page-hero-body">
+        Gyros-led, with Korean and poke bowls alongside. Everything made to order,
+        with proper ingredients — no shortcuts.
+      </p>
+    </div>
+  </section>
+
+  <!-- MENU NOTE -->
+  <div class="menu-note">
+    <div class="container">
+      <p>
+        📋 <strong>Prices and full menu details coming soon.</strong>
+        This is a placeholder build — Scott's confirmed menu copy will drop in here.
+        Dietary info, allergen notes and pricing to be confirmed.
+      </p>
+    </div>
+  </div>
+
+  <!-- MENU SECTIONS -->
+  {menuSections.map((section) => (
+    <section class="section menu-section" id={section.id}>
+      <div class="container">
+        <div class="menu-section-header">
+          <span class="menu-section-emoji" aria-hidden="true">{section.emoji}</span>
+          <div>
+            <p class="eyebrow">{section.title}</p>
+            <h2 class="display menu-section-title">{section.title}</h2>
+            <p class="menu-section-desc">{section.description}</p>
+          </div>
+        </div>
+
+        <div class="menu-items">
+          {section.items.map((item) => (
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <h3 class="menu-item-name">{item.name}</h3>
+                <p class="menu-item-desc">{item.desc}</p>
+              </div>
+              <span class="menu-item-price">{item.price}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- DIETARY NOTE -->
+  <section class="section--sand section dietary">
+    <div class="container dietary-inner">
+      <h2 class="display dietary-title">Dietary info</h2>
+      <div class="dietary-grid">
+        <div class="dietary-item">
+          <span>🌱</span>
+          <div>
+            <strong>Vegetarian & Vegan</strong>
+            <p>We have clearly marked options across all three menus. Ask at the unit if you're unsure.</p>
+          </div>
+        </div>
+        <div class="dietary-item">
+          <span>⚠️</span>
+          <div>
+            <strong>Allergens</strong>
+            <p>Full allergen information available at the unit. Please speak to a team member before ordering.</p>
+          </div>
+        </div>
+        <div class="dietary-item">
+          <span>🔄</span>
+          <div>
+            <strong>Seasonal changes</strong>
+            <p>Menu may vary slightly by event and season. Festival-specific menus available on request.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq">
+    <div class="container">
+      <p class="eyebrow">Common questions</p>
+      <h2 class="display faq-title">Menu FAQs</h2>
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>What is a gyros and how is it served?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Gyros (pronounced "yee-ros") is a traditional Greek dish — slow-cooked meat carved from a rotating spit, served in warm flatbread with tzatziki, fresh tomato, red onion and paprika fries. Ours is made properly, from scratch, at every event.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>Do you have vegetarian and vegan options?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Yes — across all three menus. Halloumi gyros (vegetarian), tofu Korean bowl (vegan) and vegan poke bowl are all available as standard. No need to request in advance at festivals — just ask at the unit.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>How do you handle allergens?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Full allergen information is available at the unit. Please speak to a team member before ordering if you have any allergies or intolerances. For private events, flag requirements when you enquire and we'll confirm what we can accommodate.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>Can you do burgers?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Yes — for private events we can add burgers to the offering. We're flexible with the menu for private catering. Get in touch and we'll work out what fits your event best.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>Does the menu change between festivals?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">The core menu stays consistent — gyros, Korean bowls and poke. Occasionally we'll run specials or seasonal items. Follow us on social to see what's on at each event.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>Can I see the full menu before an event?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">The menu on this page is our standard offering. Prices are confirmed per event — follow us on social or check back here as the 2026 season gets underway for updated pricing.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>Can you create a bespoke menu for a private event?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Absolutely. For private catering we can combine menus, adjust portion formats, create sharing platters or incorporate specific dishes on request. <a href="/contact">Get in touch</a> with your requirements and we'll build something around your event.</p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVATE CATERING CTA -->
+  <section class="section--teal section catering-cta">
+    <div class="container catering-cta-inner">
+      <div>
+        <p class="eyebrow" style="color: rgba(255,255,255,0.6)">Not at a festival?</p>
+        <h2 class="display catering-cta-title">We can come to you</h2>
+        <p>Private events, weddings, corporate — we tailor the menu to fit.</p>
+      </div>
+      <a href="/private-catering" class="btn btn--outline">Private Catering</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* HERO */
+  .page-hero {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .page-hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin: var(--space-xs) 0 var(--space-md);
+    color: var(--white);
+  }
+
+  .page-hero-body {
+    font-size: var(--text-lg);
+    color: rgba(255,255,255,0.7);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* MENU NOTE */
+  .menu-note {
+    background: #fffbe6;
+    border-bottom: 2px solid #f0d060;
+    padding: var(--space-sm) 0;
+  }
+
+  .menu-note p {
+    font-size: var(--text-sm);
+    color: #7a6a00;
+  }
+
+  /* MENU SECTIONS */
+  .menu-section {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .menu-section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  .menu-section-emoji {
+    font-size: 3.5rem;
+    line-height: 1;
+    margin-top: 4px;
+  }
+
+  .menu-section-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    margin: var(--space-xs) 0 var(--space-sm);
+  }
+
+  .menu-section-desc {
+    color: var(--warm-grey);
+    font-size: var(--text-base);
+    max-width: 480px;
+  }
+
+  /* MENU ITEMS */
+  .menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-top: 1px solid rgba(0,0,0,0.07);
+  }
+
+  .menu-item-name {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .menu-item-desc {
+    font-size: var(--text-sm);
+    color: var(--warm-grey);
+    max-width: 520px;
+    line-height: 1.6;
+  }
+
+  .menu-item-price {
+  display: none;
+}
+
+  /* DIETARY */
+  .dietary-inner {
+    max-width: 800px;
+  }
+
+  .dietary-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--space-xl);
+  }
+
+  .dietary-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .dietary-item {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+  }
+
+  .dietary-item span {
+    font-size: 1.75rem;
+    flex-shrink: 0;
+  }
+
+  .dietary-item strong {
+    display: block;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .dietary-item p {
+    font-size: var(--text-sm);
+    color: var(--warm-grey);
+    line-height: 1.6;
+  }
+
+  /* FAQ */
+  .faq-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: var(--space-sm) 0 var(--space-xl);
+  }
+
+  .faq-list {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .faq-item {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    cursor: pointer;
+    font-weight: 800;
+    font-size: var(--text-base);
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-icon { font-size: var(--text-xl); font-weight: 400; color: var(--teal); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item[open] .faq-icon { transform: rotate(45deg); }
+  .faq-answer { padding: 0 var(--space-lg) var(--space-md); font-size: var(--text-sm); color: var(--warm-grey); line-height: 1.7; }
+  .faq-answer a { color: var(--teal); font-weight: 700; }
+
+  /* CATERING CTA */
+  .catering-cta {
+    padding: var(--space-xl) 0;
+  }
+
+  .catering-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+  }
+
+  .catering-cta-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: var(--white);
+    margin: var(--space-xs) 0 var(--space-sm);
+  }
+
+  .catering-cta p {
+    color: rgba(255,255,255,0.75);
+  }
+
+  @media (max-width: 768px) {
+    .menu-section-header {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .menu-item {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .catering-cta-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Message Sent">
+  <section class="thanks section--dark">
+    <div class="container thanks-inner">
+      <span class="thanks-emoji" aria-hidden="true">🥙</span>
+      <h1 class="display thanks-title">Message received.</h1>
+      <p class="thanks-body">We'll get back to you within 24 hours. In the meantime, why not check out the menu?</p>
+      <div class="thanks-ctas">
+        <a href="/menu" class="btn btn--primary">See the Menu</a>
+        <a href="/" class="btn btn--outline">Back to Home</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thanks {
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+  }
+
+  .thanks-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: 560px;
+    padding: var(--space-2xl) 0;
+  }
+
+  .thanks-emoji {
+    font-size: 4rem;
+  }
+
+  .thanks-title {
+    font-size: clamp(3rem, 7vw, 5rem);
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .thanks-body {
+    font-size: var(--text-lg);
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+  }
+
+  .thanks-ctas {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-top: var(--space-sm);
+  }
+</style>

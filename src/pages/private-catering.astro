@@ -1,0 +1,448 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const useCases = [
+  {
+    icon: '💼',
+    title: 'Corporate Events',
+    desc: 'Team lunches, away days, client entertaining. We handle the food — properly — so you can focus on the people. No buffet trays, no soggy sandwiches.',
+    details: ['Up to [X] guests', 'Staffed service available', 'Dietary requirements catered for', 'Invoicing available'],
+  },
+  {
+    icon: '💍',
+    title: 'Weddings',
+    desc: 'Festival-style food for your big day. We\'ve done wedding receptions that guests are still talking about. The gyros go down better than most sit-down meals.',
+    details: ['Evening receptions & full-day catering', 'Custom menu builds', 'Staffed unit with full setup', 'Works alongside or instead of a caterer'],
+  },
+  {
+    icon: '🎉',
+    title: 'Private Parties',
+    desc: 'Birthdays, anniversaries, garden parties, leaving dos. If you\'re feeding a crowd and want it to feel different, we\'re your people.',
+    details: ['Flexible guest numbers', 'Outdoor & indoor-friendly setup', 'Can work with marquees and tents', 'BYOB-friendly events welcome'],
+  },
+];
+---
+
+<BaseLayout
+  title="Private Catering"
+  description="Festival-style street food for private events across the Cotswolds, Cornwall & South West. Weddings, parties, corporate. Fully staffed, fully self-sufficient. 24hr quote turnaround."
+>
+
+  <!-- HERO -->
+  <section class="page-hero section--dark">
+    <div class="container">
+      <p class="eyebrow">Private hire</p>
+      <h1 class="display page-hero-title">We bring<br />the kitchen<br /><span style="color: var(--teal-light)">to you.</span></h1>
+      <p class="page-hero-body">
+        Festival-quality street food at your event — fully staffed, fully equipped, completely tailored to your guest list.
+      </p>
+      <a href="/contact" class="btn btn--primary" style="margin-top: var(--space-lg)">Enquire Now</a>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="section use-cases">
+    <div class="container">
+      <p class="eyebrow">What we cater</p>
+      <h2 class="display use-cases-title">Three types of event.<br />Same great food.</h2>
+
+      <div class="use-cases-grid">
+        {useCases.map((uc) => (
+          <div class="use-case-card">
+            <span class="use-case-icon" aria-hidden="true">{uc.icon}</span>
+            <h3 class="display use-case-title">{uc.title}</h3>
+            <p class="use-case-desc">{uc.desc}</p>
+            <ul class="use-case-details">
+              {uc.details.map((detail) => (
+                <li>✓ {detail}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section--sand section how">
+    <div class="container">
+      <p class="eyebrow">The process</p>
+      <h2 class="display how-title">How it works</h2>
+      <div class="how-steps">
+        <div class="how-step">
+          <span class="how-step-num display">1</span>
+          <div>
+            <h3>Tell us about your event</h3>
+            <p>Drop us a message with the basics — date, location, rough guest numbers, type of event. No commitment needed at this stage.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <span class="how-step-num display">2</span>
+          <div>
+            <h3>We build the quote</h3>
+            <p>We'll come back with a tailored quote based on your requirements. Menu, staffing, setup — all included. No hidden extras.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <span class="how-step-num display">3</span>
+          <div>
+            <h3>We show up and feed people</h3>
+            <p>On the day we handle everything — setup, service, clearing. You focus on your guests, we focus on the food.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU OPTIONS -->
+  <section class="section menu-options">
+    <div class="container">
+      <p class="eyebrow">What's on offer</p>
+      <h2 class="display menu-options-title">Mix and match the menu</h2>
+      <p class="menu-options-body">
+        We can run one of our menus or combine them — Greek gyros alongside Korean bowls, or poke as a fresh starter option.
+        Tell us what you're after and we'll make it work.
+      </p>
+      <div class="menu-pills">
+        <a href="/menu#gyros" class="menu-pill">🥙 Greek & Mediterranean</a>
+        <a href="/menu#korean" class="menu-pill">🍜 Korean Bowls</a>
+        <a href="/menu#poke" class="menu-pill">🐟 Poke Bowls</a>
+        <span class="menu-pill menu-pill--muted">Custom builds on request</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREAS WE COVER -->
+<section class="section areas">
+  <div class="container">
+    <p class="eyebrow">Where we work</p>
+    <h2 class="display areas-title">Our areas</h2>
+    <p class="areas-intro">Based in Moreton-in-Marsh, Gloucestershire — with deep roots in both the Cotswolds and Cornwall. We cover the full South West and can travel further for the right event.</p>
+    <div class="areas-grid">
+
+      <a href="/private-catering/cotswolds" class="area-card">
+        <div class="area-card-top">
+          <span class="area-icon">🏡</span>
+          <span class="area-tag">Cotswolds & Gloucestershire</span>
+        </div>
+        <h3 class="display area-title">The Cotswolds</h3>
+        <p>Scott grew up in Chipping Campden. We've traded at Cheltenham Jazz Festival and Sandford Lido. This is home ground — we know the venues, the roads and the crowds.</p>
+        <span class="area-link">Full Cotswolds info →</span>
+      </a>
+
+      <a href="/private-catering/cornwall" class="area-card">
+        <div class="area-card-top">
+          <span class="area-icon">🌊</span>
+          <span class="area-tag">Cornwall & Devon</span>
+        </div>
+        <h3 class="display area-title">Cornwall</h3>
+        <p>Scott is Cornwall based. We cover the full county — from Truro to Land's End. Cornwall's outdoor event culture is exactly what we were built for.</p>
+        <span class="area-link">Full Cornwall info →</span>
+      </a>
+
+      <div class="area-card area-card--muted">
+        <div class="area-card-top">
+          <span class="area-icon">📍</span>
+          <span class="area-tag">Wider South West</span>
+        </div>
+        <h3 class="display area-title">Everywhere else</h3>
+        <p>Bristol, Somerset, Devon, Oxfordshire, Worcestershire — we cover the broader South West and can discuss travel further afield for larger events.</p>
+        <span class="area-link">Get in touch →</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- ENQUIRY CTA -->
+  <section class="section--teal section enquiry-cta">
+    <div class="container enquiry-cta-inner">
+      <div>
+        <p class="eyebrow" style="color: rgba(255,255,255,0.6)">Let's get started</p>
+        <h2 class="display enquiry-title">Tell us about your event</h2>
+        <p style="color: rgba(255,255,255,0.75); margin-top: var(--space-xs)">
+          We'll get back to you within 24 hours with a quote.
+        </p>
+      </div>
+      <a href="/contact" class="btn btn--outline">Enquire Now</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .page-hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin: var(--space-xs) 0 var(--space-md);
+    color: var(--white);
+    line-height: 0.9;
+  }
+
+  .page-hero-body {
+    font-size: var(--text-lg);
+    color: rgba(255,255,255,0.7);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  /* USE CASES */
+  .use-cases-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: var(--space-sm) 0 var(--space-xl);
+    line-height: 1;
+  }
+
+  .use-cases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .use-case-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .use-case-icon {
+    font-size: 2.5rem;
+  }
+
+  .use-case-title {
+    font-size: var(--text-2xl);
+  }
+
+  .use-case-desc {
+    font-size: var(--text-sm);
+    color: var(--warm-grey);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .use-case-details {
+    margin-top: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .use-case-details li {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--teal-dark);
+  }
+
+  /* HOW IT WORKS */
+  .how-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: var(--space-sm) 0 var(--space-xl);
+  }
+
+  .how-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    max-width: 640px;
+  }
+
+  .how-step {
+    display: flex;
+    gap: var(--space-lg);
+    align-items: flex-start;
+  }
+
+  .how-step-num {
+    font-size: var(--text-5xl);
+    color: var(--teal);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 48px;
+  }
+
+  .how-step h3 {
+    font-size: var(--text-xl);
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .how-step p {
+    font-size: var(--text-sm);
+    color: var(--warm-grey);
+    line-height: 1.7;
+  }
+
+  /* MENU OPTIONS */
+  .menu-options-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: var(--space-sm) 0 var(--space-md);
+  }
+
+  .menu-options-body {
+    font-size: var(--text-lg);
+    color: var(--warm-grey);
+    max-width: 580px;
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+  }
+
+  .menu-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .menu-pill {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: var(--white);
+    border: 2px solid var(--teal);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-sm);
+    font-weight: 800;
+    color: var(--teal-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+  }
+
+  .menu-pill:hover {
+    background: var(--teal);
+    color: var(--white);
+  }
+
+  .menu-pill--muted {
+    border-color: rgba(0,0,0,0.15);
+    color: var(--warm-grey);
+    cursor: default;
+  }
+
+  .menu-pill--muted:hover {
+    background: var(--white);
+    color: var(--warm-grey);
+    border-color: rgba(0,0,0,0.15);
+  }
+/* AREAS */
+.areas-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.areas-intro {
+  font-size: var(--text-lg);
+  color: var(--warm-grey);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-bottom: var(--space-xl);
+}
+
+.areas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.area-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  border: 2px solid transparent;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+a.area-card:hover {
+  border-color: var(--teal);
+  transform: translateY(-2px);
+}
+
+.area-card--muted {
+  background: var(--off-white);
+  cursor: default;
+}
+
+.area-card-top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.area-icon {
+  font-size: 1.75rem;
+}
+
+.area-tag {
+  font-size: var(--text-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--teal-dark);
+}
+
+.area-title {
+  font-size: var(--text-3xl);
+  line-height: 1;
+}
+
+.area-card p {
+  font-size: var(--text-sm);
+  color: var(--warm-grey);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.area-link {
+  font-size: var(--text-sm);
+  font-weight: 800;
+  color: var(--teal);
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .areas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+  /* ENQUIRY CTA */
+  .enquiry-cta {
+    padding: var(--space-xl) 0;
+  }
+
+  .enquiry-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+  }
+
+  .enquiry-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    margin-top: var(--space-xs);
+  }
+
+  @media (max-width: 768px) {
+    .use-cases-grid {
+      grid-template-columns: 1fr;
+    }
+    .enquiry-cta-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .how-step {
+      gap: var(--space-md);
+    }
+  }
+</style>

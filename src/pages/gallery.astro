@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Gallery"
+  description="Photos from Castaway Kitchen on the festival circuit — food, units and crew. Lakefest, 2000 Trees, Cheltenham Jazz Festival and more."
+>
+
+  <!-- HERO -->
+  <section class="page-hero section--dark">
+    <div class="container">
+      <p class="eyebrow">From the field</p>
+      <h1 class="display page-hero-title">Gallery</h1>
+      <p class="page-hero-body">
+        Festival life. Real food. The crew. Photos from the season — more dropping as the 2026 dates fill up.
+      </p>
+    </div>
+  </section>
+
+  <!-- PLACEHOLDER GRID -->
+  <section class="section gallery">
+    <div class="container">
+
+      <p class="gallery-placeholder-note eyebrow">
+        📸 Festival photos coming — check back during the 2026 season
+      </p>
+
+      <div class="gallery-grid">
+        <!-- Row 1: big left, two stacked right -->
+        <div class="gallery-tile gallery-tile--large gallery-tile--placeholder">
+          <div class="tile-inner">
+            <span>📸</span>
+            <p>Food close-up</p>
+          </div>
+        </div>
+        <div class="gallery-tile gallery-tile--placeholder">
+          <div class="tile-inner">
+            <span>📸</span>
+            <p>Unit at festival</p>
+          </div>
+        </div>
+        <div class="gallery-tile gallery-tile--placeholder">
+          <div class="tile-inner">
+            <span>📸</span>
+            <p>The crew</p>
+          </div>
+        </div>
+
+        <!-- Row 2: three equal -->
+        <div class="gallery-tile gallery-tile--placeholder">
+          <div class="tile-inner"><span>📸</span><p>Gyros build</p></div>
+        </div>
+        <div class="gallery-tile gallery-tile--placeholder">
+          <div class="tile-inner"><span>📸</span><p>Korean bowl</p></div>
+        </div>
+        <div class="gallery-tile gallery-tile--placeholder">
+          <div class="tile-inner"><span>📸</span><p>Festival crowd</p></div>
+        </div>
+
+        <!-- Row 3: two left, big right -->
+        <div class="gallery-tile gallery-tile--placeholder">
+          <div class="tile-inner"><span>📸</span><p>Setup morning</p></div>
+        </div>
+        <div class="gallery-tile gallery-tile--placeholder">
+          <div class="tile-inner"><span>📸</span><p>Happy customer</p></div>
+        </div>
+        <div class="gallery-tile gallery-tile--large gallery-tile--placeholder">
+          <div class="tile-inner"><span>📸</span><p>Sunset at the festival</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM CTA -->
+  <section class="section--teal section insta-cta">
+    <div class="container insta-cta-inner">
+      <div>
+        <p class="eyebrow" style="color: rgba(255,255,255,0.6)">Follow along</p>
+        <h2 class="display insta-title">See us in the wild</h2>
+        <p style="color: rgba(255,255,255,0.75); margin-top: var(--space-xs)">
+          Live festival updates, food shots and team moments — follow us on Instagram and Facebook.
+        </p>
+      </div>
+      <div class="insta-cta-buttons">
+        <a href="#" class="btn btn--outline">Instagram</a>
+        <a href="#" class="btn btn--outline">Facebook</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .page-hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin: var(--space-xs) 0 var(--space-md);
+    color: var(--white);
+  }
+
+  .page-hero-body {
+    font-size: var(--text-lg);
+    color: rgba(255,255,255,0.7);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .gallery-placeholder-note {
+    margin-bottom: var(--space-lg);
+    color: var(--teal-dark);
+  }
+
+  /* GALLERY GRID */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 260px;
+    gap: var(--space-sm);
+  }
+
+  .gallery-tile {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .gallery-tile--large {
+    grid-column: span 2;
+  }
+
+  .gallery-tile--placeholder {
+    background: var(--sand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    transition: background 0.2s;
+  }
+
+  .gallery-tile--placeholder:hover {
+    background: #ddd5bb;
+  }
+
+  .tile-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--warm-grey);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .tile-inner span {
+    font-size: 2rem;
+  }
+
+  /* INSTA CTA */
+  .insta-cta {
+    padding: var(--space-xl) 0;
+  }
+
+  .insta-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+  }
+
+  .insta-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    margin-top: var(--space-xs);
+  }
+
+  .insta-cta-buttons {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 200px;
+    }
+    .gallery-tile--large {
+      grid-column: span 2;
+    }
+    .insta-cta-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+    .gallery-tile--large {
+      grid-column: span 1;
+    }
+  }
+</style>

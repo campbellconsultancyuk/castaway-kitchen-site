@@ -1,0 +1,330 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get a quote for private catering or festival bookings. Based in Moreton-in-Marsh, covering the Cotswolds, Cornwall & wider South West. We reply within 24 hours."
+>
+
+  <!-- HERO -->
+  <section class="page-hero section--dark">
+    <div class="container">
+      <p class="eyebrow">Say hello</p>
+      <h1 class="display page-hero-title">Get in Touch</h1>
+      <p class="page-hero-body">
+        Private catering enquiry, festival question, or just want to know where we're heading next — drop us a message and we'll get back to you.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT CONTENT -->
+  <section class="section contact-body">
+    <div class="container contact-grid">
+
+      <!-- FORM -->
+      <div class="contact-form-wrap">
+        <h2 class="display contact-form-title">Send a message</h2>
+
+        <form class="contact-form" name="contact" method="POST" data-netlify="true" action="/thanks">
+          <input type="hidden" name="form-name" value="contact" />
+
+          <div class="form-group">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" placeholder="First and last name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone number <span class="form-optional">(optional)</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="+44 7xxx xxxxxx" />
+          </div>
+
+          <div class="form-group">
+            <label for="enquiry-type">Type of enquiry</label>
+            <select id="enquiry-type" name="enquiry-type" required>
+              <option value="" disabled selected>Select one</option>
+              <option value="private-catering">Private catering — wedding</option>
+              <option value="private-corporate">Private catering — corporate</option>
+              <option value="private-party">Private catering — party</option>
+              <option value="festival">Festival / event organiser</option>
+              <option value="general">General question</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="event-details-group">
+            <label for="event-date">Event date <span class="form-optional">(if applicable)</span></label>
+            <input type="date" id="event-date" name="event-date" />
+          </div>
+
+          <div class="form-group">
+            <label for="guests">Approximate guest numbers <span class="form-optional">(if applicable)</span></label>
+            <input type="number" id="guests" name="guests" placeholder="e.g. 80" min="1" />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us a bit about what you need..." rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--primary form-submit">Send Message</button>
+        </form>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="contact-sidebar">
+        <div class="contact-info-block">
+          <p class="eyebrow">Direct contact</p>
+          <h3 class="display contact-info-title">Other ways to reach us</h3>
+          <div class="contact-info-items">
+            <div class="contact-info-item">
+              <span>✉️</span>
+              <div>
+                <strong>Email</strong>
+                <a href="mailto:hello@castawaykitchen.co.uk">hello@castawaykitchen.co.uk</a>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <span>📍</span>
+              <div>
+                <strong>Based in</strong>
+                <p>Moreton-in-Marsh, Gloucestershire</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <span>🕐</span>
+              <div>
+                <strong>Response time</strong>
+                <p>We aim to reply within 24 hours on weekdays.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-social-block">
+          <p class="eyebrow">Follow us</p>
+          <div class="contact-social-links">
+            <a href="#" class="social-pill">Instagram</a>
+            <a href="#" class="social-pill">Facebook</a>
+          </div>
+        </div>
+
+        <div class="contact-quick-links">
+          <p class="eyebrow">Quick links</p>
+          <a href="/menu" class="quick-link">→ See the menu</a>
+          <a href="/festivals" class="quick-link">→ Festival dates</a>
+          <a href="/private-catering" class="quick-link">→ Private catering info</a>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .page-hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin: var(--space-xs) 0 var(--space-md);
+    color: var(--white);
+  }
+
+  .page-hero-body {
+    font-size: var(--text-lg);
+    color: rgba(255,255,255,0.7);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  /* CONTACT GRID */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  /* FORM */
+  .contact-form-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: var(--text-sm);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--black);
+  }
+
+  .form-optional {
+    font-weight: 600;
+    color: var(--warm-grey);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid rgba(0,0,0,0.12);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--black);
+    background: var(--white);
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--teal);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b6560' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+
+  .form-submit {
+    align-self: flex-start;
+    margin-top: var(--space-sm);
+  }
+
+  /* SIDEBAR */
+  .contact-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-lg));
+  }
+
+  .contact-info-title {
+    font-size: var(--text-2xl);
+    margin: var(--space-xs) 0 var(--space-md);
+  }
+
+  .contact-info-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .contact-info-item {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: flex-start;
+  }
+
+  .contact-info-item span {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .contact-info-item strong {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .contact-info-item a,
+  .contact-info-item p {
+    font-size: var(--text-sm);
+    color: var(--warm-grey);
+    line-height: 1.5;
+  }
+
+  .contact-info-item a:hover {
+    color: var(--teal);
+  }
+
+  .contact-social-links {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-xs);
+  }
+
+  .social-pill {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--teal);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-sm);
+    font-weight: 800;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+  }
+
+  .social-pill:hover {
+    background: var(--teal);
+    color: var(--white);
+  }
+
+  .contact-quick-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: var(--space-xs);
+  }
+
+  .quick-link {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--teal-dark);
+    transition: color 0.2s;
+  }
+
+  .quick-link:hover {
+    color: var(--teal-light);
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    .contact-sidebar {
+      position: static;
+    }
+  }
+</style>

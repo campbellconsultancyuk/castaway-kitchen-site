@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page Not Found">
+  <section class="not-found section--dark">
+    <div class="container not-found-inner">
+      <p class="display not-found-code" aria-hidden="true">404</p>
+      <h1 class="display not-found-title">Washed up somewhere unfamiliar.</h1>
+      <p class="not-found-body">That page doesn't exist — but the food's still great.</p>
+      <a href="/" class="btn btn--primary">Back to Home</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+  }
+
+  .not-found-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: 600px;
+    padding: var(--space-2xl) 0;
+  }
+
+  .not-found-code {
+    font-size: clamp(6rem, 20vw, 14rem);
+    color: var(--teal-light);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: -var(--space-lg);
+  }
+
+  .not-found-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .not-found-body {
+    font-size: var(--text-lg);
+    color: rgba(255,255,255,0.6);
+  }
+</style>

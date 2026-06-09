@@ -1,0 +1,382 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Placeholder — real dates/festivals to be confirmed by Scott
+const festivals2026 = [
+  {
+    name: 'Lakefest',
+    location: 'Eastnor Castle, Herefordshire',
+    dates: 'TBC — Summer 2026',
+    description: 'One of our favourite spots. Lakeside vibes, brilliant crowd, and a pitch right in the heart of the action.',
+    confirmed: false,
+  },
+  {
+    name: '2000 Trees',
+    location: 'Upcote Farm, Cheltenham',
+    dates: 'TBC — Summer 2026',
+    description: 'Indie, alternative, and consistently one of the best-run festivals in the UK. We\'re proud to be part of it.',
+    confirmed: false,
+  },
+  {
+    name: 'More dates TBC',
+    location: 'Various locations',
+    dates: '2026 Season',
+    description: 'More festivals to be announced. Follow us on social for the latest.',
+    confirmed: false,
+  },
+];
+---
+
+<BaseLayout
+  title="Festivals"
+  description="Castaway Kitchen on the 2026 festival circuit — Lakefest, 2000 Trees & more. Greek gyros, Korean bowls & poke. Find us, follow us, come hungry."
+>
+
+  <!-- HERO -->
+  <section class="page-hero section--dark">
+    <div class="container">
+      <p class="eyebrow">2026 Season</p>
+      <h1 class="display page-hero-title">Find Us<br />at a Festival</h1>
+      <p class="page-hero-body">
+        We're out on the road from spring through to autumn. Two fully kitted units,
+        a great crew, and food that stands up to whatever the festival throws at us.
+      </p>
+    </div>
+  </section>
+
+  <!-- DATES NOTICE -->
+  <div class="dates-notice">
+    <div class="container">
+      <p>📅 <strong>2026 dates being confirmed.</strong> Check back soon — or follow us on social to catch the announcements as they drop.</p>
+    </div>
+  </div>
+
+  <!-- FESTIVAL LIST -->
+  <section class="section festival-list">
+    <div class="container">
+      <p class="eyebrow">Where you'll find us</p>
+      <h2 class="display festivals-title">2026 Lineup</h2>
+
+      <div class="festivals-grid">
+        {festivals2026.map((fest) => (
+          <div class={`festival-card ${fest.confirmed ? 'festival-card--confirmed' : ''}`}>
+            <div class="festival-card-header">
+              <h3 class="display festival-name">{fest.name}</h3>
+              <span class={`festival-badge ${fest.confirmed ? 'festival-badge--confirmed' : 'festival-badge--tbc'}`}>
+                {fest.confirmed ? '✓ Confirmed' : 'TBC'}
+              </span>
+            </div>
+            <p class="festival-location">📍 {fest.location}</p>
+            <p class="festival-dates">📅 {fest.dates}</p>
+            <p class="festival-desc">{fest.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT TO EXPECT -->
+  <section class="section--sand section expect">
+    <div class="container">
+      <p class="eyebrow">At the unit</p>
+      <h2 class="display expect-title">What to expect</h2>
+      <div class="expect-grid">
+        <div class="expect-item">
+          <span class="expect-icon">⚡</span>
+          <h3>Fast service</h3>
+          <p>Festival queues are no fun. We run a tight operation so you're back with your food quickly.</p>
+        </div>
+        <div class="expect-item">
+          <span class="expect-icon">🌱</span>
+          <h3>Options for everyone</h3>
+          <p>Vegetarian, vegan and allergen-aware options across all three menus. Always.</p>
+        </div>
+        <div class="expect-item">
+          <span class="expect-icon">💳</span>
+          <h3>Card & cash</h3>
+          <p>We accept both. No surprises at the front of the queue.</p>
+        </div>
+        <div class="expect-item">
+          <span class="expect-icon">🍽️</span>
+          <h3>Proper portions</h3>
+          <p>Festival prices don't mean festival scraps. We load them up.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section--sand section faq">
+    <div class="container">
+      <p class="eyebrow">Common questions</p>
+      <h2 class="display faq-title">Festival FAQs</h2>
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>Which festivals are you at in 2026?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Confirmed dates for 2026 are being finalised — Lakefest and 2000 Trees are our regular fixtures. Check back on this page or follow us on social for announcements as they drop.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>What food do you serve at festivals?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Greek gyros (chicken, pork or halloumi), Korean bowls and poke bowls. Everything made fresh to order. We run fast — you won't be standing in a long queue.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>Do you have vegetarian and vegan options?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Yes — across all three menus. Halloumi gyros, tofu Korean bowls and vegan poke are all available. Ask at the unit if you're unsure about any dish.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>Do you take card payments at festivals?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Yes — we accept card and contactless at all events. We also accept cash. No surprises at the front of the queue.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>How do I find the Castaway Kitchen unit on site?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">We'll share our pitch location on social before and during each event. At smaller festivals we're usually easy to find — look for the Castaway Kitchen signage. Follow us on Instagram and Facebook for live updates.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>How long is the queue typically?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">We've been trained on busy festival circuits — fast service is something we're proud of. Peak times will always have a short wait but we run two units and an efficient team. It moves quickly.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>I'm a festival organiser — how do I book Castaway Kitchen?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Use our <a href="/contact">contact form</a> and select the festival/event organiser option. Tell us about your event — capacity, dates, location — and we'll get back to you within 24 hours.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>Do you do private catering as well as festivals?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Yes — weddings, private parties, corporate events. The same great food, brought to your venue. See our <a href="/private-catering">Private Catering page</a> for details.</p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING / ORGANISER CTA -->
+  <section class="section--dark section organiser-cta">
+    <div class="container organiser-cta-inner">
+      <div>
+        <p class="eyebrow">Festival organisers</p>
+        <h2 class="display organiser-title">Running an event?</h2>
+        <p class="organiser-body">
+          We're experienced festival traders with two fully equipped units, a proven team and a track record at established UK events.
+          Get in touch if you'd like us at your festival.
+        </p>
+        <a href="/contact" class="btn btn--primary" style="margin-top: var(--space-md)">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .page-hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin: var(--space-xs) 0 var(--space-md);
+    color: var(--white);
+  }
+
+  .page-hero-body {
+    font-size: var(--text-lg);
+    color: rgba(255,255,255,0.7);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  .dates-notice {
+    background: #e8f4f2;
+    border-bottom: 2px solid var(--teal-light);
+    padding: var(--space-sm) 0;
+  }
+
+  .dates-notice p {
+    font-size: var(--text-sm);
+    color: var(--teal-dark);
+  }
+
+  .festivals-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: var(--space-sm) 0 var(--space-xl);
+  }
+
+  .festivals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .festival-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .festival-card:hover {
+    border-color: var(--teal-light);
+  }
+
+  .festival-card--confirmed {
+    border-color: var(--teal);
+  }
+
+  .festival-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .festival-name {
+    font-size: var(--text-3xl);
+    line-height: 1;
+  }
+
+  .festival-badge {
+    font-size: var(--text-xs);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    flex-shrink: 0;
+  }
+
+  .festival-badge--confirmed {
+    background: var(--teal);
+    color: var(--white);
+  }
+
+  .festival-badge--tbc {
+    background: var(--sand);
+    color: var(--warm-grey);
+  }
+
+  .festival-location,
+  .festival-dates {
+    font-size: var(--text-sm);
+    color: var(--warm-grey);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .festival-desc {
+    font-size: var(--text-sm);
+    color: var(--warm-grey);
+    line-height: 1.6;
+    margin-top: var(--space-sm);
+  }
+
+  /* WHAT TO EXPECT */
+  .expect-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: var(--space-sm) 0 var(--space-xl);
+  }
+
+  .expect-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+  }
+
+  .expect-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .expect-icon {
+    font-size: 2rem;
+  }
+
+  .expect-item h3 {
+    font-weight: 800;
+    font-size: var(--text-base);
+  }
+
+  .expect-item p {
+    font-size: var(--text-sm);
+    color: var(--warm-grey);
+    line-height: 1.6;
+  }
+
+  /* FAQ */
+  .faq-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: var(--space-sm) 0 var(--space-xl);
+  }
+
+  .faq-list {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .faq-item {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    cursor: pointer;
+    font-weight: 800;
+    font-size: var(--text-base);
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-icon { font-size: var(--text-xl); font-weight: 400; color: var(--teal); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item[open] .faq-icon { transform: rotate(45deg); }
+  .faq-answer { padding: 0 var(--space-lg) var(--space-md); font-size: var(--text-sm); color: var(--warm-grey); line-height: 1.7; }
+  .faq-answer a { color: var(--teal); font-weight: 700; }
+
+  /* ORGANISER CTA */
+  .organiser-cta-inner {
+    max-width: 640px;
+  }
+
+  .organiser-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    margin: var(--space-sm) 0 var(--space-md);
+  }
+
+  .organiser-body {
+    color: rgba(255,255,255,0.7);
+    font-size: var(--text-lg);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .expect-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .expect-grid {
+      grid-template-columns: 1fr;
+    }
+    .festivals-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

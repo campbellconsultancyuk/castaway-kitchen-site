@@ -1,0 +1,569 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Home"
+  description="Greek gyros, Korean bowls & poke at festivals across the UK. Private catering for events in the Cotswolds, Cornwall & South West. Two units, proper food, zero fuss."
+>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-bg-text" aria-hidden="true">CASTAWAY</div>
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <p class="eyebrow">Festival street food</p>
+        <h1 class="display hero-headline">
+          Good food.<br />
+          Good vibes.<br />
+          <span class="hero-headline--teal">No nonsense.</span>
+        </h1>
+        <p class="hero-body">
+          Castaway Kitchen brings bold, proper street food to festivals and events across the UK.
+          Greek gyros, Korean bowls, poke — food worth queuing for.
+        </p>
+        <div class="hero-ctas">
+          <a href="/menu" class="btn btn--primary">See the Menu</a>
+          <a href="/festivals" class="btn btn--outline">Find Us at a Festival</a>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <img src="/castaway-logo.png" alt="" aria-hidden="true" width="280" height="280" class="hero-logo-reveal" />
+      </div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>↓</span>
+    </div>
+  </section>
+
+  <!-- ===== QUICK INTRO BAND ===== -->
+  <section class="band section--dark">
+    <div class="container band-inner">
+      <div class="band-stat">
+        <span class="display band-number">2</span>
+        <span class="band-label">Festival Units</span>
+      </div>
+      <div class="band-divider" aria-hidden="true"></div>
+      <div class="band-stat">
+        <span class="display band-number">16</span>
+        <span class="band-label">Peak Season Crew</span>
+      </div>
+      <div class="band-divider" aria-hidden="true"></div>
+      <div class="band-stat">
+        <span class="display band-number">100%</span>
+        <span class="band-label">Worth It</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHAT WE DO ===== -->
+  <section class="section what">
+    <div class="container">
+      <p class="eyebrow">What we do</p>
+      <h2 class="display what-headline">Food that fits the moment</h2>
+      <div class="what-grid">
+
+        <div class="what-card">
+          <div class="what-card-icon">🥙</div>
+          <h3 class="display what-card-title">Greek & Mediterranean</h3>
+          <p>Gyros are our heart. Slow-cooked, properly seasoned, loaded into warm flatbreads. The kind of thing that makes people come back twice.</p>
+        </div>
+
+        <div class="what-card what-card--featured">
+          <div class="what-card-icon">🍜</div>
+          <h3 class="display what-card-title">Korean & Poke</h3>
+          <p>Bold flavours, fresh builds. Korean bowls and poke that hold their own against anything else on the festival circuit.</p>
+        </div>
+
+        <div class="what-card">
+          <div class="what-card-icon">🎪</div>
+          <h3 class="display what-card-title">Private Catering</h3>
+          <p>Weddings, corporate events, private parties — we bring the full setup to you. <a href="/private-catering">Find out more →</a></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FESTIVAL BANNER ===== -->
+  <section class="section--teal festival-banner">
+    <div class="container festival-banner-inner">
+      <div>
+        <p class="eyebrow" style="color: rgba(255,255,255,0.6)">2026 Season</p>
+        <h2 class="display festival-banner-headline">Catch us at a festival</h2>
+        <p class="festival-banner-body">We're heading to Lakefest, 2000 Trees and more this summer. Full dates dropping soon.</p>
+      </div>
+      <a href="/festivals" class="btn btn--outline">See Festival Dates</a>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY TEASER ===== -->
+  <section class="section gallery-teaser">
+    <div class="container">
+      <p class="eyebrow">From the field</p>
+      <h2 class="display gallery-teaser-headline">See it in action</h2>
+      <div class="gallery-teaser-grid">
+        <!-- Placeholder tiles — replace with real photos -->
+        <div class="gallery-tile gallery-tile--placeholder">
+          <span>📸 Festival photos coming soon</span>
+        </div>
+        <div class="gallery-tile gallery-tile--placeholder gallery-tile--tall">
+          <span>📸</span>
+        </div>
+        <div class="gallery-tile gallery-tile--placeholder">
+          <span>📸</span>
+        </div>
+        <div class="gallery-tile gallery-tile--placeholder">
+          <span>📸</span>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: var(--space-lg)">
+        <a href="/gallery" class="btn btn--outline-dark">View Gallery</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRIVATE CATERING CTA ===== -->
+  <section class="section--dark section private-cta">
+    <div class="container private-cta-inner">
+      <div>
+        <p class="eyebrow">Private hire</p>
+        <h2 class="display private-cta-headline">Your event.<br />Our kitchen.</h2>
+        <p class="private-cta-body">
+          Corporate lunches, wedding receptions, birthday parties. We tailor the menu and bring everything we need — you just enjoy the food.
+        </p>
+        <a href="/private-catering" class="btn btn--primary" style="margin-top: var(--space-md)">Enquire Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section faq">
+    <div class="container">
+      <p class="eyebrow">Quick answers</p>
+      <h2 class="display faq-title">Common questions</h2>
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>Where are you based and where do you travel to?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">We're based in Moreton-in-Marsh, Gloucestershire. We regularly cover the Cotswolds, Cheltenham, Bristol, Cornwall, Devon and the wider South West. For larger events we'll travel further — just ask.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>What food do you serve?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Our main menus are Greek gyros (chicken, pork or halloumi), Korean bowls (gochujang chicken or beef) and poke bowls (salmon or tuna). We also do burgers for certain events. All made fresh, all cooked in front of your guests.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>Do you do private events as well as festivals?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Yes — private parties, weddings, corporate events and more. Head to our <a href="/private-catering">Private Catering page</a> for the full details and to enquire.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>How many people can you cater for?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">With two fully equipped units we can comfortably cater from 30 guests up to several hundred. We've served large festival crowds and intimate private parties — the setup scales to the event.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>Do you cater for vegetarians, vegans and allergies?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Yes. Vegetarian and vegan options are available across all three menus. We take allergens seriously — please flag any requirements when you get in touch and we'll make sure nobody misses out.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>How do I find you at a festival?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Check our <a href="/festivals">Festivals page</a> for confirmed 2026 dates. Once on site, look for the Castaway Kitchen unit — we're usually hard to miss. Follow us on social for live location updates during events.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span>How do I book you for a private event?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+          <p class="faq-answer">Use our <a href="/contact">contact form</a> — give us your date, location, rough guest numbers and type of event and we'll come back to you within 24 hours with a tailored quote.</p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT STRIP ===== -->
+  <section class="section contact-strip">
+    <div class="container contact-strip-inner">
+      <h2 class="display contact-strip-headline">Ready to book?</h2>
+      <p>Drop us a message and we'll get back to you.</p>
+      <a href="/contact" class="btn btn--primary">Get in Touch</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+
+  /* ---- HERO ---- */
+  .hero {
+    position: relative;
+    background-color: var(--black);
+    color: var(--white);
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    font-family: var(--font-display);
+    font-size: clamp(8rem, 20vw, 22rem);
+    letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.03);
+    white-space: nowrap;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--space-xl);
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-headline {
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    line-height: 0.92;
+    margin: var(--space-sm) 0 var(--space-md);
+  }
+
+  .hero-headline--teal {
+    color: var(--teal-light);
+  }
+
+  .hero-body {
+    font-size: var(--text-lg);
+    color: rgba(255,255,255,0.7);
+    max-width: 480px;
+    margin-bottom: var(--space-lg);
+    line-height: 1.7;
+  }
+
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+.hero-badge {
+  background: transparent;
+}
+
+.hero-badge img {
+  filter: invert(1);
+  opacity: 0;
+}
+
+.hero-logo-reveal {
+  animation: logoAppear 1s ease-out 0.5s forwards;
+}
+
+@keyframes logoAppear {
+  0%   { opacity: 0; transform: scale(0.92); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.3);
+    font-size: var(--text-xl);
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ---- BAND ---- */
+  .band {
+    padding: var(--space-lg) 0;
+  }
+
+  .band-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+  }
+
+  .band-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .band-number {
+    font-size: var(--text-5xl);
+    color: var(--teal-light);
+    line-height: 1;
+  }
+
+  .band-label {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .band-divider {
+    width: 1px;
+    height: 48px;
+    background: rgba(255,255,255,0.15);
+  }
+
+  /* ---- WHAT WE DO ---- */
+  .what-headline {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: var(--space-sm) 0 var(--space-xl);
+  }
+
+  .what-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .what-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+  }
+
+  .what-card--featured {
+    background: var(--teal);
+    color: var(--white);
+  }
+
+  .what-card--featured a {
+    color: var(--white);
+  }
+
+  .what-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .what-card-title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .what-card p {
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    color: inherit;
+    opacity: 0.85;
+  }
+
+  .what-card a {
+    color: var(--teal);
+    font-weight: 700;
+  }
+
+  /* ---- FESTIVAL BANNER ---- */
+  .festival-banner {
+    padding: var(--space-xl) 0;
+  }
+
+  .festival-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+  }
+
+  .festival-banner-headline {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    margin: var(--space-xs) 0 var(--space-sm);
+  }
+
+  .festival-banner-body {
+    color: rgba(255,255,255,0.75);
+    max-width: 480px;
+  }
+
+  /* ---- GALLERY TEASER ---- */
+  .gallery-teaser-headline {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: var(--space-sm) 0 var(--space-xl);
+  }
+
+  .gallery-teaser-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: var(--space-sm);
+  }
+
+  .gallery-tile {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    min-height: 200px;
+  }
+
+  .gallery-tile--tall {
+    grid-row: span 2;
+  }
+
+  .gallery-tile--placeholder {
+    background: var(--sand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--warm-grey);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-align: center;
+    padding: var(--space-md);
+  }
+
+  /* ---- PRIVATE CTA ---- */
+  .private-cta-inner {
+    max-width: 640px;
+  }
+
+  .private-cta-headline {
+    font-size: clamp(3rem, 6vw, 5rem);
+    margin: var(--space-sm) 0 var(--space-md);
+    color: var(--white);
+  }
+
+  .private-cta-body {
+    color: rgba(255,255,255,0.7);
+    font-size: var(--text-lg);
+    line-height: 1.7;
+  }
+
+  /* ---- FAQ ---- */
+  .faq {
+    background: var(--white);
+  }
+
+  .faq-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: var(--space-sm) 0 var(--space-xl);
+  }
+
+  .faq-list {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .faq-item {
+    background: var(--off-white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    cursor: pointer;
+    font-weight: 800;
+    font-size: var(--text-base);
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+
+  .faq-icon {
+    font-size: var(--text-xl);
+    font-weight: 400;
+    color: var(--teal);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  .faq-item[open] .faq-icon { transform: rotate(45deg); }
+
+  .faq-answer {
+    padding: 0 var(--space-lg) var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--warm-grey);
+    line-height: 1.7;
+  }
+
+  .faq-answer a {
+    color: var(--teal);
+    font-weight: 700;
+  }
+
+  /* ---- CONTACT STRIP ---- */
+  .contact-strip {
+    background: var(--sand);
+  }
+
+  .contact-strip-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-sm);
+  }
+
+  .contact-strip-headline {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+    }
+    .hero-badge {
+      display: none;
+    }
+    .what-grid {
+      grid-template-columns: 1fr;
+    }
+    .festival-banner-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .gallery-teaser-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .gallery-tile--tall {
+      grid-row: span 1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .band-inner {
+      gap: var(--space-lg);
+    }
+    .band-divider {
+      display: none;
+    }
+    .gallery-teaser-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

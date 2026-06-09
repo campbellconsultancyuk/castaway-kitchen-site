@@ -1,0 +1,58 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'Castaway Kitchen — Festival street food done properly. Greek gyros, Korean bowls & more. Available for festivals and private catering across the UK.',
+  ogImage = '/castaway-logo.png',
+} = Astro.props;
+
+const fullTitle = title === 'Home'
+  ? 'Festival Street Food Catering | Cotswolds, Cornwall & South West | Castaway Kitchen'
+  : title === 'Food & Menu'
+  ? 'Greek Gyros, Korean Bowls & Poke | Festival Street Food Menu | Castaway Kitchen'
+  : title === 'Festivals'
+  ? 'Festival Street Food 2026 | Lakefest, 2000 Trees & More | Castaway Kitchen'
+  : title === 'Private Catering'
+  ? 'Private Event Catering | Cotswolds, Cornwall & South West | Castaway Kitchen'
+  : title === 'Gallery'
+  ? 'Festival Food Van Photos | Castaway Kitchen'
+  : title === 'Contact'
+  ? 'Enquire About Catering | Castaway Kitchen | South West UK'
+  : title === 'Event Catering Cotswolds'
+  ? 'Event Catering Cotswolds | Bespoke Menus for Private Events | Castaway Kitchen'
+  : title === 'Street Food Catering Cornwall'
+  ? 'Street Food Catering Cornwall | Private Events & Weddings | Castaway Kitchen'
+  : `${title} | Castaway Kitchen`;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="/castaway-logo.png" />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <Nav />
+    <main style={`padding-top: var(--nav-height);`}>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
