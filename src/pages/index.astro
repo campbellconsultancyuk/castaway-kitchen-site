@@ -9,7 +9,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <!-- ===== HERO ===== -->
   <section class="hero">
-    <div class="hero-bg-text" aria-hidden="true">CASTAWAY</div>
+    <div class="hero-bg-text hero-bg-text--reveal" aria-hidden="true">CASTAWAY</div>
     <div class="container hero-inner">
       <div class="hero-content">
         <p class="eyebrow">Festival street food</p>
@@ -221,7 +221,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     user-select: none;
     line-height: 1;
   }
+.hero-bg-text--reveal {
+  clip-path: inset(0 100% 0 0);
+  animation: revealText 2s cubic-bezier(0.77, 0, 0.18, 1) 0.2s forwards;
+}
 
+@keyframes revealText {
+  0%   { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0% 0 0); }
+}
   .hero-inner {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -275,19 +283,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   100% { opacity: 1; transform: scale(1); }
 }
 
-  .hero-scroll-hint {
+ .hero-scroll-hint {
     position: absolute;
     bottom: var(--space-lg);
     left: 50%;
     transform: translateX(-50%);
     color: rgba(255,255,255,0.3);
     font-size: var(--text-xl);
+  }
+
+  .hero-scroll-hint span {
+    display: inline-block;
     animation: bounce 2s ease-in-out infinite;
   }
 
   @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(8px); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
   }
 
   /* ---- BAND ---- */
