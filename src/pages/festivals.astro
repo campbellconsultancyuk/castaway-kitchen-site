@@ -600,14 +600,15 @@ const faqs = [
     { id: 'we-have-ways', gyros: 360, miles: 82 },
   ];
 
-  const STORAGE_KEY = 'castaway-2026-tracker';
+const STORAGE_KEY = 'castaway-2026-tracker';
+const DEFAULT_COMPLETED = ['cheltenham-jazz', 'big-retreat'];
 
-  function getState() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : { completed: [] };
-    } catch { return { completed: [] }; }
-  }
+function getState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : { completed: DEFAULT_COMPLETED };
+  } catch { return { completed: DEFAULT_COMPLETED }; }
+}
 
   function saveState(state) {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
