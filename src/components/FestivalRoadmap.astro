@@ -1,7 +1,7 @@
 ---
 const festivals = [
   { id: 'cheltenham-jazz', num: 1, name: 'Cheltenham Jazz Festival', dates: '28 Apr – 5 May', location: 'Cheltenham, Gloucestershire', status: 'completed', desc: "Our home patch. Scott grew up in Chipping Campden — Cheltenham Jazz is where the season begins.", url: 'https://www.cheltenhamfestivals.com/jazz', left: 71.0, top: 43.7, gyros: 280, miles: 0 },
-  { id: 'big-retreat', num: 2, name: 'The Big Retreat Festival', dates: '21 – 26 May', location: 'Lawrenny, Pembrokeshire', status: 'completed', desc: 'Wellness, music and good vibes on the Pembrokeshire coast. A different crowd, a brilliant atmosphere.', url: 'https://www.thebigretreatfestival.com/', left: 36.5, top: 48.0, gyros: 320, miles: 180 },
+  { id: 'big-retreat', num: 2, name: 'The Big Retreat Festival', dates: '21 – 26 May', location: 'Lawrenny, Pembrokeshire', status: 'completed', desc: 'Wellness, music and good vibes on the Pembrokeshire coast. A different crowd, a brilliant atmosphere.', url: 'https://www.thebigretreatfestival.com/', left: 28.5, top: 58.5, gyros: 320, miles: 180 },
   { id: '2000trees', num: 3, name: '2000trees Festival', dates: '7 – 12 Jul', location: 'Upcote Farm, Cheltenham', status: 'current', desc: "Consistently one of the best-run festivals in the UK. Indie, alternative, and we're proud to be part of it.", url: 'https://2000trees.co.uk/', left: 70.0, top: 42.9, gyros: 450, miles: 8 },
   { id: 'emf', num: 4, name: 'Electromagnetic Field', dates: '16 – 19 Jul', location: 'Eastnor Castle, Herefordshire', status: 'upcoming', desc: 'Tech, art and making. A unique crowd who appreciate proper food as much as a good hack.', url: 'https://www.emfcamp.org/', left: 66.2, top: 39.4, gyros: 310, miles: 12 },
   { id: 'camp-bestival', num: 5, name: 'Camp Bestival', dates: '29 Jul – 3 Aug', location: 'Lulworth Castle, Dorset', status: 'upcoming', desc: 'Family festival at a stunning Dorset castle. Big crowds, brilliant energy, and gyros going fast.', url: 'https://dorset.campbestival.net/', left: 67.0, top: 75.7, gyros: 520, miles: 95 },
@@ -161,15 +161,17 @@ const completedCount = festivals.filter(f => f.status === 'completed').length;
   }
 
   /* MAP */
-  .map-container {
-    position: relative;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: #0a1a17 url('/Maps/uk-brand.svg') no-repeat center center;
-    background-size: 285%;
-    background-position: 72% 78%;
-    aspect-ratio: 4/3;
-  }
+ .map-container {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: #050e0c;
+  background-image: url('/Maps/uk-brand.svg');
+  background-repeat: no-repeat;
+  background-size: 320%;
+  background-position: 68% 82%;
+  aspect-ratio: 4/3;
+}
 
   .route-svg {
     position: absolute;
