@@ -9,7 +9,7 @@ const festivals = [
     status: 'completed',
     desc: "Our home patch. Scott grew up in Chipping Campden — Cheltenham Jazz is where the season begins.",
     url: 'https://www.cheltenhamfestivals.com/jazz',
-    px: 242, py: 340,
+    px: 664, py: 803,
     gyros: 280, miles: 0,
   },
   {
@@ -21,7 +21,7 @@ const festivals = [
     status: 'completed',
     desc: 'Wellness, music and good vibes on the Pembrokeshire coast. A different crowd, a brilliant atmosphere.',
     url: 'https://www.thebigretreatfestival.com/',
-    px: 138, py: 318,
+    px: 526, py: 818,
     gyros: 320, miles: 180,
   },
   {
@@ -33,7 +33,7 @@ const festivals = [
     status: 'current',
     desc: "Consistently one of the best-run festivals in the UK. Indie, alternative, and we're proud to be part of it.",
     url: 'https://2000trees.co.uk/',
-    px: 248, py: 348,
+    px: 660, py: 800,
     gyros: 450, miles: 8,
   },
   {
@@ -45,7 +45,7 @@ const festivals = [
     status: 'upcoming',
     desc: 'Tech, art and making. A unique crowd who appreciate proper food as much as a good hack.',
     url: 'https://www.emfcamp.org/',
-    px: 228, py: 332,
+    px: 645, py: 788,
     gyros: 310, miles: 12,
   },
   {
@@ -57,7 +57,7 @@ const festivals = [
     status: 'upcoming',
     desc: 'Family festival at a stunning Dorset castle. Big crowds, brilliant energy, and gyros going fast.',
     url: 'https://dorset.campbestival.net/',
-    px: 218, py: 432,
+    px: 648, py: 915,
     gyros: 520, miles: 95,
   },
   {
@@ -69,7 +69,7 @@ const festivals = [
     status: 'upcoming',
     desc: "Lakeside vibes, brilliant crowd, and a pitch right in the heart of the action. One of our favourites.",
     url: 'https://www.lakefest.co.uk/',
-    px: 234, py: 338,
+    px: 650, py: 793,
     gyros: 480, miles: 12,
   },
   {
@@ -81,7 +81,7 @@ const festivals = [
     status: 'upcoming',
     desc: 'An institution. Beautiful setting, loyal crowd, and Cornwall just down the road.',
     url: 'https://www.beautifuldays.org/',
-    px: 174, py: 418,
+    px: 588, py: 901,
     gyros: 390, miles: 145,
   },
   {
@@ -93,7 +93,7 @@ const festivals = [
     status: 'upcoming',
     desc: "Bristol's biggest music festival. Urban, diverse and seriously good fun.",
     url: 'https://www.forwardsbristol.co.uk/',
-    px: 210, py: 380,
+    px: 630, py: 842,
     gyros: 420, miles: 55,
   },
   {
@@ -105,14 +105,13 @@ const festivals = [
     status: 'upcoming',
     desc: 'History, music and community in the Buckinghamshire countryside. Season finale.',
     url: 'https://wehavewaysfest.co.uk/',
-    px: 284, py: 330,
+    px: 705, py: 797,
     gyros: 360, miles: 82,
   },
 ];
 
 const nextFestival = festivals.find(f => f.status === 'current') || festivals.find(f => f.status === 'upcoming');
 const completedCount = festivals.filter(f => f.status === 'completed').length;
-
 const routePoints = festivals.map(f => `${f.px},${f.py}`).join(' ');
 ---
 
@@ -138,111 +137,26 @@ const routePoints = festivals.map(f => `${f.px},${f.py}`).join(' ');
   <!-- MAP + PANEL -->
   <div class="map-panel-grid">
 
-    <!-- SVG MAP -->
+    <!-- MAP using real UK SVG -->
     <div class="map-container">
-      <svg id="festival-map" viewBox="0 0 420 580" xmlns="http://www.w3.org/2000/svg">
+      <svg id="festival-map" viewBox="380 650 400 350" xmlns="http://www.w3.org/2000/svg">
 
-        <!-- Accurate UK outline - Great Britain -->
-        <g fill="#1a2e2a" stroke="#2a7c6f" stroke-width="0.8" stroke-linejoin="round">
+        <!-- Real UK map imported as image -->
+        <image
+          href="/Maps/uk.svg"
+          x="0" y="0"
+          width="1000" height="1000"
+          style="filter: saturate(0) brightness(0.3) sepia(1) hue-rotate(120deg) brightness(0.6);"
+        />
 
-          <!-- England + Wales main body -->
-          <path d="
-            M 248,490 L 256,482 L 268,476 L 274,466 L 272,454 L 264,446
-            L 258,436 L 252,428 L 248,418 L 242,410 L 236,402 L 232,392
-            L 228,382 L 224,372 L 218,362 L 214,354 L 210,344 L 204,336
-            L 198,326 L 192,318 L 188,308 L 184,298 L 180,290 L 176,282
-            L 172,272 L 168,264 L 162,256 L 158,248 L 152,240 L 148,232
-            L 144,224 L 140,216 L 138,206 L 136,196 L 138,188 L 142,180
-            L 148,174 L 156,170 L 164,168 L 172,170 L 178,176 L 182,184
-            L 184,192 L 186,200 L 188,208 L 192,216 L 196,224 L 202,230
-            L 208,236 L 216,240 L 224,242 L 232,240 L 238,236 L 244,230
-            L 248,224 L 252,218 L 256,212 L 258,204 L 260,196 L 258,188
-            L 256,180 L 252,172 L 248,166 L 244,158 L 242,150 L 240,142
-            L 238,134 L 238,126 L 240,118 L 244,112 L 250,108 L 256,106
-            L 264,106 L 270,110 L 276,116 L 280,124 L 282,132 L 284,140
-            L 284,148 L 282,156 L 280,164 L 278,172 L 278,180 L 280,188
-            L 284,194 L 290,198 L 296,200 L 302,200 L 308,196 L 312,190
-            L 314,184 L 314,176 L 312,168 L 308,162 L 304,156 L 302,148
-            L 300,140 L 300,132 L 302,124 L 306,118 L 312,114 L 318,112
-            L 324,114 L 328,120 L 330,128 L 328,136 L 324,142 L 320,148
-            L 318,156 L 318,164 L 320,172 L 324,178 L 328,184 L 332,190
-            L 334,198 L 334,206 L 332,214 L 328,220 L 324,226 L 320,232
-            L 316,238 L 312,244 L 308,250 L 304,256 L 300,262 L 296,268
-            L 292,274 L 288,280 L 284,286 L 280,292 L 278,300 L 276,308
-            L 276,316 L 278,324 L 282,330 L 288,334 L 294,336 L 300,334
-            L 306,330 L 310,324 L 312,316 L 312,308 L 310,300 L 306,294
-            L 302,288 L 300,280 L 300,272 L 302,264 L 306,258 L 312,254
-            L 318,252 L 324,254 L 328,260 L 330,268 L 328,276 L 324,282
-            L 320,288 L 318,296 L 318,304 L 320,312 L 324,318 L 330,322
-            L 336,322 L 342,318 L 346,312 L 348,304 L 346,296 L 342,290
-            L 338,284 L 336,276 L 336,268 L 338,260 L 342,254 L 348,250
-            L 354,250 L 358,256 L 360,264 L 358,272 L 354,278 L 350,284
-            L 348,292 L 348,300 L 350,308 L 354,314 L 360,318 L 366,318
-            L 370,312 L 372,304 L 370,296 L 366,290 L 362,284 L 360,276
-            L 360,268 L 362,260 L 368,256 L 374,256 L 378,262 L 378,270
-            L 374,276 L 370,282 L 368,290 L 368,298 L 372,304
-            L 360,360 L 348,390 L 334,416 L 316,440 L 296,460
-            L 276,476 L 260,488 L 248,490 Z
-          "/>
-
-          <!-- Wales bump west -->
-          <path d="
-            M 176,282 L 162,288 L 148,292 L 136,298 L 126,308
-            L 120,320 L 118,332 L 122,342 L 130,350 L 140,354
-            L 150,352 L 158,346 L 164,338 L 168,328 L 170,318
-            L 172,308 L 172,298 L 172,288 L 176,282 Z
-          "/>
-
-          <!-- Scotland -->
-          <path d="
-            M 248,166 L 252,158 L 254,148 L 252,138 L 248,130
-            L 242,124 L 236,120 L 228,118 L 220,118 L 212,120
-            L 206,126 L 200,132 L 196,140 L 194,148 L 194,156
-            L 196,164 L 200,170 L 206,174 L 212,178 L 218,180
-            L 224,180 L 230,178 L 236,174 L 242,170 L 248,166
-          "/>
-
-          <!-- Scotland main body -->
-          <path d="
-            M 200,132 L 192,124 L 184,116 L 176,108 L 168,100
-            L 160,94 L 152,90 L 144,88 L 136,88 L 130,92
-            L 124,98 L 120,106 L 118,114 L 120,122 L 124,128
-            L 130,132 L 136,134 L 144,134 L 150,132 L 156,128
-            L 162,124 L 168,120 L 174,118 L 180,118 L 186,120
-            L 192,124 L 196,130 L 200,136 L 200,132
-          "/>
-
-          <path d="
-            M 136,88 L 142,80 L 148,72 L 154,66 L 160,60
-            L 168,56 L 176,54 L 184,54 L 190,58 L 194,64
-            L 196,72 L 194,80 L 190,86 L 184,90 L 178,92
-            L 170,92 L 162,90 L 156,88 L 150,88 L 144,88 L 136,88
-          "/>
-
-          <path d="
-            M 190,58 L 196,52 L 202,46 L 208,42 L 216,40
-            L 224,40 L 230,44 L 234,50 L 234,58 L 230,64
-            L 224,68 L 218,70 L 212,70 L 206,68 L 200,64
-            L 194,60 L 190,58
-          "/>
-
-          <!-- NW Scotland peninsula -->
-          <path d="
-            M 130,92 L 120,96 L 110,102 L 102,110 L 96,120
-            L 94,130 L 96,140 L 102,148 L 110,152 L 118,152
-            L 126,148 L 130,142 L 132,134 L 130,126 L 128,118
-            L 128,110 L 130,102 L 130,92
-          "/>
-        </g>
-
-        <!-- Animated dotted route -->
+        <!-- Animated route -->
         <polyline
           points={routePoints}
           fill="none"
           stroke="#f0a500"
-          stroke-width="1.5"
-          stroke-dasharray="5,4"
-          opacity="0.6"
+          stroke-width="2"
+          stroke-dasharray="6,4"
+          opacity="0.7"
           id="route-line"
         />
 
@@ -250,8 +164,8 @@ const routePoints = festivals.map(f => `${f.px},${f.py}`).join(' ');
         {festivals.map((f) => {
           const isCompleted = f.status === 'completed';
           const isCurrent = f.status === 'current';
-          const ringColor = isCompleted ? '#2a7c6f' : isCurrent ? '#f0a500' : 'rgba(255,255,255,0.5)';
-          const fillColor = isCompleted ? '#1a5c4e' : isCurrent ? '#8a5c00' : '#111';
+          const ringColor = isCompleted ? '#2a7c6f' : isCurrent ? '#f0a500' : 'rgba(255,255,255,0.6)';
+          const fillColor = isCompleted ? '#1a5c4e' : isCurrent ? '#8a5c00' : '#1a1a1a';
 
           return (
             <g
@@ -263,21 +177,27 @@ const routePoints = festivals.map(f => `${f.px},${f.py}`).join(' ');
               aria-label={f.name}
             >
               {isCurrent && (
-                <circle class="pulse-ring" cx="0" cy="0" r="20" fill="none" stroke="#f0a500" stroke-width="1.5" opacity="0.5"/>
+                <circle class="pulse-ring" cx="0" cy="0" r="14" fill="none" stroke="#f0a500" stroke-width="1.5" opacity="0.6"/>
               )}
-              <circle cx="0" cy="0" r="13" fill={fillColor} stroke={ringColor} stroke-width="2"/>
+              <circle cx="0" cy="0" r="9" fill={fillColor} stroke={ringColor} stroke-width="1.8"/>
               <image
                 href="/castaway-logo.png"
-                x="-9" y="-9"
-                width="18" height="18"
-                style="filter: invert(1); opacity: 0.9;"
+                x="-6" y="-6"
+                width="12" height="12"
+                style="filter: invert(1); opacity: 0.95;"
               />
-              <text x="0" y="22" text-anchor="middle" font-family="'Bebas Neue', Impact, sans-serif" font-size="9" fill="rgba(255,255,255,0.8)">{f.num}</text>
             </g>
           );
         })}
 
       </svg>
+
+      <!-- Legend -->
+      <div class="map-legend">
+        <div class="legend-item"><span class="legend-dot legend-dot--completed"></span>Completed</div>
+        <div class="legend-item"><span class="legend-dot legend-dot--current"></span>Current</div>
+        <div class="legend-item"><span class="legend-dot legend-dot--upcoming"></span>Upcoming</div>
+      </div>
     </div>
 
     <!-- DETAILS PANEL -->
@@ -314,8 +234,8 @@ const routePoints = festivals.map(f => `${f.px},${f.py}`).join(' ');
           <h3 class="display detail-name" id="detail-name">Click any pin</h3>
           <p class="detail-dates" id="detail-dates">—</p>
           <p class="detail-location" id="detail-location">—</p>
-          <p class="detail-desc" id="detail-desc">Click any festival pin or name on the left to see details.</p>
-          <a href="#" class="btn btn--primary detail-link" id="detail-link" style="display:none; margin-top: var(--space-sm)">Festival Site →</a>
+          <p class="detail-desc" id="detail-desc">Click any festival pin or name to see details.</p>
+          <a href="#" class="btn btn--primary detail-link" id="detail-link" style="display:none; margin-top: var(--space-sm); font-size: var(--text-xs);">Festival Site →</a>
         </div>
       </div>
 
@@ -366,7 +286,6 @@ const routePoints = festivals.map(f => `${f.px},${f.py}`).join(' ');
   }
 
   .countdown-num { font-size: var(--text-5xl); color: var(--teal-light); line-height: 1; }
-
   .countdown-label {
     font-size: var(--text-xs);
     font-weight: 800;
@@ -379,42 +298,73 @@ const routePoints = festivals.map(f => `${f.px},${f.py}`).join(' ');
 
   .map-panel-grid {
     display: grid;
-    grid-template-columns: 1fr 360px;
+    grid-template-columns: 1fr 340px;
     gap: var(--space-lg);
     align-items: start;
   }
 
   .map-container {
-    background: #0d1f1c;
+    background: #0a1a17;
     border-radius: var(--radius-lg);
     border: 1px solid rgba(42,124,111,0.25);
     overflow: hidden;
+    position: relative;
   }
 
   #festival-map { width: 100%; display: block; }
 
+  .map-legend {
+    position: absolute;
+    bottom: var(--space-sm);
+    left: var(--space-sm);
+    display: flex;
+    gap: var(--space-md);
+    background: rgba(0,0,0,0.7);
+    border-radius: var(--radius-md);
+    padding: 6px 12px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid;
+    flex-shrink: 0;
+  }
+
+  .legend-dot--completed { background: #1a5c4e; border-color: #2a7c6f; }
+  .legend-dot--current { background: #8a5c00; border-color: #f0a500; }
+  .legend-dot--upcoming { background: #1a1a1a; border-color: rgba(255,255,255,0.6); }
+
   .pin { cursor: pointer; transition: transform 0.2s ease; transform-origin: center; }
-  .pin:hover, .pin:focus { transform: scale(1.25); outline: none; }
+  .pin:hover, .pin:focus { transform: scale(1.4); outline: none; }
 
   .pulse-ring { animation: pulse 2s ease-in-out infinite; }
 
   @keyframes pulse {
-    0%, 100% { opacity: 0.5; r: 18; }
-    50% { opacity: 0.1; r: 26; }
+    0%, 100% { opacity: 0.6; r: 12; }
+    50% { opacity: 0.1; r: 20; }
   }
 
   #route-line {
     stroke-dashoffset: 3000;
-    animation: drawRoute 2.5s ease-out 0.3s forwards;
+    animation: drawRoute 2.5s ease-out 0.5s forwards;
   }
 
   @keyframes drawRoute { to { stroke-dashoffset: 0; } }
 
-  .details-panel {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-  }
+  .details-panel { display: flex; flex-direction: column; gap: var(--space-md); }
 
   .tracker {
     background: var(--white);
@@ -460,7 +410,6 @@ const routePoints = festivals.map(f => `${f.px},${f.py}`).join(' ');
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: background 0.15s;
-    font-size: var(--text-sm);
   }
 
   .tracker-item:hover { background: rgba(42,124,111,0.08); }
@@ -472,8 +421,7 @@ const routePoints = festivals.map(f => `${f.px},${f.py}`).join(' ');
   .tracker-item--upcoming .tracker-icon { color: rgba(0,0,0,0.25); }
 
   .tracker-num { font-size: var(--text-xs); font-weight: 800; color: var(--warm-grey); width: 14px; flex-shrink: 0; }
-
-  .tracker-name { font-weight: 600; color: var(--black); line-height: 1.3; font-size: var(--text-sm); }
+  .tracker-name { font-weight: 600; color: var(--black); font-size: var(--text-sm); line-height: 1.3; }
   .tracker-item--upcoming .tracker-name { color: var(--warm-grey); }
 
   .detail-card {
@@ -490,35 +438,14 @@ const routePoints = festivals.map(f => `${f.px},${f.py}`).join(' ');
     gap: var(--space-sm);
   }
 
-  .detail-status {
-    font-size: var(--text-xs);
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    color: var(--teal-light);
-  }
-
-  .detail-name {
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
-    color: var(--white);
-    line-height: 1;
-  }
-
-  .detail-dates, .detail-location {
-    font-size: var(--text-sm);
-    color: rgba(255,255,255,0.5);
-    font-weight: 600;
-  }
-
-  .detail-desc {
-    font-size: var(--text-sm);
-    color: rgba(255,255,255,0.6);
-    line-height: 1.6;
-  }
-
-  .detail-link { font-size: var(--text-xs); align-self: flex-start; }
+  .detail-status { font-size: var(--text-xs); font-weight: 800; letter-spacing: 0.12em; color: var(--teal-light); }
+  .detail-name { font-size: clamp(1.4rem, 2.5vw, 2rem); color: var(--white); line-height: 1; }
+  .detail-dates, .detail-location { font-size: var(--text-sm); color: rgba(255,255,255,0.5); font-weight: 600; }
+  .detail-desc { font-size: var(--text-sm); color: rgba(255,255,255,0.6); line-height: 1.6; }
 
   @media (max-width: 900px) {
     .map-panel-grid { grid-template-columns: 1fr; }
+    .map-legend { flex-wrap: wrap; }
   }
 </style>
 
@@ -540,19 +467,15 @@ const routePoints = festivals.map(f => `${f.px},${f.py}`).join(' ');
   function selectFestival(id) {
     const f = FESTIVALS.find(fest => fest.id === id);
     if (!f) return;
-
     document.querySelectorAll('.pin').forEach(p => p.classList.remove('pin--active'));
     document.querySelectorAll('.tracker-item').forEach(t => t.classList.remove('active'));
-
     document.querySelector(`.pin[data-id="${id}"]`)?.classList.add('pin--active');
     document.querySelector(`.tracker-item[data-id="${id}"]`)?.classList.add('active');
-
     document.getElementById('detail-status').textContent = STATUS_LABELS[f.status];
     document.getElementById('detail-name').textContent = f.name;
     document.getElementById('detail-dates').textContent = '📅 ' + f.dates;
     document.getElementById('detail-location').textContent = '📍 ' + f.location;
     document.getElementById('detail-desc').textContent = f.desc;
-
     const link = document.getElementById('detail-link');
     link.href = f.url;
     link.style.display = 'inline-flex';
@@ -569,14 +492,10 @@ const routePoints = festivals.map(f => `${f.px},${f.py}`).join(' ');
   });
 
   const nextDates = {
-    'cheltenham-jazz': new Date('2026-04-28'),
-    'big-retreat': new Date('2026-05-21'),
-    '2000trees': new Date('2026-07-07'),
-    'emf': new Date('2026-07-16'),
-    'camp-bestival': new Date('2026-07-29'),
-    'lakefest': new Date('2026-08-04'),
-    'beautiful-days': new Date('2026-08-20'),
-    'forwards': new Date('2026-08-26'),
+    'cheltenham-jazz': new Date('2026-04-28'), 'big-retreat': new Date('2026-05-21'),
+    '2000trees': new Date('2026-07-07'), 'emf': new Date('2026-07-16'),
+    'camp-bestival': new Date('2026-07-29'), 'lakefest': new Date('2026-08-04'),
+    'beautiful-days': new Date('2026-08-20'), 'forwards': new Date('2026-08-26'),
     'we-have-ways': new Date('2026-09-10'),
   };
 
