@@ -1,101 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const festivals = [
-  {
-    id: 'cheltenham-jazz',
-    name: 'Cheltenham Jazz Festival',
-    location: 'Cheltenham, Gloucestershire',
-    dates: '28 Apr – 5 May',
-    month: 'APR / MAY',
-    url: 'https://www.cheltenhamfestivals.com/jazz',
-    home: true,
-    desc: 'Our home patch. Scott grew up in Chipping Campden — Cheltenham Jazz is where the season begins.',
-  },
-  {
-    id: 'big-retreat',
-    name: 'The Big Retreat Festival',
-    location: 'Lawrenny, Pembrokeshire',
-    dates: '21 – 26 May',
-    month: 'MAY',
-    url: 'https://www.thebigretreatfestival.com/',
-    desc: 'Wellness, music and good vibes on the Pembrokeshire coast. A different crowd, a brilliant atmosphere.',
-  },
-  {
-    id: '2000trees',
-    name: '2000trees Festival',
-    location: 'Upcote Farm, Cheltenham',
-    dates: '7 – 12 Jul',
-    month: 'JUL',
-    url: 'https://2000trees.co.uk/',
-    home: true,
-    desc: 'Consistently one of the best-run festivals in the UK. Indie, alternative, and we\'re proud to be part of it.',
-  },
-  {
-    id: 'emf',
-    name: 'Electromagnetic Field Festival',
-    location: 'Eastnor Castle Deer Park, Herefordshire',
-    dates: '16 – 19 Jul',
-    month: 'JUL',
-    url: 'https://www.emfcamp.org/',
-    desc: 'Tech, art and making. A unique crowd who appreciate proper food as much as a good hack.',
-  },
-  {
-    id: 'camp-bestival',
-    name: 'Camp Bestival',
-    location: 'Lulworth Castle, Dorset',
-    dates: '29 Jul – 3 Aug',
-    month: 'JUL / AUG',
-    url: 'https://dorset.campbestival.net/',
-    desc: 'Family festival at a stunning Dorset castle. Big crowds, brilliant energy, and gyros going fast.',
-  },
-  {
-    id: 'lakefest',
-    name: 'Lakefest',
-    location: 'Eastnor Castle Deer Park, Herefordshire',
-    dates: '4 – 10 Aug',
-    month: 'AUG',
-    url: 'https://www.lakefest.co.uk/',
-    home: true,
-    desc: 'Lakeside vibes, brilliant crowd, and a pitch right in the heart of the action. One of our favourites.',
-  },
-  {
-    id: 'beautiful-days',
-    name: 'Beautiful Days Festival',
-    location: 'Escot Park, Devon',
-    dates: '20 – 24 Aug',
-    month: 'AUG',
-    url: 'https://www.beautifuldays.org/',
-    desc: 'An Exeter-based institution. Beautiful setting, loyal crowd, and Cornwall just down the road.',
-  },
-  {
-    id: 'forwards',
-    name: 'Forwards Festival',
-    location: 'Bristol',
-    dates: '26 – 31 Aug',
-    month: 'AUG',
-    url: 'https://www.forwardsbristol.co.uk/',
-    desc: 'Bristol\'s biggest music festival. Urban, diverse and seriously good fun.',
-  },
-  {
-    id: 'we-have-ways',
-    name: 'We Have Ways Festival',
-    location: 'Blackpit Farm, Buckinghamshire',
-    dates: '10 – 14 Sep',
-    month: 'SEP',
-    url: 'https://wehavewaysfest.co.uk/',
-    desc: 'History, music and community in the Buckinghamshire countryside. Season finale vibes.',
-  },
-];
+import FestivalRoadmap from '../components/FestivalRoadmap.astro';
 
 const faqs = [
   {
     q: 'Which festivals are you at in 2026?',
-    a: 'Our confirmed 2026 lineup is on this page — Cheltenham Jazz Festival, The Big Retreat, 2000trees, Electromagnetic Field, Camp Bestival, Lakefest, Beautiful Days, Forwards Festival and We Have Ways. Nine events across the UK from April to September.',
+    a: 'Our confirmed 2026 lineup — Cheltenham Jazz Festival, The Big Retreat, 2000trees, Electromagnetic Field, Camp Bestival, Lakefest, Beautiful Days, Forwards Festival and We Have Ways. Nine events from April to September.',
   },
   {
     q: 'What food do you serve at festivals?',
-    a: 'Greek gyros (chicken, pork or halloumi), Korean bowls and poke bowls. Everything made fresh to order. We run fast — you won\'t be standing in a long queue.',
+    a: "Greek gyros (chicken, pork or halloumi), Korean bowls and poke bowls. Everything made fresh to order. We run fast — you won't be standing in a long queue.",
   },
   {
     q: 'Do you have vegetarian and vegan options?',
@@ -107,15 +21,15 @@ const faqs = [
   },
   {
     q: 'How do I find the Castaway Kitchen unit on site?',
-    a: 'We\'ll share our pitch location on social before and during each event. Follow us on Instagram and Facebook for live updates.',
+    a: "We'll share our pitch location on social before and during each event. Follow us on Instagram and Facebook for live updates.",
   },
   {
     q: 'How long is the queue typically?',
-    a: 'We\'ve been trained on busy festival circuits — fast service is something we\'re proud of. Peak times will always have a short wait but we run two units and an efficient team. It moves quickly.',
+    a: "We've been trained on busy festival circuits — fast service is something we're proud of. Peak times will always have a short wait but we run two units and an efficient team. It moves quickly.",
   },
   {
-    q: 'I\'m a festival organiser — how do I book Castaway Kitchen?',
-    a: 'Use our contact form and select the festival/event organiser option. Tell us about your event — capacity, dates, location — and we\'ll get back to you within 24 hours.',
+    q: "I'm a festival organiser — how do I book Castaway Kitchen?",
+    a: "Use our contact form and select the festival/event organiser option. Tell us about your event — capacity, dates, location — and we'll get back to you within 24 hours.",
   },
   {
     q: 'Do you do private catering as well as festivals?',
@@ -140,72 +54,10 @@ const faqs = [
     </div>
   </section>
 
-  <!-- STATS BAR -->
-  <section class="stats-bar section--teal">
-    <div class="container stats-inner">
-      <div class="stat">
-        <span class="display stat-num" id="stat-completed">0</span>
-        <span class="stat-label">Festivals Smashed</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="display stat-num" id="stat-gyros">0</span>
-        <span class="stat-label">Gyros Wrapped</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="display stat-num" id="stat-miles">0</span>
-        <span class="stat-label">Miles Travelled</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="display stat-num">Countless</span>
-        <span class="stat-label">Happy Customers</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROGRESS BAR -->
-  <section class="progress-section">
+  <!-- ROADMAP -->
+  <section class="section roadmap-section">
     <div class="container">
-      <div class="progress-header">
-        <span class="eyebrow">Season progress</span>
-        <span class="progress-pct" id="progress-pct">0 of 9 events</span>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="progress-fill"></div>
-      </div>
-      <div class="progress-icons" id="progress-icons"></div>
-    </div>
-  </section>
-
-  <!-- FESTIVAL GRID -->
-  <section class="section festival-list">
-    <div class="container">
-      <p class="eyebrow">The lineup</p>
-      <h2 class="display list-title">2026 Festivals</h2>
-      <p class="list-note">Updated every Monday. Click "Mark as done" after each event.</p>
-
-      <div class="festival-grid">
-        {festivals.map((f) => (
-          <div class="festival-card" id={`card-${f.id}`} data-id={f.id}>
-            <div class="festival-card-top">
-              <div class="festival-month">{f.month}</div>
-              {f.home && <span class="home-badge">🏠 Home turf</span>}
-            </div>
-            <h3 class="display festival-name">{f.name}</h3>
-            <p class="festival-location">📍 {f.location}</p>
-            <p class="festival-dates">📅 {f.dates}</p>
-            <p class="festival-desc">{f.desc}</p>
-            <div class="festival-card-footer">
-              <a href={f.url} target="_blank" rel="noopener" class="festival-link">Festival site →</a>
-            </div>
-            <div class="smashed-overlay">
-              <span class="smashed-text">SMASHED 🎉</span>
-            </div>
-          </div>
-        ))}
-      </div>
+      <FestivalRoadmap />
     </div>
   </section>
 
@@ -246,7 +98,6 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  /* HERO */
   .page-hero {
     padding: var(--space-2xl) 0 var(--space-xl);
   }
@@ -265,260 +116,10 @@ const faqs = [
     line-height: 1.7;
   }
 
-  /* STATS */
-  .stats-bar {
-    padding: var(--space-lg) 0;
+  .roadmap-section {
+    background: var(--off-white);
   }
 
-  .stats-inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xl);
-    flex-wrap: wrap;
-  }
-
-  .stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .stat-num {
-    font-size: var(--text-4xl);
-    color: var(--white);
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: var(--text-xs);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.7);
-    text-align: center;
-  }
-
-  .stat-divider {
-    width: 1px;
-    height: 40px;
-    background: rgba(255,255,255,0.25);
-  }
-
-  /* PROGRESS */
-  .progress-section {
-    padding: var(--space-xl) 0 var(--space-lg);
-    background: var(--black);
-  }
-
-  .progress-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-sm);
-  }
-
-  .progress-pct {
-    font-size: var(--text-sm);
-    font-weight: 800;
-    color: var(--teal-light);
-  }
-
-  .progress-track {
-    width: 100%;
-    height: 12px;
-    background: rgba(255,255,255,0.1);
-    border-radius: var(--radius-pill);
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--teal), var(--teal-light));
-    border-radius: var(--radius-pill);
-    width: 0%;
-    transition: width 0.8s cubic-bezier(0.77, 0, 0.18, 1);
-  }
-
-  .progress-icons {
-    display: flex;
-    gap: 8px;
-    margin-top: var(--space-md);
-    flex-wrap: wrap;
-  }
-
-  .progress-dot {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    color: var(--white);
-    transition: all 0.3s ease;
-  }
-
-  .progress-dot.done {
-    background: var(--teal);
-    border-color: var(--teal);
-  }
-
-  /* FESTIVAL LIST */
-  .list-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin: var(--space-xs) 0 var(--space-sm);
-  }
-
-  .list-note {
-    font-size: var(--text-sm);
-    color: var(--warm-grey);
-    margin-bottom: var(--space-xl);
-  }
-
-  .festival-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-md);
-  }
-
-  .festival-card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    position: relative;
-    overflow: hidden;
-    border: 2px solid transparent;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-
-  .festival-card:hover {
-    border-color: var(--teal-light);
-    transform: translateY(-2px);
-  }
-
-  .festival-card.smashed {
-    border-color: var(--teal);
-    background: #f0faf8;
-  }
-
-  .festival-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-sm);
-  }
-
-  .festival-month {
-    font-size: var(--text-xs);
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--teal-dark);
-    background: rgba(42,124,111,0.08);
-    padding: 4px 10px;
-    border-radius: var(--radius-pill);
-  }
-
-  .home-badge {
-    font-size: var(--text-xs);
-    font-weight: 700;
-    color: var(--warm-grey);
-  }
-
-  .festival-name {
-    font-size: var(--text-2xl);
-    line-height: 1;
-  }
-
-  .festival-location,
-  .festival-dates {
-    font-size: var(--text-sm);
-    color: var(--warm-grey);
-    font-weight: 600;
-  }
-
-  .festival-desc {
-    font-size: var(--text-sm);
-    color: var(--warm-grey);
-    line-height: 1.6;
-    flex: 1;
-  }
-
-  .festival-card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: auto;
-    padding-top: var(--space-sm);
-    border-top: 1px solid rgba(0,0,0,0.07);
-  }
-
-  .festival-link {
-    font-size: var(--text-xs);
-    font-weight: 800;
-    color: var(--teal);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    transition: color 0.2s;
-  }
-
-  .festival-link:hover {
-    color: var(--teal-dark);
-  }
-
-  .smash-btn {
-    background: var(--black);
-    color: var(--white);
-    border: none;
-    border-radius: var(--radius-pill);
-    padding: 6px 14px;
-    font-size: var(--text-xs);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: var(--font-body);
-  }
-
-  .smash-btn:hover {
-    background: var(--teal);
-  }
-
-  .festival-card.smashed .smash-btn {
-    background: var(--teal);
-  }
-
-  .smashed-overlay {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: var(--teal);
-    color: var(--white);
-    font-weight: 800;
-    font-size: var(--text-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 4px 10px;
-    border-radius: var(--radius-pill);
-    opacity: 0;
-    transform: scale(0.8);
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    pointer-events: none;
-  }
-
-  .festival-card.smashed .smashed-overlay {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  /* ORGANISER CTA */
   .organiser-cta-inner {
     max-width: 640px;
   }
@@ -535,7 +136,6 @@ const faqs = [
     line-height: 1.7;
   }
 
-  /* FAQ */
   .faq-title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     margin: var(--space-sm) 0 var(--space-xl);
@@ -571,92 +171,4 @@ const faqs = [
   .faq-icon { font-size: var(--text-xl); font-weight: 400; color: var(--teal); flex-shrink: 0; transition: transform 0.2s; }
   .faq-item[open] .faq-icon { transform: rotate(45deg); }
   .faq-answer { padding: 0 var(--space-lg) var(--space-md); font-size: var(--text-sm); color: var(--warm-grey); line-height: 1.7; }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .festival-grid { grid-template-columns: 1fr 1fr; }
-    .stats-inner { gap: var(--space-lg); }
-    .stat-divider { display: none; }
-  }
-
-  @media (max-width: 600px) {
-    .festival-grid { grid-template-columns: 1fr; }
-  }
 </style>
-
-<script>
-  const FESTIVALS = [
-    { id: 'cheltenham-jazz', gyros: 280, miles: 0 },
-    { id: 'big-retreat', gyros: 320, miles: 180 },
-    { id: '2000trees', gyros: 450, miles: 8 },
-    { id: 'emf', gyros: 310, miles: 12 },
-    { id: 'camp-bestival', gyros: 520, miles: 95 },
-    { id: 'lakefest', gyros: 480, miles: 12 },
-    { id: 'beautiful-days', gyros: 390, miles: 145 },
-    { id: 'forwards', gyros: 420, miles: 55 },
-    { id: 'we-have-ways', gyros: 360, miles: 82 },
-  ];
-
-const STORAGE_KEY = 'castaway-2026-tracker';
-const DEFAULT_COMPLETED = ['cheltenham-jazz', 'big-retreat'];
-
-function getState() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : { completed: DEFAULT_COMPLETED };
-  } catch { return { completed: DEFAULT_COMPLETED }; }
-}
-
-  function saveState(state) {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
-  }
-
-  function updateUI() {
-    const state = getState();
-    const completed = state.completed;
-    const total = FESTIVALS.length;
-    const count = completed.length;
-
-    const totalGyros = FESTIVALS.filter(f => completed.includes(f.id)).reduce((sum, f) => sum + f.gyros, 0);
-    const totalMiles = FESTIVALS.filter(f => completed.includes(f.id)).reduce((sum, f) => sum + f.miles, 0);
-
-    document.getElementById('stat-completed').textContent = count;
-    document.getElementById('stat-gyros').textContent = totalGyros.toLocaleString();
-    document.getElementById('stat-miles').textContent = totalMiles.toLocaleString();
-
-    const pct = Math.round((count / total) * 100);
-    document.getElementById('progress-fill').style.width = pct + '%';
-    document.getElementById('progress-pct').textContent = `${count} of ${total} events`;
-
-    const dotsEl = document.getElementById('progress-icons');
-    dotsEl.innerHTML = FESTIVALS.map(f => `
-      <div class="progress-dot ${completed.includes(f.id) ? 'done' : ''}" title="${f.id}">
-        ${completed.includes(f.id) ? '✓' : ''}
-      </div>
-    `).join('');
-
-    FESTIVALS.forEach(f => {
-      const card = document.getElementById(`card-${f.id}`);
-      const btn = card?.querySelector('.smash-btn-text');
-      if (!card) return;
-      if (completed.includes(f.id)) {
-        card.classList.add('smashed');
-        if (btn) btn.textContent = 'Done';
-      } else {
-        card.classList.remove('smashed');
-        if (btn) btn.textContent = 'Mark as done';
-      }
-    });
-  }
-
-  window.toggleFestival = function(id) {
-    const state = getState();
-    const idx = state.completed.indexOf(id);
-    if (idx === -1) { state.completed.push(id); }
-    else { state.completed.splice(idx, 1); }
-    saveState(state);
-    updateUI();
-  };
-
-  updateUI();
-</script>
