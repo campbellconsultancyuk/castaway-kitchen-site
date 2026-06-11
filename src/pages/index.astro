@@ -103,18 +103,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="eyebrow">From the field</p>
       <h2 class="display gallery-teaser-headline">See it in action</h2>
       <div class="gallery-teaser-grid">
-        <!-- Placeholder tiles — replace with real photos -->
-        <div class="gallery-tile gallery-tile--placeholder">
-          <span>📸 Festival photos coming soon</span>
+        <div class="gallery-tile">
+          <img src="/gallery-both-units.webp" alt="Castaway Kitchen's Greek and Korean units side by side at a festival" loading="lazy" width="900" height="675" />
         </div>
-        <div class="gallery-tile gallery-tile--placeholder gallery-tile--tall">
-          <span>📸</span>
+        <div class="gallery-tile gallery-tile--tall">
+          <img src="/gallery-gyros-teal.webp" alt="A chicken gyros loaded with fries, fresh salad and tzatziki" loading="lazy" width="900" height="1200" />
         </div>
-        <div class="gallery-tile gallery-tile--placeholder">
-          <span>📸</span>
+        <div class="gallery-tile">
+          <img src="/gallery-festival-crowd.webp" alt="Festival crowds queuing at the Castaway Kitchen Greek gyros unit" loading="lazy" width="825" height="1100" />
         </div>
-        <div class="gallery-tile gallery-tile--placeholder">
-          <span>📸</span>
+        <div class="gallery-tile">
+          <img src="/gallery-unit-queue.webp" alt="The Greek gyros unit serving a busy queue on a sunny day" loading="lazy" width="825" height="1100" />
         </div>
       </div>
       <div style="text-align: center; margin-top: var(--space-lg)">
@@ -199,6 +198,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   /* ---- HERO ---- */
   .hero {
     position: relative;
+    background:
+      linear-gradient(100deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.78) 55%, rgba(13,13,13,0.55) 100%),
+      url('/hero-main-stage.webp') center 35% / cover no-repeat;
     background-color: var(--black);
     color: var(--white);
     min-height: calc(100vh - var(--nav-height));
@@ -434,20 +436,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     min-height: 200px;
   }
 
-  .gallery-tile--tall {
-    grid-row: span 2;
+  .gallery-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
   }
 
-  .gallery-tile--placeholder {
-    background: var(--sand);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--warm-grey);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    text-align: center;
-    padding: var(--space-md);
+  .gallery-tile:hover img {
+    transform: scale(1.04);
+  }
+
+  .gallery-tile--tall {
+    grid-row: span 2;
   }
 
   /* ---- PRIVATE CTA ---- */
