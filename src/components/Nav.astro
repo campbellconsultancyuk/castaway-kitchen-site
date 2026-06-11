@@ -10,6 +10,11 @@ const navLinks = [
 ];
 
 const { pathname } = Astro.url;
+
+// Normalise trailing slashes so "/about/" matches "/about"
+const normalise = (p: string) => (p !== '/' && p.endsWith('/') ? p.slice(0, -1) : p);
+const currentPath = normalise(pathname);
+const isActive = (href: string) => currentPath === normalise(href);
 ---
 
 <header class="nav-wrapper">
@@ -22,7 +27,7 @@ const { pathname } = Astro.url;
       {navLinks.map(link => (
         <a
           href={link.href}
-          class={`nav-link ${pathname === link.href ? 'nav-link--active' : ''}`}
+          class={`nav-link ${isActive(link.href) ? 'nav-link--active' : ''}`}
         >
           {link.label}
         </a>
@@ -53,7 +58,7 @@ const { pathname } = Astro.url;
   <!-- Mobile menu -->
   <div class="nav-mobile" id="mobile-menu" aria-hidden="true">
     {navLinks.map(link => (
-      <a href={link.href} class="nav-mobile-link">{link.label}</a>
+      <a href={link.href} class={`nav-mobile-link ${isActive(link.href) ? 'nav-mobile-link--active' : ''}`}>{link.label}</a>
     ))}
     <a href="/contact" class="btn btn--primary" style="margin-top: 1rem; text-align: center;">Book Us</a>
   </div>
@@ -193,7 +198,8 @@ const { pathname } = Astro.url;
     transition: color 0.2s;
   }
 
-  .nav-mobile-link:hover {
+  .nav-mobile-link:hover,
+  .nav-mobile-link--active {
     color: var(--teal-light);
   }
 
