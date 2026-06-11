@@ -1,0 +1,410 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const stats = [
+  { label: 'Established', value: '2015' },
+  { label: 'Business Type', value: 'Family-Run Festival Caterer' },
+  { label: 'Service Area', value: 'UK Festivals & Events' },
+];
+
+const timeline = [
+  { year: '2015', text: 'Castaway Kitchen launches — a family-run festival food trader is born.' },
+  { year: '2018', text: 'Became completely single-use plastic free across every unit.' },
+  { year: '2020', text: 'Adapted and prepared for the return of live events.' },
+  { year: '2022', text: 'Returned to a full festival season on the road.' },
+  { year: '2026', text: 'Still serving festivals and outdoor events throughout the UK.' },
+];
+
+const eventTypes = [
+  { icon: 'music', label: 'Music Festivals' },
+  { icon: 'food', label: 'Food Festivals' },
+  { icon: 'family', label: 'Family Festivals' },
+  { icon: 'community', label: 'Community Events' },
+  { icon: 'show', label: 'Outdoor Shows' },
+  { icon: 'season', label: 'Seasonal Events' },
+  { icon: 'private', label: 'Private Events' },
+  { icon: 'venue', label: 'Live Entertainment Venues' },
+];
+
+const sustainability = [
+  { icon: 'plastic', text: 'Single-use plastic free since 2018' },
+  { icon: 'compost', text: 'Compostable and recyclable serving ware' },
+  { icon: 'beach', text: 'Supporters of environmental and beach clean initiatives' },
+  { icon: 'waste', text: 'Food waste reduction wherever possible' },
+  { icon: 'donate', text: 'Donations to local causes and food charities' },
+  { icon: 'oil', text: 'Vegetable oil recycled for biodiesel use' },
+  { icon: 'recycle', text: 'Beach-shack units built from recycled and upcycled materials' },
+];
+
+const whyChoose = [
+  'Family-run business', 'Established since 2015', 'Festival and event experience',
+  'Fast service during peak periods', 'Vegetarian, vegan & gluten-free options',
+  'Sustainable operating practices', 'Distinctive beach shack presentation',
+  'Friendly and experienced team', 'Reliable and professional setup',
+  'Flexible menus', 'Operationally efficient service', 'Strong customer experience focus',
+];
+
+function sustIcon(name: string) {
+  const paths: Record<string, string> = {
+    plastic: '<path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V5h6v3"/><line x1="4" y1="4" x2="20" y2="20"/>',
+    compost: '<path d="M12 2a9 9 0 0 0-9 9c0 5 4 9 9 11 5-2 9-6 9-11a9 9 0 0 0-9-9z"/><path d="M12 8v8M8 12h8"/>',
+    beach: '<path d="M3 18h18"/><path d="M5 18c2-4 5-6 7-6s5 2 7 6"/><circle cx="17" cy="7" r="2.5"/>',
+    waste: '<path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/>',
+    donate: '<path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/>',
+    oil: '<path d="M7 4h10v4l-3 3v9H10v-9L7 8V4z"/>',
+    recycle: '<path d="M7 19l-3-5 3-2M17 19l3-5-2-1M12 4l3 5h-6l3-5z"/>',
+  };
+  return paths[name] || '';
+}
+
+function eventIcon(name: string) {
+  const paths: Record<string, string> = {
+    music: '<circle cx="6" cy="18" r="2.5"/><circle cx="17" cy="16" r="2.5"/><path d="M8.5 18V6l11-2v10"/>',
+    food: '<path d="M5 3v8a3 3 0 0 0 6 0V3M8 3v18"/><path d="M16 3c-1.5 0-2.5 2-2.5 5s1 4 2.5 4 2.5-1 2.5-4-1-5-2.5-5zM16 12v9"/>',
+    family: '<circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M17 13a3 3 0 0 1 4 3v2"/>',
+    community: '<circle cx="12" cy="8" r="3"/><path d="M5 21v-1a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v1"/>',
+    show: '<path d="M3 21h18M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/>',
+    season: '<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+    private: '<path d="M4 10h16v10H4z"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
+    venue: '<path d="M4 4h16v12H4z"/><path d="M4 16l4 4M20 16l-4 4M9 9l3-2 3 2-3 2z"/>',
+  };
+  return paths[name] || '';
+}
+---
+
+<BaseLayout
+  title="About"
+  description="The Castaway Story — a family-run festival catering business serving music festivals, food festivals and outdoor events across the UK since 2015. Sustainable festival street food done properly."
+>
+
+  <!-- ===== HERO ===== -->
+  <section class="about-hero section--dark">
+    <div class="container">
+      <p class="eyebrow">The Castaway Story</p>
+      <h1 class="display about-hero-title">The Castaway Story</h1>
+      <p class="about-hero-sub">
+        Serving Festivals, Events &amp; Good Food Since 2015
+      </p>
+      <p class="about-hero-body">
+        Family-run festival catering serving music festivals, outdoor events and live
+        experiences across the UK since 2015.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== OUR STORY ===== -->
+  <section class="section story">
+    <div class="container story-grid">
+      <div class="story-text">
+        <p class="eyebrow">Our story</p>
+        <h2 class="display story-headline">Built Around Food, Travel &amp; the Outdoors</h2>
+        <p>
+          Castaway Kitchen began in 2015 from a shared love of great food, travel, music,
+          surfing and life outdoors. What started as a passion project has grown into an
+          established festival catering business.
+        </p>
+        <p>
+          Today we serve customers at music festivals, food festivals, family events and
+          outdoor gatherings across the UK. Our aim has always been simple: serve freshly
+          prepared festival street food, create a welcoming atmosphere, and bring a little
+          bit of beach life wherever we go.
+        </p>
+        <p>
+          Castaway Kitchen remains proudly family-run, delivering high-quality food from
+          our distinctive beach-shack inspired catering units.
+        </p>
+      </div>
+      <div class="story-image">
+        <img src="/image-assets/stall-sunset-collect.webp" alt="The Castaway Kitchen festival unit lit gold at sunset with a queue collecting food" loading="lazy" width="1100" height="825" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AT A GLANCE ===== -->
+  <section class="section--sand section glance">
+    <div class="container">
+      <p class="eyebrow">At a glance</p>
+      <h2 class="display glance-headline">The Essentials</h2>
+      <div class="glance-grid">
+        {stats.map(s => (
+          <div class="glance-card">
+            <span class="glance-label">{s.label}</span>
+            <span class="display glance-value">{s.value}</span>
+          </div>
+        ))}
+        <div class="glance-card glance-card--wide">
+          <span class="glance-label">Menus</span>
+          <span class="glance-tags">
+            <span>Mediterranean Gyros</span><span>Loaded Fries</span><span>Poke Bowls</span><span>Katsu Curry</span><span>Noodles</span>
+          </span>
+        </div>
+        <div class="glance-card glance-card--wide">
+          <span class="glance-label">Dietary Options</span>
+          <span class="glance-tags">
+            <span>Vegetarian</span><span>Vegan</span><span>Gluten-Free</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHAT WE SERVE ===== -->
+  <section class="section serve">
+    <div class="container">
+      <p class="eyebrow">What we serve</p>
+      <h2 class="display serve-headline">Freshly Made, Festival-Style</h2>
+      <div class="serve-grid">
+        <div class="serve-card">
+          <div class="serve-icon">🥙</div>
+          <h3 class="display serve-card-title">Mediterranean Gyros</h3>
+          <p>Freshly prepared gyros inspired by Mediterranean street food, packed with flavour and served festival-style.</p>
+        </div>
+        <div class="serve-card serve-card--featured">
+          <div class="serve-icon">🍟</div>
+          <h3 class="display serve-card-title">Loaded Fries</h3>
+          <p>A crowd favourite and one of our most popular festival dishes — made fresh and served fast.</p>
+        </div>
+        <div class="serve-card">
+          <div class="serve-icon">🍜</div>
+          <h3 class="display serve-card-title">Poke, Katsu &amp; Noodles</h3>
+          <p>Fresh flavours inspired by travels around the world — something different for customers looking beyond traditional festival food.</p>
+        </div>
+      </div>
+      <p class="serve-note">
+        We believe everyone should be able to enjoy great food at events, which is why all
+        of our menus offer vegetarian, vegan and gluten-free options.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== FESTIVAL JOURNEY / TIMELINE ===== -->
+  <section class="section--dark section journey">
+    <div class="container">
+      <p class="eyebrow" style="color: var(--teal-light)">Festival journey</p>
+      <h2 class="display journey-headline">Trusted on the Festival Circuit Since 2015</h2>
+      <ol class="timeline">
+        {timeline.map(t => (
+          <li class="timeline-item">
+            <span class="display timeline-year">{t.year}</span>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <p class="timeline-text">{t.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="journey-foot">
+        <p>
+          Over the years we have worked at music festivals, food festivals, community
+          events, outdoor shows and family events across the country.
+        </p>
+        <p>
+          The experience gained from years on the road lets us operate efficiently in busy
+          event environments while maintaining food quality, customer service and consistency.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FESTIVALS & EVENTS ===== -->
+  <section class="section events">
+    <div class="container">
+      <p class="eyebrow">Festivals &amp; events</p>
+      <h2 class="display events-headline">Experienced Across a Wide Range of Events</h2>
+      <div class="events-grid">
+        {eventTypes.map(e => (
+          <div class="event-card">
+            <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={eventIcon(e.icon)} />
+            <span>{e.label}</span>
+          </div>
+        ))}
+      </div>
+      <p class="events-note">
+        Every event is different. Years of experience across a wide range of environments
+        has helped us develop the flexibility, preparation and operational efficiency needed
+        to deliver consistently high standards wherever we trade.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SUSTAINABILITY ===== -->
+  <section class="section--teal section sustain">
+    <div class="container">
+      <p class="eyebrow" style="color: rgba(255,255,255,0.6)">Sustainability</p>
+      <h2 class="display sustain-headline">Doing Things Properly</h2>
+      <p class="sustain-intro">
+        The environment has always been important to us. Our love of beaches, the sea and the
+        outdoors influences many of the choices we make as a sustainable festival catering business.
+      </p>
+      <div class="sustain-grid">
+        {sustainability.map(s => (
+          <div class="sustain-card">
+            <svg class="sustain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={sustIcon(s.icon)} />
+            <p>{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY ORGANISERS CHOOSE CASTAWAY ===== -->
+  <section class="section why">
+    <div class="container">
+      <p class="eyebrow">Why organisers choose Castaway</p>
+      <h2 class="display why-headline">A Catering Partner You Can Rely On</h2>
+      <div class="why-grid">
+        {whyChoose.map(item => (
+          <div class="why-card">
+            <span class="why-check" aria-hidden="true">✓</span>
+            <span>{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MODERN OPERATIONS ===== -->
+  <section class="section--sand section ops">
+    <div class="container ops-inner">
+      <p class="eyebrow">Modern operations</p>
+      <h2 class="display ops-headline">Combining Experience with Modern Technology</h2>
+      <p>
+        Since 2015, Castaway Kitchen has continually adapted to new ways of working —
+        helping us stay efficient, responsive and organised throughout the busy festival season.
+      </p>
+      <p>
+        Our values remain the same: great food, friendly service and a passion for life
+        outdoors. To streamline enquiries, communications and internal processes, we've
+        partnered with Campbell Consultancy — specialists in AI, automation and operational
+        systems — so we can spend less time on paperwork and more time delivering exceptional
+        food and service across the UK.
+      </p>
+      <a href="https://campbellconsultancy.co" target="_blank" rel="noopener" class="ops-logo">
+        <img src="/campbell-logo.png" alt="Campbell Consultancy" width="280" height="88" />
+      </a>
+      <p class="ops-credit">Operational Systems, AI &amp; Automation by Campbell Consultancy</p>
+    </div>
+  </section>
+
+  <!-- ===== FINAL CTA ===== -->
+  <section class="section--dark section about-cta">
+    <div class="container about-cta-inner">
+      <h2 class="display about-cta-headline">Planning an Event?</h2>
+      <p>
+        Whether you're organising a music festival, food festival, community event or outdoor
+        gathering, we'd love to hear from you.
+      </p>
+      <div class="about-cta-buttons">
+        <a href="/contact" class="btn btn--primary">Get in Touch</a>
+        <a href="/festivals" class="btn btn--outline">View Festivals</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ---- HERO ---- */
+  .about-hero { padding: var(--space-2xl) 0 var(--space-xl); }
+  .about-hero-title { font-size: clamp(3rem, 8vw, 6rem); margin: var(--space-xs) 0 var(--space-sm); color: var(--white); }
+  .about-hero-sub {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--teal-light);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-md);
+  }
+  .about-hero-body { font-size: var(--text-lg); color: rgba(255,255,255,0.7); max-width: 620px; line-height: 1.7; }
+
+  /* ---- OUR STORY ---- */
+  .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: center; }
+  .story-headline { font-size: clamp(2rem, 4vw, 3.25rem); margin: var(--space-sm) 0 var(--space-md); }
+  .story-text p { margin-bottom: var(--space-sm); color: var(--warm-grey); line-height: 1.8; }
+  .story-image img { border-radius: var(--radius-lg); width: 100%; height: 100%; object-fit: cover; max-height: 520px; }
+
+  /* ---- AT A GLANCE ---- */
+  .glance-headline { font-size: clamp(2rem, 4vw, 3rem); margin: var(--space-sm) 0 var(--space-lg); }
+  .glance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+  .glance-card { background: var(--white); border-radius: var(--radius-lg); padding: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-xs); }
+  .glance-card--wide { grid-column: span 3; }
+  .glance-label { font-size: var(--text-xs); font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); }
+  .glance-value { font-size: var(--text-3xl); color: var(--black); line-height: 1; }
+  .glance-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .glance-tags span { background: var(--sand); border-radius: var(--radius-pill); padding: 0.4rem 1rem; font-size: var(--text-sm); font-weight: 700; }
+
+  /* ---- WHAT WE SERVE ---- */
+  .serve-headline { font-size: clamp(2rem, 4vw, 3rem); margin: var(--space-sm) 0 var(--space-lg); }
+  .serve-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+  .serve-card { background: var(--white); border: 1px solid var(--sand); border-radius: var(--radius-lg); padding: var(--space-lg); }
+  .serve-card--featured { background: var(--teal); color: var(--white); border-color: var(--teal); }
+  .serve-icon { font-size: 2.5rem; margin-bottom: var(--space-sm); }
+  .serve-card-title { font-size: var(--text-2xl); margin-bottom: var(--space-sm); }
+  .serve-card p { font-size: var(--text-sm); line-height: 1.7; opacity: 0.85; }
+  .serve-note { max-width: 720px; margin: var(--space-lg) auto 0; text-align: center; font-size: var(--text-lg); color: var(--warm-grey); line-height: 1.7; }
+
+  /* ---- TIMELINE ---- */
+  .journey-headline { font-size: clamp(2rem, 4vw, 3rem); color: var(--white); margin: var(--space-sm) 0 var(--space-xl); }
+  .timeline { position: relative; max-width: 760px; margin: 0 auto; padding-left: var(--space-lg); }
+  .timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: rgba(255,255,255,0.15); }
+  .timeline-item { position: relative; display: grid; grid-template-columns: 90px 1fr; align-items: start; gap: var(--space-md); padding-bottom: var(--space-lg); }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-year { font-size: var(--text-2xl); color: var(--teal-light); line-height: 1; }
+  .timeline-dot { position: absolute; left: -19px; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--teal-light); border: 3px solid var(--black); }
+  .timeline-text { color: rgba(255,255,255,0.75); line-height: 1.7; }
+  .journey-foot { max-width: 760px; margin: var(--space-xl) auto 0; }
+  .journey-foot p { color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: var(--space-sm); }
+
+  /* ---- EVENTS GRID ---- */
+  .events-headline { font-size: clamp(2rem, 4vw, 3rem); margin: var(--space-sm) 0 var(--space-lg); }
+  .events-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
+  .event-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-sm); background: var(--off-white); border: 1px solid var(--sand); border-radius: var(--radius-lg); padding: var(--space-lg) var(--space-sm); font-size: var(--text-sm); font-weight: 700; transition: transform 0.2s, border-color 0.2s; }
+  .event-card:hover { transform: translateY(-4px); border-color: var(--teal); }
+  .event-icon { width: 38px; height: 38px; color: var(--teal); }
+  .events-note { max-width: 760px; margin: var(--space-lg) auto 0; text-align: center; color: var(--warm-grey); line-height: 1.8; }
+
+  /* ---- SUSTAINABILITY ---- */
+  .sustain-headline { font-size: clamp(2rem, 4vw, 3rem); color: var(--white); margin: var(--space-sm) 0 var(--space-md); }
+  .sustain-intro { max-width: 680px; color: rgba(255,255,255,0.8); line-height: 1.8; margin-bottom: var(--space-lg); }
+  .sustain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+  .sustain-card { display: flex; align-items: flex-start; gap: var(--space-sm); background: rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: var(--space-md); }
+  .sustain-icon { width: 28px; height: 28px; flex-shrink: 0; color: var(--white); }
+  .sustain-card p { font-size: var(--text-sm); font-weight: 600; line-height: 1.5; color: var(--white); }
+
+  /* ---- WHY CHOOSE ---- */
+  .why-headline { font-size: clamp(2rem, 4vw, 3rem); margin: var(--space-sm) 0 var(--space-lg); }
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
+  .why-card { display: flex; align-items: center; gap: 0.75rem; background: var(--off-white); border: 1px solid var(--sand); border-radius: var(--radius-md); padding: var(--space-md); font-weight: 700; font-size: var(--text-sm); }
+  .why-check { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; flex-shrink: 0; border-radius: 50%; background: var(--teal); color: var(--white); font-size: 0.8rem; }
+
+  /* ---- MODERN OPERATIONS ---- */
+  .ops-inner { max-width: 760px; }
+  .ops-headline { font-size: clamp(1.8rem, 3.5vw, 2.75rem); margin: var(--space-sm) 0 var(--space-md); }
+  .ops-inner p { color: var(--warm-grey); line-height: 1.8; margin-bottom: var(--space-sm); }
+  .ops-logo { display: inline-block; margin-top: var(--space-md); transition: opacity 0.2s; }
+  .ops-logo img { width: 280px; height: auto; }
+  .ops-logo:hover { opacity: 0.85; }
+  .ops-credit { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warm-grey); margin-top: var(--space-sm); }
+
+  /* ---- CTA ---- */
+  .about-cta-inner { max-width: 640px; text-align: center; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: var(--space-sm); }
+  .about-cta-headline { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--white); }
+  .about-cta-inner p { color: rgba(255,255,255,0.7); font-size: var(--text-lg); line-height: 1.7; }
+  .about-cta-buttons { display: flex; gap: var(--space-sm); flex-wrap: wrap; justify-content: center; margin-top: var(--space-sm); }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    .story-grid { grid-template-columns: 1fr; }
+    .story-image { order: -1; }
+    .glance-grid { grid-template-columns: 1fr 1fr; }
+    .glance-card--wide { grid-column: span 2; }
+    .serve-grid { grid-template-columns: 1fr; }
+    .events-grid { grid-template-columns: 1fr 1fr; }
+    .sustain-grid, .why-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .glance-grid { grid-template-columns: 1fr; }
+    .glance-card--wide { grid-column: span 1; }
+    .events-grid, .sustain-grid, .why-grid { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 70px 1fr; }
+  }
+</style>
