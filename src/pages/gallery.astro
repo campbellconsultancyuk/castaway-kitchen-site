@@ -1,73 +1,65 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// LIFE ON THE ROAD — scrapbook wall.
+// To add more: drop a .webp into public/image-assets/ and add a line here.
+// Add `feature: true` to make any photo a larger Polaroid.
+const photos = [
+  { src: '/image-assets/crew-ketchup-cheers.webp', alt: 'Two Castaway Kitchen staff toasting with sauce bottles in the unit', caption: 'Team Effort', feature: true },
+  { src: '/image-assets/punters-trio-wraps.webp', alt: 'Three festival-goers posing with gyros wraps', caption: 'Long Weekend' },
+  { src: '/image-assets/food-gyros-closeup.webp', alt: 'A chicken gyros with fries and tomato held up, crowd behind', caption: 'Service Time', feature: true },
+  { src: '/image-assets/stall-twin-units.webp', alt: 'The Greek and Korean units side by side at a festival', caption: 'On The Road' },
+  { src: '/image-assets/punter-tattoo-gyros.webp', alt: 'A smiling customer showing off a gyros tattoo, wrap in hand', caption: 'Proper Fan', feature: true },
+  { src: '/image-assets/punter-midbite.webp', alt: 'A customer taking a big bite of a chicken gyros in the sun', caption: 'First Bite' },
+  { src: '/image-assets/gallery-gyros-teal.webp', alt: 'A chicken gyros loaded with fries, salad and tzatziki', caption: 'Ready To Serve' },
+  { src: '/image-assets/stall-sunset-collect.webp', alt: 'The unit lit gold at sunset with a queue collecting food', caption: 'Sunset Shift', feature: true },
+  { src: '/image-assets/punters-crew-posing.webp', alt: 'A group of mates posing in front of the Castaway unit', caption: 'The Crew' },
+  { src: '/image-assets/crew-kitchen-interior.webp', alt: 'Inside the festival kitchen, crew prepping during service', caption: 'Behind The Scenes' },
+  { src: '/image-assets/food-gyros-fries.webp', alt: 'A chicken gyros wrap packed with golden fries', caption: 'Loaded Up' },
+  { src: '/image-assets/punters-gucci-peace.webp', alt: 'Two customers throwing peace signs outside the unit', caption: 'Worth It' },
+  { src: '/image-assets/gallery-both-units.webp', alt: 'Castaway Kitchen Greek and Korean units side by side', caption: 'Two Kitchens' },
+  { src: '/image-assets/stall-dusk-crowd.webp', alt: 'A big evening crowd gathered in front of the lit-up unit', caption: 'Early Start' },
+  { src: '/image-assets/punter-eating-sunny.webp', alt: 'A customer enjoying a gyros in bright sunshine', caption: 'Lunch Rush' },
+  { src: '/image-assets/crew-counter-smiles.webp', alt: 'Two crew members smiling from behind the serving counter', caption: 'Service With A Smile' },
+  { src: '/image-assets/stall-sunny-blue-sky.webp', alt: 'The full unit front under a bright blue sky', caption: 'Showtime' },
+  { src: '/image-assets/punters-two-girls.webp', alt: 'Two customers eating gyros in front of the unit', caption: 'Packed House' },
+  { src: '/image-assets/gallery-festival-crowd.webp', alt: 'Festival crowds queuing at the Greek gyros unit', caption: 'Big Queue' },
+  { src: '/image-assets/punters-couple-beers.webp', alt: 'A couple with beers laughing outside the unit', caption: 'Another Busy Day' },
+  { src: '/image-assets/stall-chipwrecked.webp', alt: 'The Chip Wrecked and gyros units in a busy festival field', caption: 'Field Day' },
+  { src: '/image-assets/punters-two-lads.webp', alt: 'Two staff posing for the camera outside the unit', caption: 'Flat Out' },
+  { src: '/image-assets/gallery-unit-queue.webp', alt: 'The Greek gyros unit serving a busy queue on a sunny day', caption: 'Sunny One' },
+  { src: '/image-assets/stall-glasto-strip.webp', alt: 'The unit on a huge busy festival food strip', caption: 'Big Crowd' },
+  { src: '/image-assets/gallery-festival-queue.webp', alt: 'Festival-goers queuing in the sunshine', caption: 'Hot One' },
+];
 ---
 
 <BaseLayout
   title="Gallery"
-  description="Photos from Castaway Kitchen on the festival circuit — food, units and crew. Lakefest, 2000 Trees, Cheltenham Jazz Festival and more."
+  description="Photos from Castaway Kitchen on the festival circuit — food, units and crew. A collection of moments from years on the road."
 >
 
   <!-- HERO -->
   <section class="page-hero section--dark">
     <div class="container">
-      <p class="eyebrow">From the field</p>
-      <h1 class="display page-hero-title">Gallery</h1>
+      <p class="eyebrow">Scrapbook</p>
+      <h1 class="display page-hero-title">Life on the Road</h1>
       <p class="page-hero-body">
-        Festival life. Real food. The crew. Photos from the season — more dropping as the 2026 dates fill up.
+        A collection of moments from the road, behind the scenes, busy services, early
+        starts, late finishes and everything in between.
       </p>
     </div>
   </section>
 
-  <!-- PLACEHOLDER GRID -->
-  <section class="section gallery">
+  <!-- POLAROID WALL -->
+  <section class="section scrapbook">
     <div class="container">
-
-      <p class="gallery-placeholder-note eyebrow">
-        📸 Festival photos coming — check back during the 2026 season
-      </p>
-
-      <div class="gallery-grid">
-        <!-- Row 1: big left, two stacked right -->
-        <div class="gallery-tile gallery-tile--large gallery-tile--placeholder">
-          <div class="tile-inner">
-            <span>📸</span>
-            <p>Food close-up</p>
-          </div>
-        </div>
-        <div class="gallery-tile gallery-tile--placeholder">
-          <div class="tile-inner">
-            <span>📸</span>
-            <p>Unit at festival</p>
-          </div>
-        </div>
-        <div class="gallery-tile gallery-tile--placeholder">
-          <div class="tile-inner">
-            <span>📸</span>
-            <p>The crew</p>
-          </div>
-        </div>
-
-        <!-- Row 2: three equal -->
-        <div class="gallery-tile gallery-tile--placeholder">
-          <div class="tile-inner"><span>📸</span><p>Gyros build</p></div>
-        </div>
-        <div class="gallery-tile gallery-tile--placeholder">
-          <div class="tile-inner"><span>📸</span><p>Korean bowl</p></div>
-        </div>
-        <div class="gallery-tile gallery-tile--placeholder">
-          <div class="tile-inner"><span>📸</span><p>Festival crowd</p></div>
-        </div>
-
-        <!-- Row 3: two left, big right -->
-        <div class="gallery-tile gallery-tile--placeholder">
-          <div class="tile-inner"><span>📸</span><p>Setup morning</p></div>
-        </div>
-        <div class="gallery-tile gallery-tile--placeholder">
-          <div class="tile-inner"><span>📸</span><p>Happy customer</p></div>
-        </div>
-        <div class="gallery-tile gallery-tile--large gallery-tile--placeholder">
-          <div class="tile-inner"><span>📸</span><p>Sunset at the festival</p></div>
-        </div>
+      <div class="polaroid-wall">
+        {photos.map((photo, i) => (
+          <figure class={`polaroid polaroid--r${i % 6}${photo.feature ? ' polaroid--feature' : ''}`}>
+            <img src={photo.src} alt={photo.alt} loading="lazy" />
+            {photo.caption && <figcaption>{photo.caption}</figcaption>}
+          </figure>
+        ))}
       </div>
     </div>
   </section>
@@ -92,9 +84,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-  .page-hero {
-    padding: var(--space-2xl) 0 var(--space-xl);
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap');
+
+  .page-hero { padding: var(--space-2xl) 0 var(--space-xl); }
 
   .page-hero-title {
     font-size: clamp(3rem, 8vw, 6rem);
@@ -105,63 +97,78 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .page-hero-body {
     font-size: var(--text-lg);
     color: rgba(255,255,255,0.7);
-    max-width: 520px;
+    max-width: 560px;
     line-height: 1.7;
   }
 
-  .gallery-placeholder-note {
-    margin-bottom: var(--space-lg);
-    color: var(--teal-dark);
+  /* ---- SCRAPBOOK BACKGROUND ---- */
+  .scrapbook {
+    background-color: var(--off-white);
+    background-image:
+      radial-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+      radial-gradient(rgba(0,0,0,0.018) 1px, transparent 1px);
+    background-size: 22px 22px, 22px 22px;
+    background-position: 0 0, 11px 11px;
   }
 
-  /* GALLERY GRID */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 260px;
-    gap: var(--space-sm);
+  /* ---- MASONRY VIA CSS COLUMNS (no JS) ---- */
+  .polaroid-wall {
+    column-count: 4;
+    column-gap: var(--space-lg);
+    padding: var(--space-md) 0;
   }
 
-  .gallery-tile {
-    border-radius: var(--radius-md);
-    overflow: hidden;
+  /* ---- POLAROID ---- */
+  .polaroid {
+    break-inside: avoid;
+    margin: 0 auto var(--space-xl);
+    width: 100%;
+    max-width: 280px;
+    background: #fff;
+    padding: 12px 12px 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.10), 0 10px 22px rgba(0,0,0,0.14);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transform-origin: center;
+    will-change: transform;
   }
 
-  .gallery-tile--large {
-    grid-column: span 2;
-  }
-
-  .gallery-tile--placeholder {
+  .polaroid img {
+    width: 100%;
+    height: auto;
+    display: block;
     background: var(--sand);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: default;
-    transition: background 0.2s;
   }
 
-  .gallery-tile--placeholder:hover {
-    background: #ddd5bb;
+  .polaroid figcaption {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #2b2b2b;
+    text-align: center;
+    padding: 14px 6px 18px;
   }
 
-  .tile-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    color: var(--warm-grey);
-    font-size: var(--text-sm);
-    font-weight: 600;
+  .polaroid--feature { max-width: 340px; }
+
+  /* ---- ROTATION VARIANTS (baked, feels random) ---- */
+  .polaroid--r0 { transform: rotate(-2.5deg); }
+  .polaroid--r1 { transform: rotate(1.8deg); }
+  .polaroid--r2 { transform: rotate(-1.2deg); }
+  .polaroid--r3 { transform: rotate(2.6deg); }
+  .polaroid--r4 { transform: rotate(-3deg); }
+  .polaroid--r5 { transform: rotate(1.1deg); }
+
+  /* ---- HOVER: lift, straighten, deepen shadow ---- */
+  .polaroid:hover {
+    transform: rotate(-0.4deg) translateY(-8px) scale(1.02);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 20px 40px rgba(0,0,0,0.22);
+    z-index: 2;
+    position: relative;
   }
 
-  .tile-inner span {
-    font-size: 2rem;
-  }
-
-  /* INSTA CTA */
-  .insta-cta {
-    padding: var(--space-xl) 0;
-  }
+  /* ---- INSTA CTA ---- */
+  .insta-cta { padding: var(--space-xl) 0; }
 
   .insta-cta-inner {
     display: flex;
@@ -177,33 +184,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-top: var(--space-xs);
   }
 
-  .insta-cta-buttons {
-    display: flex;
-    gap: var(--space-sm);
-    flex-wrap: wrap;
-    flex-shrink: 0;
-  }
+  .insta-cta-buttons { display: flex; gap: var(--space-sm); flex-wrap: wrap; flex-shrink: 0; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 1100px) { .polaroid-wall { column-count: 3; } }
 
   @media (max-width: 768px) {
-    .gallery-grid {
-      grid-template-columns: 1fr 1fr;
-      grid-auto-rows: 200px;
-    }
-    .gallery-tile--large {
-      grid-column: span 2;
-    }
-    .insta-cta-inner {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+    .polaroid-wall { column-count: 2; column-gap: var(--space-md); }
+    .polaroid { max-width: 100%; }
+    .polaroid--feature { max-width: 100%; }
+    .polaroid--r0 { transform: rotate(-1.4deg); }
+    .polaroid--r1 { transform: rotate(1deg); }
+    .polaroid--r2 { transform: rotate(-0.7deg); }
+    .polaroid--r3 { transform: rotate(1.4deg); }
+    .polaroid--r4 { transform: rotate(-1.6deg); }
+    .polaroid--r5 { transform: rotate(0.6deg); }
+    .insta-cta-inner { flex-direction: column; align-items: flex-start; }
   }
 
-  @media (max-width: 500px) {
-    .gallery-grid {
-      grid-template-columns: 1fr;
-    }
-    .gallery-tile--large {
-      grid-column: span 1;
-    }
+  @media (prefers-reduced-motion: reduce) {
+    .polaroid { transition: none; }
+    .polaroid:hover { transform: translateY(-4px); }
   }
 </style>
