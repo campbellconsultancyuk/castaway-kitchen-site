@@ -115,6 +115,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="gallery-tile">
           <img src="/image-assets/gallery-unit-queue.webp" alt="The Greek gyros unit serving a busy queue on a sunny day" loading="lazy" width="825" height="1100" />
         </div>
+        <div class="gallery-tile">
+          <img src="/image-assets/gallery-festival-queue.webp" alt="Festival-goers queuing in the sunshine at Castaway Kitchen" loading="lazy" width="825" height="1100" />
+        </div>
       </div>
       <div style="text-align: center; margin-top: var(--space-lg)">
         <a href="/gallery" class="btn btn--outline-dark">View Gallery</a>
@@ -426,7 +429,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .gallery-teaser-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto;
+    grid-template-rows: 1fr 1fr;
     gap: var(--space-sm);
   }
 
