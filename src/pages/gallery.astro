@@ -75,8 +75,38 @@ const photos = [
         </p>
       </div>
       <div class="insta-cta-buttons">
-        <a href="#" class="btn btn--outline">Instagram</a>
-        <a href="#" class="btn btn--outline">Facebook</a>
+        <a
+          href="https://www.instagram.com/castawaykitchen/"
+          target="_blank"
+          rel="noopener"
+          class="social-btn social-btn--insta"
+          aria-label="Follow Castaway Kitchen on Instagram"
+        >
+          <span class="social-btn-icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="2"/>
+              <circle cx="17.5" cy="6.5" r="1.4" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="social-btn-label">Instagram</span>
+          <span class="social-btn-arrow" aria-hidden="true">→</span>
+        </a>
+        <a
+          href="https://www.facebook.com/CastawayKitchen"
+          target="_blank"
+          rel="noopener"
+          class="social-btn social-btn--fb"
+          aria-label="Follow Castaway Kitchen on Facebook"
+        >
+          <span class="social-btn-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M14 8.5h2.2V5.3c-.38-.05-1.69-.17-3.2-.17-3.17 0-5.3 1.94-5.3 5.5V13H5v3.4h2.7V24h3.4v-7.6h2.85L14.4 13h-3.3v-1.97c0-1.39.37-2.53 2.9-2.53z"/>
+            </svg>
+          </span>
+          <span class="social-btn-label">Facebook</span>
+          <span class="social-btn-arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   </section>
@@ -184,7 +214,84 @@ const photos = [
     margin-top: var(--space-xs);
   }
 
-  .insta-cta-buttons { display: flex; gap: var(--space-sm); flex-wrap: wrap; flex-shrink: 0; }
+  .insta-cta-buttons { display: flex; gap: var(--space-md); flex-wrap: wrap; flex-shrink: 0; }
+
+  /* ---- BRANDED SOCIAL BUTTONS ---- */
+  .social-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.9rem 1.6rem;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--white);
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  /* Brand fills sit on a pseudo-element so we can sweep a shine over them */
+  .social-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .social-btn--insta::before {
+    background: linear-gradient(135deg, #feda75 0%, #fa7e1e 28%, #d62976 58%, #962fbf 80%, #4f5bd5 100%);
+  }
+
+  .social-btn--fb::before {
+    background: linear-gradient(135deg, #1877f2 0%, #0a5dc2 100%);
+  }
+
+  /* Shine sweep */
+  .social-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.35), transparent);
+    transform: skewX(-18deg);
+    transition: left 0.6s ease;
+  }
+
+  .social-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+  }
+
+  .social-btn:hover::after { left: 130%; }
+
+  .social-btn-icon {
+    display: inline-flex;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .social-btn-icon svg { width: 100%; height: 100%; }
+
+  .social-btn-arrow {
+    font-weight: 400;
+    transform: translateX(-4px);
+    opacity: 0;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .social-btn:hover .social-btn-arrow {
+    transform: translateX(0);
+    opacity: 1;
+  }
 
   /* ---- RESPONSIVE ---- */
   @media (max-width: 1100px) { .polaroid-wall { column-count: 3; } }
