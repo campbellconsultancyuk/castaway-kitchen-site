@@ -700,8 +700,282 @@
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script is:inline>
-  console.log('GSAP loaded:', typeof gsap !== 'undefined');
-  console.log('ScrollTrigger loaded:', typeof ScrollTrigger !== 'undefined');
-  console.log('ck-story found:', !!document.getElementById('ck-story'));
-  console.log('ck-stage found:', !!document.getElementById('ck-stage'));
+(function(){
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  const story = document.getElementById('ck-story');
+  if (!story) return;
+
+  let seed = 7;
+  const rand = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  const between = (a, b) => a + rand() * (b - a);
+
+  const SKIN = ['#caa176', '#8d6748', '#5c4632', '#d9b08c'];
+  const TOPS = ['#39404c', '#4a4356', '#574a3a', '#3e4d45', '#54403f', '#46505e', '#6b5a45'];
+  function person(x, y, s, opts = {}) {
+    const outer = document.createElementNS(SVG_NS, 'g');
+    const fig = document.createElementNS(SVG_NS, 'g');
+    const lean = between(-3, 3);
+    const top = opts.top || TOPS[Math.floor(rand() * TOPS.length)];
+    const skin = SKIN[Math.floor(rand() * SKIN.length)];
+    outer.setAttribute('transform', `translate(${x} ${y}) scale(${s}) rotate(${lean})`);
+    fig.innerHTML = `
+      <ellipse cx="0" cy="2" rx="22" ry="5.5" fill="#000" opacity=".3"/>
+      <path d="M-8 0 L-6 -42 Q-9 -46 -9 -54 Q-9 -64 0 -64 Q9 -64 9 -54 Q9 -46 6 -42 L8 0 L3 0 L1 -28 L-1 -28 L-3 0 Z" fill="${top}"/>
+      <circle cx="0" cy="-72" r="9" fill="${skin}"/>
+      ${rand() > .55 ? `<path d="M-9 -54 Q-12 -57 -11 -62 Q-5 -68 0 -67 Q6 -68 11 -62 Q12 -57 9 -54 Q0 -60 -9 -54 Z" fill="#1c1812"/>` : ''}
+    `;
+    outer.appendChild(fig);
+    return { el: outer, fig };
+  }
+
+  const crowdFar = document.getElementById('ckCrowdFar');
+  const crowdNear = document.getElementById('ckCrowdNear');
+  const queueG = document.getElementById('ckQueue');
+  const waves = [[], [], []];
+
+  for (let i = 0; i < 7; i++) {
+    const y = between(596, 636);
+    const s = .42 + (y - 590) / 60 * .2;
+    const p = person(between(880, 1540), y, s);
+    crowdFar.appendChild(p.el); waves[0].push(p.fig);
+  }
+  for (let i = 0; i < 13; i++) {
+    const y = between(610, 680);
+    const s = .5 + (y - 600) / 90 * .3;
+    const p = person(between(880, 1560), y, s);
+    (y < 645 ? crowdFar : crowdNear).appendChild(p.el); waves[1].push(p.fig);
+  }
+  for (let i = 0; i < 18; i++) {
+    const cx = between(960, 1580), cy = between(616, 700);
+    const y = cy + between(-12, 12);
+    const s = .55 + (y - 610) / 100 * .35;
+    const p = person(cx + between(-26, 26), y, s);
+    crowdNear.appendChild(p.el); waves[2].push(p.fig);
+  }
+
+  const queueFigs = [];
+  for (let i = 0; i < 11; i++) {
+    const x = 700 + i * 58 + between(-5, 5);
+    const y = 716 + between(-3, 3) + i * 2.4;
+    const s = 1.0 + i * .012 + between(-.02, .02);
+    const p = person(x, y, s, { faceLeft: true });
+    queueG.appendChild(p.el); queueFigs.push(p.fig);
+  }
+
+  const buntingLine = document.getElementById('ckBuntingLine');
+  const buntingFlags = document.getElementById('ckBuntingFlags');
+  const FLAG_COLS = ['#2a7c6f', '#e8dfc8', '#3a9d8d', '#D9A441'];
+  const bLen = buntingLine.getTotalLength();
+  const flagEls = [];
+  for (let i = 1; i <= 14; i++) {
+    const pt = buntingLine.getPointAtLength((i / 15) * bLen);
+    const f = document.createElementNS(SVG_NS, 'path');
+    f.setAttribute('d', `M${pt.x - 9} ${pt.y} L${pt.x + 9} ${pt.y} L${pt.x} ${pt.y + 17} Z`);
+    f.setAttribute('fill', FLAG_COLS[i % FLAG_COLS.length]);
+    buntingFlags.appendChild(f); flagEls.push(f);
+  }
+
+  const festoonLine = document.getElementById('ckFestoonLine');
+  const festoonBulbs = document.getElementById('ckFestoonBulbs');
+  const fLen = festoonLine.getTotalLength();
+  const bulbEls = [], bulbGlowEls = [];
+  for (let i = 1; i <= 9; i++) {
+    const pt = festoonLine.getPointAtLength((i / 10) * fLen);
+    const glow = document.createElementNS(SVG_NS, 'circle');
+    glow.setAttribute('cx', pt.x); glow.setAttribute('cy', pt.y + 8);
+    glow.setAttribute('r', 14); glow.setAttribute('fill', 'url(#ckBulbGlow)'); glow.setAttribute('opacity', '0');
+    const b = document.createElementNS(SVG_NS, 'circle');
+    b.setAttribute('cx', pt.x); b.setAttribute('cy', pt.y + 8);
+    b.setAttribute('r', 4); b.setAttribute('fill', '#4a443a');
+    festoonBulbs.appendChild(glow); festoonBulbs.appendChild(b);
+    bulbEls.push(b); bulbGlowEls.push(glow);
+  }
+
+  const stringBulbs = document.getElementById('ckStringBulbs');
+  const sBulbs = [];
+  ['ckStringL', 'ckStringR'].forEach(id => {
+    const path = document.getElementById(id);
+    const len = path.getTotalLength();
+    for (let i = 0; i <= 12; i++) {
+      const pt = path.getPointAtLength((i / 12) * len);
+      const glow = document.createElementNS(SVG_NS, 'circle');
+      glow.setAttribute('cx', pt.x); glow.setAttribute('cy', pt.y + 10);
+      glow.setAttribute('r', 18); glow.setAttribute('fill', 'url(#ckBulbGlow)');
+      const b = document.createElementNS(SVG_NS, 'circle');
+      b.setAttribute('cx', pt.x); b.setAttribute('cy', pt.y + 10);
+      b.setAttribute('r', 5); b.setAttribute('fill', '#ffd98f');
+      stringBulbs.appendChild(glow); stringBulbs.appendChild(b);
+      sBulbs.push(glow);
+    }
+  });
+
+  const wheelLights = document.getElementById('ckWheelLights');
+  for (let i = 0; i < 8; i++) {
+    const a = (i / 8) * Math.PI * 2;
+    const c = document.createElementNS(SVG_NS, 'circle');
+    c.setAttribute('cx', Math.cos(a) * 84); c.setAttribute('cy', Math.sin(a) * 84);
+    c.setAttribute('r', 4);
+    wheelLights.appendChild(c);
+  }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setFinalState() {
+    gsap.set('#ckSkyDayLayer', { opacity: 0 });
+    gsap.set('#ckSkyGoldenLayer, #ckFieldGoldenLayer', { opacity: 1 });
+    gsap.set('#ckFieldDayLayer', { opacity: .35 });
+    gsap.set('#ckSunDawn', { opacity: 0 });
+    gsap.set('#ckSunGolden', { opacity: 1 });
+    gsap.set('#ckVan', { x: 150 });
+    gsap.set('#ckAwningFold', { scaleY: 1 });
+    gsap.set('#ckBuntingG, #ckFestoonG, #ckMenuBoard, #ckPrep, #ckStaff, #ckSteam, #ckStringFG, #ckWheel, #ckTentLights, #ckWheelGlow', { opacity: 1 });
+    gsap.set('#ckMenuBoard, #ckPrep', { y: 0 });
+    gsap.set('#ckHatchLight', { opacity: .8 });
+    gsap.set('#ckCanopyGlowEl', { opacity: 1 });
+    gsap.set('#ckPath', { opacity: .18 });
+    gsap.set('#ckWarmWash', { opacity: .35 });
+    gsap.set('#ckWarmWash2', { opacity: .12 });
+    gsap.set(bulbEls, { fill: '#ffd98f' });
+    gsap.set(bulbGlowEls, { opacity: .9 });
+    gsap.set([...waves[0], ...waves[1], ...waves[2], ...queueFigs], { opacity: 1 });
+    gsap.set('#ck-intro', { autoAlpha: 1 });
+  }
+
+  if (reduceMotion) {
+    story.classList.add('ck-static');
+    const sc = document.getElementById('ck-scene');
+    sc.style.width = '100%'; sc.style.height = 'auto'; sc.style.position = 'relative';
+    setFinalState();
+    document.querySelectorAll('[data-count]').forEach(el => el.textContent = el.dataset.count);
+    document.querySelectorAll('[data-word]').forEach(el => el.textContent = el.dataset.word);
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const sceneEl = document.getElementById('ck-scene');
+  const stageEl = document.getElementById('ck-stage');
+  function sizeScene() {
+    const vw = stageEl.clientWidth, vh = stageEl.clientHeight;
+    const scale = Math.max(vw / 1600, vh / 900);
+    sceneEl.style.width = (1600 * scale) + 'px';
+    sceneEl.style.height = (900 * scale) + 'px';
+  }
+  sizeScene();
+  ScrollTrigger.addEventListener('refreshInit', sizeScene);
+
+  gsap.set('#ckVan', { x: -680 });
+  gsap.set('#ckAwningFold', { scaleY: 0, transformOrigin: '50% 0%', svgOrigin: '340 408' });
+  gsap.set('#ckMenuBoard, #ckPrep', { opacity: 0, y: 26 });
+  gsap.set(flagEls, { scale: 0, transformOrigin: '50% 0%' });
+  gsap.set('#ckFestoonLine', { strokeDasharray: fLen, strokeDashoffset: fLen });
+  gsap.set([...waves[0], ...waves[1], ...waves[2]], { opacity: 0, y: 10 });
+  gsap.set(queueFigs, { opacity: 0, x: 60 });
+  gsap.set(sBulbs, { scale: .2, transformOrigin: '50% 50%' });
+
+  const captions = {};
+  document.querySelectorAll('.ck-caption').forEach(c => {
+    captions[c.dataset.phase] = c;
+    gsap.set(c, { autoAlpha: 0, y: 28 });
+  });
+
+  const showCaption = (tl, n, at, leaveAt) => {
+    tl.to(captions[n], { autoAlpha: 1, y: 0, duration: 2.2, ease: 'power2.out' }, at);
+    if (leaveAt) tl.to(captions[n], { autoAlpha: 0, y: -22, duration: 1.8, ease: 'power2.in' }, leaveAt);
+  };
+
+  const tl = gsap.timeline({
+    defaults: { ease: 'none' },
+    scrollTrigger: {
+      trigger: '#ck-stage',
+      start: 'top top',
+      end: '+=320%',
+      pin: true,
+      scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true
+    }
+  });
+
+  const panAmount = () => Math.max(0, parseFloat(sceneEl.style.width || 0) - stageEl.clientWidth);
+  tl.fromTo(sceneEl, { x: 0 }, { x: () => -panAmount() * .85, duration: 52, ease: 'sine.inOut' }, 36);
+  tl.fromTo('#ckClouds', { x: 0 }, { x: -90, duration: 100 }, 0);
+  tl.fromTo('#ckFar',    { y: 0 }, { y: -10, duration: 100 }, 0);
+  tl.fromTo('#ckMid',    { y: 14 }, { y: 0,  duration: 100 }, 0);
+  tl.to('#ck-intro', { autoAlpha: 0, y: -60, duration: 6, ease: 'power1.in' }, 0);
+  tl.to('#ck-hint',  { autoAlpha: 0, duration: 3 }, 0);
+
+  tl.to('#ckVan', { x: 150, duration: 13, ease: 'power2.out' }, 4);
+  gsap.utils.toArray('#ckDust .d').forEach((d, i) => {
+    tl.fromTo(d, { opacity: 0, scale: .5, x: 80 }, { opacity: .5, scale: 1.4, x: -30, duration: 4, ease: 'power1.out' }, 7 + i * 2.4);
+    tl.to(d, { opacity: 0, duration: 3 }, 11 + i * 2.4);
+  });
+  showCaption(tl, 1, 9, 19);
+
+  tl.to('#ckAwningFold', { scaleY: 1, duration: 5, ease: 'power2.out' }, 20);
+  tl.to('#ckBuntingG', { opacity: 1, duration: 3 }, 23);
+  tl.to(flagEls, { scale: 1, duration: 2.5, stagger: .22, ease: 'back.out(2)' }, 24);
+  tl.to('#ckMenuBoard', { opacity: 1, y: 0, duration: 4, ease: 'power2.out' }, 26);
+  tl.to('#ckPrep', { opacity: 1, y: 0, duration: 4, ease: 'power2.out' }, 27.5);
+  tl.to('#ckFestoonG', { opacity: 1, duration: 2 }, 27);
+  tl.to('#ckFestoonLine', { strokeDashoffset: 0, duration: 5, ease: 'power1.inOut' }, 27.5);
+  tl.to(bulbEls, { fill: '#ffd98f', duration: .8, stagger: .35 }, 31);
+  tl.to(bulbGlowEls, { opacity: .8, duration: .8, stagger: .35 }, 31);
+  showCaption(tl, 2, 24, 37);
+
+  tl.to('#ckSkyDayLayer', { opacity: 1, duration: 14, ease: 'sine.inOut' }, 38);
+  tl.to('#ckFieldDayLayer', { opacity: 1, duration: 14, ease: 'sine.inOut' }, 38);
+  tl.to('#ckSunDawn', { opacity: 0, duration: 10 }, 40);
+  tl.to('#ckPath', { opacity: .14, duration: 10 }, 42);
+  tl.to(waves[0], { opacity: 1, y: 0, duration: 3, stagger: .7, ease: 'power1.out' }, 39);
+  tl.to(waves[1], { opacity: 1, y: 0, duration: 3, stagger: .45, ease: 'power1.out' }, 43);
+  tl.to(waves[2], { opacity: 1, y: 0, duration: 3, stagger: .3, ease: 'power1.out' }, 47);
+  showCaption(tl, 3, 41, 53);
+
+  tl.to(queueFigs, { opacity: 1, x: 0, duration: 4, stagger: .9, ease: 'power2.out' }, 54);
+  showCaption(tl, 4, 56, 65);
+
+  tl.to('#ckStaff', { opacity: 1, duration: 3 }, 66);
+  tl.to('#ckHatchLight', { opacity: .7, duration: 4 }, 66);
+  tl.to('#ckCanopyGlowEl', { opacity: .8, duration: 5 }, 67);
+  tl.to('#ckSteam', { opacity: 1, duration: 3 }, 67);
+  tl.fromTo('#ckServe', { x: -14, opacity: 0 }, { x: 0, opacity: 1, duration: 2, ease: 'power2.out' }, 68);
+  tl.to('#ckServe', { x: 10, duration: 2.5, ease: 'sine.inOut' }, 71);
+  tl.to('#ckServe', { x: 0, duration: 2.5, ease: 'sine.inOut' }, 74);
+  showCaption(tl, 5, 68, 77);
+
+  tl.to('#ckSkyGoldenLayer', { opacity: 1, duration: 12, ease: 'sine.inOut' }, 78);
+  tl.to('#ckFieldGoldenLayer', { opacity: 1, duration: 12, ease: 'sine.inOut' }, 78);
+  tl.to('#ckFieldDayLayer', { opacity: .35, duration: 12 }, 78);
+  tl.to('#ckSunGolden', { opacity: 1, duration: 10, ease: 'sine.inOut' }, 80);
+  tl.to('#ckWarmWash', { opacity: .35, duration: 10 }, 80);
+  tl.to('#ckWarmWash2', { opacity: .12, duration: 10 }, 82);
+  tl.to('#ckWheel', { opacity: 1, duration: 6 }, 80);
+  tl.to('#ckWheelGlow, #ckTentLights', { opacity: 1, duration: 5 }, 84);
+  tl.to('#ckStringFG', { opacity: 1, duration: 5 }, 82);
+  tl.to(sBulbs, { scale: 1, duration: 2, stagger: { each: .18, from: 'edges' }, ease: 'back.out(2)' }, 83);
+  tl.to(bulbGlowEls, { opacity: 1, duration: 4 }, 84);
+  showCaption(tl, 6, 84, 96.5);
+
+  tl.to('#ck-scene-wrap', { scale: 1.025, duration: 100, ease: 'none' }, 0);
+  tl.to({}, { duration: 4 }, 96);
+
+  ScrollTrigger.create({
+    trigger: '#ck-counters',
+    start: 'top 75%',
+    once: true,
+    onEnter: () => {
+      document.querySelectorAll('[data-count]').forEach(el => {
+        const target = +el.dataset.count;
+        const obj = { v: 0 };
+        gsap.to(obj, { v: target, duration: 1.8, ease: 'power3.out', onUpdate: () => el.textContent = Math.round(obj.v) });
+      });
+      document.querySelectorAll('[data-word]').forEach(el => {
+        gsap.fromTo(el, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1, delay: .6, ease: 'power2.out', onStart: () => el.textContent = el.dataset.word });
+      });
+    }
+  });
+
+  story.querySelectorAll('img').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
+})();
 </script>
