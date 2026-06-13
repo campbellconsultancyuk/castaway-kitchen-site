@@ -700,7 +700,7 @@
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script is:inline>
-(function(){
+window.addEventListener('load', function(){
   const SVG_NS = 'http://www.w3.org/2000/svg';
   const story = document.getElementById('ck-story');
   if (!story) return;
@@ -977,5 +977,5 @@
   });
 
   story.querySelectorAll('img').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
-})();
+});
 </script>
