@@ -700,7 +700,7 @@
 <script>
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-(() => {
+{
   const SVG_NS = 'http://www.w3.org/2000/svg';
   const story = document.getElementById('ck-story');
   if (!story) return;
@@ -1024,5 +1024,5 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
   /* lazy-decode hint for any future raster assets inside the section */
   story.querySelectorAll('img').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
-})();
+}
 </script>
