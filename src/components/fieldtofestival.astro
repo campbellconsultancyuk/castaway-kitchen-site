@@ -697,27 +697,20 @@
 
 </style>
 
-<script>
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-
-(async () => {
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script is:inline>
+(function(){
   const SVG_NS = 'http://www.w3.org/2000/svg';
   const story = document.getElementById('ck-story');
   if (!story) return;
 
-  /* ---------- seeded random so the scene is identical every load ---------- */
   let seed = 7;
   const rand = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
   const between = (a, b) => a + rand() * (b - a);
 
-  /* ---------- build a person silhouette ---------- */
   const SKIN = ['#caa176', '#8d6748', '#5c4632', '#d9b08c'];
   const TOPS = ['#39404c', '#4a4356', '#574a3a', '#3e4d45', '#54403f', '#46505e', '#6b5a45'];
-  // Returns { el, fig } — `el` carries the static placement transform,
-  // `fig` is the inner group GSAP is allowed to animate.
   function person(x, y, s, opts = {}) {
     const outer = document.createElementNS(SVG_NS, 'g');
     const fig = document.createElementNS(SVG_NS, 'g');
@@ -735,27 +728,23 @@ gsap.registerPlugin(ScrollTrigger);
     return { el: outer, fig };
   }
 
-  /* ---------- crowd groups ---------- */
   const crowdFar = document.getElementById('ckCrowdFar');
   const crowdNear = document.getElementById('ckCrowdNear');
   const queueG = document.getElementById('ckQueue');
   const waves = [[], [], []];
 
-  // wave 1: a few scattered far figures
   for (let i = 0; i < 7; i++) {
     const y = between(596, 636);
     const s = .42 + (y - 590) / 60 * .2;
     const p = person(between(880, 1540), y, s);
     crowdFar.appendChild(p.el); waves[0].push(p.fig);
   }
-  // wave 2: mid density
   for (let i = 0; i < 13; i++) {
     const y = between(610, 680);
     const s = .5 + (y - 600) / 90 * .3;
     const p = person(between(880, 1560), y, s);
     (y < 645 ? crowdFar : crowdNear).appendChild(p.el); waves[1].push(p.fig);
   }
-  // wave 3: groups, closer
   for (let i = 0; i < 18; i++) {
     const cx = between(960, 1580), cy = between(616, 700);
     const y = cy + between(-12, 12);
@@ -764,18 +753,15 @@ gsap.registerPlugin(ScrollTrigger);
     crowdNear.appendChild(p.el); waves[2].push(p.fig);
   }
 
-  /* ---------- the queue: figures lining up toward the hatch ---------- */
-  // hatch front sits ~x=700 in scene space (van translate 150 + counter ~550)
   const queueFigs = [];
   for (let i = 0; i < 11; i++) {
     const x = 700 + i * 58 + between(-5, 5);
-    const y = 716 + between(-3, 3) + i * 2.4;        // gentle perspective drift toward viewer
+    const y = 716 + between(-3, 3) + i * 2.4;
     const s = 1.0 + i * .012 + between(-.02, .02);
     const p = person(x, y, s, { faceLeft: true });
     queueG.appendChild(p.el); queueFigs.push(p.fig);
   }
 
-  /* ---------- bunting flags along the curve ---------- */
   const buntingLine = document.getElementById('ckBuntingLine');
   const buntingFlags = document.getElementById('ckBuntingFlags');
   const FLAG_COLS = ['#2a7c6f', '#e8dfc8', '#3a9d8d', '#D9A441'];
@@ -789,7 +775,6 @@ gsap.registerPlugin(ScrollTrigger);
     buntingFlags.appendChild(f); flagEls.push(f);
   }
 
-  /* ---------- festoon bulbs ---------- */
   const festoonLine = document.getElementById('ckFestoonLine');
   const festoonBulbs = document.getElementById('ckFestoonBulbs');
   const fLen = festoonLine.getTotalLength();
@@ -806,7 +791,6 @@ gsap.registerPlugin(ScrollTrigger);
     bulbEls.push(b); bulbGlowEls.push(glow);
   }
 
-  /* ---------- foreground string lights ---------- */
   const stringBulbs = document.getElementById('ckStringBulbs');
   const sBulbs = [];
   ['ckStringL', 'ckStringR'].forEach(id => {
@@ -825,7 +809,6 @@ gsap.registerPlugin(ScrollTrigger);
     }
   });
 
-  /* ---------- ferris wheel cabin lights ---------- */
   const wheelLights = document.getElementById('ckWheelLights');
   for (let i = 0; i < 8; i++) {
     const a = (i / 8) * Math.PI * 2;
@@ -835,9 +818,6 @@ gsap.registerPlugin(ScrollTrigger);
     wheelLights.appendChild(c);
   }
 
-  /* =========================================================
-     Reduced motion / no-JS-pin fallback: static golden hour
-     ========================================================= */
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function setFinalState() {
@@ -865,14 +845,14 @@ gsap.registerPlugin(ScrollTrigger);
     story.classList.add('ck-static');
     const sc = document.getElementById('ck-scene');
     sc.style.width = '100%'; sc.style.height = 'auto'; sc.style.position = 'relative';
-    if (window.gsap) setFinalState();
-    // counters: set instantly
+    setFinalState();
     document.querySelectorAll('[data-count]').forEach(el => el.textContent = el.dataset.count);
     document.querySelectorAll('[data-word]').forEach(el => el.textContent = el.dataset.word);
     return;
   }
 
-  /* cover-size the scene against the stage (16:9 artwork, anchored to the ground) */
+  gsap.registerPlugin(ScrollTrigger);
+
   const sceneEl = document.getElementById('ck-scene');
   const stageEl = document.getElementById('ck-stage');
   function sizeScene() {
@@ -884,8 +864,7 @@ gsap.registerPlugin(ScrollTrigger);
   sizeScene();
   ScrollTrigger.addEventListener('refreshInit', sizeScene);
 
-  /* ---------- initial states ---------- */
-  gsap.set('#ckVan', { x: -680 });                       // off screen left (group already at 150)
+  gsap.set('#ckVan', { x: -680 });
   gsap.set('#ckAwningFold', { scaleY: 0, transformOrigin: '50% 0%', svgOrigin: '340 408' });
   gsap.set('#ckMenuBoard, #ckPrep', { opacity: 0, y: 26 });
   gsap.set(flagEls, { scale: 0, transformOrigin: '50% 0%' });
@@ -905,10 +884,6 @@ gsap.registerPlugin(ScrollTrigger);
     if (leaveAt) tl.to(captions[n], { autoAlpha: 0, y: -22, duration: 1.8, ease: 'power2.in' }, leaveAt);
   };
 
-  /* =========================================================
-     MASTER TIMELINE — one continuous scene, scrubbed by scroll
-     total = 100 "units"
-     ========================================================= */
   const tl = gsap.timeline({
     defaults: { ease: 'none' },
     scrollTrigger: {
@@ -922,30 +897,21 @@ gsap.registerPlugin(ScrollTrigger);
     }
   });
 
-  /* --- camera pan: keeps the unit framed early, opens up to the field late --- */
   const panAmount = () => Math.max(0, parseFloat(sceneEl.style.width || 0) - stageEl.clientWidth);
   tl.fromTo(sceneEl, { x: 0 }, { x: () => -panAmount() * .85, duration: 52, ease: 'sine.inOut' }, 36);
-
-  /* --- slow ambient parallax across the whole journey --- */
   tl.fromTo('#ckClouds', { x: 0 }, { x: -90, duration: 100 }, 0);
   tl.fromTo('#ckFar',    { y: 0 }, { y: -10, duration: 100 }, 0);
   tl.fromTo('#ckMid',    { y: 14 }, { y: 0,  duration: 100 }, 0);
-
-  /* --- intro out --- */
   tl.to('#ck-intro', { autoAlpha: 0, y: -60, duration: 6, ease: 'power1.in' }, 0);
   tl.to('#ck-hint',  { autoAlpha: 0, duration: 3 }, 0);
 
-  /* --- PHASE 1 · ARRIVAL (4 → 20) --- */
   tl.to('#ckVan', { x: 150, duration: 13, ease: 'power2.out' }, 4);
-  // dust puffs trail the wheels
   gsap.utils.toArray('#ckDust .d').forEach((d, i) => {
-    tl.fromTo(d, { opacity: 0, scale: .5, x: 80 },
-      { opacity: .5, scale: 1.4, x: -30, duration: 4, ease: 'power1.out' }, 7 + i * 2.4);
+    tl.fromTo(d, { opacity: 0, scale: .5, x: 80 }, { opacity: .5, scale: 1.4, x: -30, duration: 4, ease: 'power1.out' }, 7 + i * 2.4);
     tl.to(d, { opacity: 0, duration: 3 }, 11 + i * 2.4);
   });
   showCaption(tl, 1, 9, 19);
 
-  /* --- PHASE 2 · SETUP (20 → 38) --- */
   tl.to('#ckAwningFold', { scaleY: 1, duration: 5, ease: 'power2.out' }, 20);
   tl.to('#ckBuntingG', { opacity: 1, duration: 3 }, 23);
   tl.to(flagEls, { scale: 1, duration: 2.5, stagger: .22, ease: 'back.out(2)' }, 24);
@@ -957,7 +923,6 @@ gsap.registerPlugin(ScrollTrigger);
   tl.to(bulbGlowEls, { opacity: .8, duration: .8, stagger: .35 }, 31);
   showCaption(tl, 2, 24, 37);
 
-  /* --- PHASE 3 · THE CROWD ARRIVES (38 → 54) --- */
   tl.to('#ckSkyDayLayer', { opacity: 1, duration: 14, ease: 'sine.inOut' }, 38);
   tl.to('#ckFieldDayLayer', { opacity: 1, duration: 14, ease: 'sine.inOut' }, 38);
   tl.to('#ckSunDawn', { opacity: 0, duration: 10 }, 40);
@@ -967,22 +932,18 @@ gsap.registerPlugin(ScrollTrigger);
   tl.to(waves[2], { opacity: 1, y: 0, duration: 3, stagger: .3, ease: 'power1.out' }, 47);
   showCaption(tl, 3, 41, 53);
 
-  /* --- PHASE 4 · THE QUEUE FORMS (54 → 66) --- */
   tl.to(queueFigs, { opacity: 1, x: 0, duration: 4, stagger: .9, ease: 'power2.out' }, 54);
   showCaption(tl, 4, 56, 65);
 
-  /* --- PHASE 5 · SERVICE (66 → 78) --- */
   tl.to('#ckStaff', { opacity: 1, duration: 3 }, 66);
   tl.to('#ckHatchLight', { opacity: .7, duration: 4 }, 66);
   tl.to('#ckCanopyGlowEl', { opacity: .8, duration: 5 }, 67);
   tl.to('#ckSteam', { opacity: 1, duration: 3 }, 67);
-  // serving gesture: tray slides out and back, twice across the phase
   tl.fromTo('#ckServe', { x: -14, opacity: 0 }, { x: 0, opacity: 1, duration: 2, ease: 'power2.out' }, 68);
   tl.to('#ckServe', { x: 10, duration: 2.5, ease: 'sine.inOut' }, 71);
   tl.to('#ckServe', { x: 0, duration: 2.5, ease: 'sine.inOut' }, 74);
   showCaption(tl, 5, 68, 77);
 
-  /* --- PHASE 6 · FESTIVAL ATMOSPHERE (78 → 95) --- */
   tl.to('#ckSkyGoldenLayer', { opacity: 1, duration: 12, ease: 'sine.inOut' }, 78);
   tl.to('#ckFieldGoldenLayer', { opacity: 1, duration: 12, ease: 'sine.inOut' }, 78);
   tl.to('#ckFieldDayLayer', { opacity: .35, duration: 12 }, 78);
@@ -996,13 +957,9 @@ gsap.registerPlugin(ScrollTrigger);
   tl.to(bulbGlowEls, { opacity: 1, duration: 4 }, 84);
   showCaption(tl, 6, 84, 96.5);
 
-  /* --- settle (95 → 100) --- */
-  tl.to('#ck-scene-wrap', { scale: 1.025, duration: 100, ease: 'none' }, 0); // imperceptible push-in across the journey
-  tl.to({}, { duration: 4 }, 96); // breathing room at the end of the pin
+  tl.to('#ck-scene-wrap', { scale: 1.025, duration: 100, ease: 'none' }, 0);
+  tl.to({}, { duration: 4 }, 96);
 
-  /* =========================================================
-     COUNTERS — count up once when visible
-     ========================================================= */
   ScrollTrigger.create({
     trigger: '#ck-counters',
     start: 'top 75%',
@@ -1011,19 +968,14 @@ gsap.registerPlugin(ScrollTrigger);
       document.querySelectorAll('[data-count]').forEach(el => {
         const target = +el.dataset.count;
         const obj = { v: 0 };
-        gsap.to(obj, {
-          v: target, duration: 1.8, ease: 'power3.out',
-          onUpdate: () => el.textContent = Math.round(obj.v)
-        });
+        gsap.to(obj, { v: target, duration: 1.8, ease: 'power3.out', onUpdate: () => el.textContent = Math.round(obj.v) });
       });
       document.querySelectorAll('[data-word]').forEach(el => {
-        gsap.fromTo(el, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1, delay: .6, ease: 'power2.out',
-          onStart: () => el.textContent = el.dataset.word });
+        gsap.fromTo(el, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1, delay: .6, ease: 'power2.out', onStart: () => el.textContent = el.dataset.word });
       });
     }
   });
 
-  /* lazy-decode hint for any future raster assets inside the section */
   story.querySelectorAll('img').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
 })();
 </script>
