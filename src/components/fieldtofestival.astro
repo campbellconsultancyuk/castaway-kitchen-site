@@ -702,9 +702,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
-console.log('FieldToFestival script loaded', gsap.version);
 
-{
+(async () => {
   const SVG_NS = 'http://www.w3.org/2000/svg';
   const story = document.getElementById('ck-story');
   if (!story) return;
@@ -1026,5 +1025,5 @@ console.log('FieldToFestival script loaded', gsap.version);
 
   /* lazy-decode hint for any future raster assets inside the section */
   story.querySelectorAll('img').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
-}
+})();
 </script>
