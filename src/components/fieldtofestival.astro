@@ -700,6 +700,9 @@
 <script>
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 {
   const SVG_NS = 'http://www.w3.org/2000/svg';
   const story = document.getElementById('ck-story');
@@ -868,8 +871,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
     document.querySelectorAll('[data-word]').forEach(el => el.textContent = el.dataset.word);
     return;
   }
-
-  gsap.registerPlugin(ScrollTrigger);
 
   /* cover-size the scene against the stage (16:9 artwork, anchored to the ground) */
   const sceneEl = document.getElementById('ck-scene');
