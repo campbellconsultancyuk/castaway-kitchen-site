@@ -1,0 +1,1028 @@
+---
+/**
+ * FieldToFestival.astro
+ * Scroll-driven story: an empty field becomes the busiest spot on site.
+ * Place directly below the homepage hero:
+ *
+ *   import FieldToFestival from '../components/FieldToFestival.astro';
+ *   ...
+ *   </section>  <!-- end of .hero -->
+ *   <FieldToFestival />
+ *
+ * Requires: npm i gsap
+ *
+ * Branding:
+ *  - Pulls --teal / --teal-light / --teal-dark / --sand / --black / --white,
+ *    --font-display (Bebas Neue) and --font-body (Nunito) straight from the
+ *    global design tokens. No local font imports needed.
+ *  - Warm gold (#D9A441) is reserved for physical light in the scene only
+ *    (festoon bulbs, string lights, sunrise/sunset glow) — not UI.
+ *
+ * Tuning:
+ *  - Scroll length: the `end: '+=320%'` value in the ScrollTrigger below.
+ */
+---
+
+<section class="ck-story" id="ck-story" aria-label="How Castaway Kitchen transforms an empty field into a festival favourite">
+
+  <div class="ck-stage" id="ck-stage">
+    <div class="ck-scene-wrap" id="ck-scene-wrap">
+
+      <svg class="ck-scene" id="ck-scene" viewBox="0 0 1600 900" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false">
+        <defs>
+          <!-- skies -->
+          <linearGradient id="ckSkyDawn" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1b2335"/>
+            <stop offset=".45" stop-color="#3d3a52"/>
+            <stop offset=".75" stop-color="#a4646a"/>
+            <stop offset="1" stop-color="#e8a37a"/>
+          </linearGradient>
+          <linearGradient id="ckSkyDay" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#5a7fa8"/>
+            <stop offset=".6" stop-color="#9db8cf"/>
+            <stop offset="1" stop-color="#d8dfd9"/>
+          </linearGradient>
+          <linearGradient id="ckSkyGolden" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#241a2e"/>
+            <stop offset=".4" stop-color="#5e3a4a"/>
+            <stop offset=".7" stop-color="#c0633f"/>
+            <stop offset="1" stop-color="#eda049"/>
+          </linearGradient>
+          <radialGradient id="ckSunGlow" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#ffe9bb" stop-opacity=".95"/>
+            <stop offset=".35" stop-color="#f7c477" stop-opacity=".5"/>
+            <stop offset="1" stop-color="#f7c477" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="ckBulbGlow" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#ffe3a1" stop-opacity=".9"/>
+            <stop offset="1" stop-color="#ffe3a1" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="ckCanopyGlow" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#ffce7e" stop-opacity=".55"/>
+            <stop offset="1" stop-color="#ffce7e" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="ckFieldDawn" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2e3326"/>
+            <stop offset="1" stop-color="#171a13"/>
+          </linearGradient>
+          <linearGradient id="ckFieldDay" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#56663f"/>
+            <stop offset="1" stop-color="#2c3522"/>
+          </linearGradient>
+          <linearGradient id="ckFieldGolden" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#7d6238"/>
+            <stop offset="1" stop-color="#352a18"/>
+          </linearGradient>
+          <linearGradient id="ckVanBody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#20242b"/>
+            <stop offset="1" stop-color="#14171c"/>
+          </linearGradient>
+          <linearGradient id="ckCanopy" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e9e4d8"/>
+            <stop offset="1" stop-color="#cfc7b4"/>
+          </linearGradient>
+          <filter id="ckBlurS" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="6"/>
+          </filter>
+          <filter id="ckBlurM" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="14"/>
+          </filter>
+        </defs>
+
+        <!-- ===== SKY ===== -->
+        <rect width="1600" height="620" fill="url(#ckSkyDawn)"/>
+        <rect id="ckSkyDayLayer" width="1600" height="620" fill="url(#ckSkyDay)" opacity="0"/>
+        <rect id="ckSkyGoldenLayer" width="1600" height="620" fill="url(#ckSkyGolden)" opacity="0"/>
+
+        <!-- sunrise sun -->
+        <g id="ckSunDawn">
+          <circle cx="1180" cy="540" r="300" fill="url(#ckSunGlow)" opacity=".8"/>
+          <circle cx="1180" cy="540" r="46" fill="#ffe5ae"/>
+        </g>
+        <!-- golden hour sun, low left -->
+        <g id="ckSunGolden" opacity="0">
+          <circle cx="330" cy="545" r="360" fill="url(#ckSunGlow)"/>
+          <circle cx="330" cy="545" r="54" fill="#ffd98f"/>
+        </g>
+
+        <!-- clouds -->
+        <g id="ckClouds" opacity=".75">
+          <g class="ck-cloud ck-cloud-1">
+            <g transform="translate(-100 130)" fill="#ffffff" opacity=".14" filter="url(#ckBlurM)">
+              <ellipse cx="0" cy="0" rx="150" ry="30"/><ellipse cx="100" cy="-16" rx="100" ry="26"/>
+            </g>
+          </g>
+          <g class="ck-cloud ck-cloud-2">
+            <g transform="translate(-260 230)" fill="#ffffff" opacity=".1" filter="url(#ckBlurM)">
+              <ellipse cx="0" cy="0" rx="190" ry="34"/><ellipse cx="140" cy="-14" rx="110" ry="24"/>
+            </g>
+          </g>
+          <g class="ck-cloud ck-cloud-3">
+            <g transform="translate(-180 70)" fill="#ffffff" opacity=".08" filter="url(#ckBlurM)">
+              <ellipse cx="0" cy="0" rx="120" ry="22"/>
+            </g>
+          </g>
+        </g>
+
+        <!-- ===== DISTANT TREELINE + HILLS (parallax layer) ===== -->
+        <g id="ckFar">
+          <path d="M0 560 Q 300 520 640 552 T 1600 548 V 620 H 0 Z" fill="#11150f"/>
+          <g fill="#0d100b">
+            <ellipse cx="120" cy="548" rx="90" ry="26"/>
+            <ellipse cx="240" cy="552" rx="70" ry="20"/>
+            <ellipse cx="1480" cy="545" rx="110" ry="28"/>
+            <ellipse cx="1330" cy="552" rx="70" ry="18"/>
+          </g>
+          <!-- distant ferris wheel -->
+          <g id="ckWheel" opacity="0" transform="translate(1335 455)">
+            <line x1="-34" y1="92" x2="0" y2="0" stroke="#0a0907" stroke-width="7"/>
+            <line x1="34" y1="92" x2="0" y2="0" stroke="#0a0907" stroke-width="7"/>
+            <g class="ck-wheel-spin">
+              <circle r="84" fill="none" stroke="#171310" stroke-width="5"/>
+              <circle r="58" fill="none" stroke="#171310" stroke-width="3"/>
+              <g stroke="#171310" stroke-width="3">
+                <line x1="0" y1="-84" x2="0" y2="84"/><line x1="-84" y1="0" x2="84" y2="0"/>
+                <line x1="-59" y1="-59" x2="59" y2="59"/><line x1="-59" y1="59" x2="59" y2="-59"/>
+              </g>
+              <g id="ckWheelLights" fill="#ffce7e"></g>
+            </g>
+            <g id="ckWheelGlow" opacity="0">
+              <circle r="120" fill="url(#ckBulbGlow)" opacity=".5"/>
+            </g>
+          </g>
+          <!-- distant marquee tents -->
+          <g id="ckTents" fill="#0d100b">
+            <path d="M880 560 l46 -34 46 34 z"/>
+            <path d="M960 562 l38 -26 38 26 z"/>
+          </g>
+          <g id="ckTentLights" opacity="0" fill="#ffce7e">
+            <circle cx="926" cy="540" r="2.4"/><circle cx="998" cy="546" r="2.2"/>
+          </g>
+        </g>
+
+        <!-- ===== FIELD ===== -->
+        <rect y="558" width="1600" height="342" fill="url(#ckFieldDawn)"/>
+        <rect id="ckFieldDayLayer" y="558" width="1600" height="342" fill="url(#ckFieldDay)" opacity="0"/>
+        <rect id="ckFieldGoldenLayer" y="558" width="1600" height="342" fill="url(#ckFieldGolden)" opacity="0"/>
+        <!-- worn path to the unit -->
+        <path id="ckPath" d="M760 900 C 740 800 690 700 620 648 L 760 648 C 830 700 860 800 900 900 Z" fill="#000000" opacity="0"/>
+
+        <!-- mid-scene group: everything that lives on the field -->
+        <g id="ckMid">
+
+          <!-- crowd silhouettes injected by JS (behind the van) -->
+          <g id="ckCrowdFar"></g>
+
+          <!-- ===== THE UNIT ===== -->
+          <g id="ckVan" transform="translate(150 0)">
+            <!-- ground shadow -->
+            <ellipse cx="320" cy="650" rx="280" ry="22" fill="#000" opacity=".4"/>
+            <!-- warm glow under canopy (service phase) -->
+            <ellipse id="ckCanopyGlowEl" cx="330" cy="560" rx="300" ry="150" fill="url(#ckCanopyGlow)" opacity="0"/>
+
+            <!-- canopy / awning : unfolds -->
+            <g id="ckAwning" transform="translate(0 0)">
+              <g id="ckAwningFold">
+                <path d="M120 408 L 560 408 L 596 472 L 84 472 Z" fill="url(#ckCanopy)"/>
+                <path d="M84 472 L 596 472 L 596 486 L 84 486 Z" fill="#2a7c6f"/>
+                <g fill="#e9e4d8">
+                  <path d="M84 486 l 25.6 16 25.6 -16 z"/><path d="M135.2 486 l 25.6 16 25.6 -16 z"/>
+                  <path d="M186.4 486 l 25.6 16 25.6 -16 z"/><path d="M237.6 486 l 25.6 16 25.6 -16 z"/>
+                  <path d="M288.8 486 l 25.6 16 25.6 -16 z"/><path d="M340 486 l 25.6 16 25.6 -16 z"/>
+                  <path d="M391.2 486 l 25.6 16 25.6 -16 z"/><path d="M442.4 486 l 25.6 16 25.6 -16 z"/>
+                  <path d="M493.6 486 l 25.6 16 25.6 -16 z"/><path d="M544.8 486 l 25.6 16 25.6 -16 z"/>
+                </g>
+              </g>
+            </g>
+
+            <!-- body -->
+            <g id="ckVanBodyG">
+              <rect x="118" y="420" width="444" height="200" rx="14" fill="url(#ckVanBody)"/>
+              <rect x="118" y="420" width="444" height="200" rx="14" fill="none" stroke="#000" stroke-opacity=".35"/>
+              <!-- serving hatch -->
+              <rect id="ckHatch" x="300" y="452" width="230" height="104" rx="8" fill="#0b0d10"/>
+              <rect id="ckHatchLight" x="300" y="452" width="230" height="104" rx="8" fill="#3a2c18" opacity="0"/>
+              <!-- staff inside hatch -->
+              <g id="ckStaff" opacity="0">
+                <g fill="#caa176">
+                  <circle cx="356" cy="492" r="13"/>
+                  <circle cx="452" cy="496" r="12"/>
+                </g>
+                <path d="M338 556 v-36 q0 -16 18 -16 t18 16 v36 z" fill="#e3ded2"/>
+                <path d="M436 556 v-32 q0 -15 16 -15 t16 15 v32 z" fill="#e3ded2"/>
+                <rect x="336" y="470" width="40" height="8" rx="4" fill="#2a7c6f"/>
+                <rect x="434" y="475" width="36" height="7" rx="3.5" fill="#2a7c6f"/>
+                <!-- serving arm + tray -->
+                <g id="ckServe">
+                  <path d="M468 516 q 28 -6 46 6" stroke="#caa176" stroke-width="9" fill="none" stroke-linecap="round"/>
+                  <rect x="506" y="514" width="34" height="7" rx="3" fill="#d9a441"/>
+                  <path d="M512 514 q 5 -10 11 -1 q 6 -9 11 1 z" fill="#f0e2c8"/>
+                </g>
+              </g>
+              <!-- counter ledge -->
+              <rect x="288" y="552" width="254" height="12" rx="5" fill="#3a3f47"/>
+              <!-- signage -->
+              <rect x="138" y="436" width="150" height="56" rx="6" fill="#0b0d10"/>
+              <text x="213" y="459" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="19" letter-spacing="2" fill="#fff">CASTAWAY</text>
+              <text x="213" y="482" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="19" letter-spacing="2" fill="#3a9d8d">KITCHEN</text>
+              <!-- panel details -->
+              <rect x="138" y="508" width="150" height="92" rx="8" fill="#171b21"/>
+              <!-- Castaway Kitchen badge: wave, surfboard + gull, sun -->
+              <g id="ckBadge" stroke="#e9e4d8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="213" cy="554" r="33" stroke-width="3"/>
+                <!-- sun -->
+                <circle cx="200" cy="538" r="6.5" stroke-width="2.4"/>
+                <!-- wave curl -->
+                <path d="M187 576 Q 188 552 202 549 Q 211 548 210 556 Q 209 562 202 561 Q 209 568 206 576" stroke-width="3"/>
+                <!-- water -->
+                <path d="M213 570 q 4 -3.5 8 0 t 8 0" stroke-width="2.2"/>
+                <!-- surfboard -->
+                <path d="M229 576 Q 226 556 231 546 Q 236 556 233 576 Z" fill="#e9e4d8" stroke="none"/>
+                <!-- gull -->
+                <path d="M224 542 q 4 -5 7 0 q 3 -5 7 0" stroke-width="2.2"/>
+              </g>
+              <!-- wheels -->
+              <g>
+                <circle cx="208" cy="626" r="26" fill="#0a0c0e"/><circle cx="208" cy="626" r="11" fill="#23272e"/>
+                <circle cx="472" cy="626" r="26" fill="#0a0c0e"/><circle cx="472" cy="626" r="11" fill="#23272e"/>
+              </g>
+              <!-- tow bar -->
+              <path d="M118 600 L 62 612" stroke="#14171c" stroke-width="10" stroke-linecap="round"/>
+            </g>
+
+            <!-- steam from the hatch -->
+            <g id="ckSteam" opacity="0" fill="#ffffff" filter="url(#ckBlurS)">
+              <ellipse class="ck-steam-puff"    cx="392" cy="548" rx="13" ry="8"/>
+              <ellipse class="ck-steam-puff s2" cx="430" cy="544" rx="11" ry="7"/>
+              <ellipse class="ck-steam-puff s3" cx="500" cy="546" rx="12" ry="7"/>
+            </g>
+
+            <!-- flag poles + bunting -->
+            <g id="ckBuntingG" opacity="0">
+              <line x1="74" y1="404" x2="74" y2="612" stroke="#2a2520" stroke-width="6"/>
+              <line x1="612" y1="392" x2="612" y2="640" stroke="#2a2520" stroke-width="6"/>
+              <g class="ck-bunting-wave">
+                <path id="ckBuntingLine" d="M74 408 Q 340 452 612 396" fill="none" stroke="#dcd6c6" stroke-width="2.5"/>
+                <g id="ckBuntingFlags"></g>
+              </g>
+              <path d="M612 392 l 50 12 l -50 14 z" fill="#3a9d8d"/>
+              <path d="M74 404 l 44 10 l -44 12 z" fill="#e8dfc8"/>
+            </g>
+
+            <!-- festoon: van roof out to right pole -->
+            <g id="ckFestoonG" opacity="0">
+              <line x1="742" y1="420" x2="742" y2="648" stroke="#2a2520" stroke-width="6"/>
+              <path id="ckFestoonLine" d="M560 414 Q 660 478 742 424" fill="none" stroke="#3d3833" stroke-width="2.5"/>
+              <g id="ckFestoonBulbs"></g>
+            </g>
+
+            <!-- menu board -->
+            <g id="ckMenuBoard" opacity="0" transform="translate(0 26)">
+              <path d="M652 560 l 20 84 h 8 l -16 -84 z" fill="#241f19"/>
+              <path d="M708 560 l -20 84 h -8 l 16 -84 z" fill="#241f19"/>
+              <rect x="640" y="548" width="80" height="92" rx="6" fill="#15130f"/>
+              <rect x="648" y="556" width="64" height="76" rx="3" fill="#0b0a08"/>
+              <text x="680" y="576" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="13" fill="#3a9d8d">MENU</text>
+              <g stroke="#8b8474" stroke-width="2.4" stroke-linecap="round">
+                <line x1="656" y1="590" x2="704" y2="590"/>
+                <line x1="656" y1="602" x2="698" y2="602"/>
+                <line x1="656" y1="614" x2="702" y2="614"/>
+              </g>
+            </g>
+
+            <!-- prep table -->
+            <g id="ckPrep" opacity="0" transform="translate(0 26)">
+              <rect x="-58" y="586" width="130" height="12" rx="4" fill="#3b352c"/>
+              <rect x="-48" y="598" width="8" height="44" fill="#241f19"/>
+              <rect x="50" y="598" width="8" height="44" fill="#241f19"/>
+              <rect x="-34" y="568" width="34" height="18" rx="3" fill="#5a5346"/>
+              <rect x="8" y="572" width="44" height="14" rx="3" fill="#4a443a"/>
+            </g>
+
+            <!-- dust kicked up on arrival -->
+            <g id="ckDust" fill="#c9b38c" filter="url(#ckBlurS)">
+              <ellipse class="d" cx="140" cy="640" rx="26" ry="11" opacity="0"/>
+              <ellipse class="d" cx="80"  cy="632" rx="34" ry="13" opacity="0"/>
+              <ellipse class="d" cx="20"  cy="640" rx="42" ry="15" opacity="0"/>
+            </g>
+          </g>
+
+          <!-- queue + near crowd injected by JS (in front of the van) -->
+          <g id="ckQueue"></g>
+          <g id="ckCrowdNear"></g>
+        </g>
+
+        <!-- foreground string lights — golden hour frame -->
+        <g id="ckStringFG" opacity="0">
+          <path id="ckStringL" d="M-20 60 Q 320 200 760 130" fill="none" stroke="#241f19" stroke-width="3.5"/>
+          <path id="ckStringR" d="M840 130 Q 1280 210 1620 70" fill="none" stroke="#241f19" stroke-width="3.5"/>
+          <g id="ckStringBulbs"></g>
+        </g>
+
+        <!-- golden hour grade wash -->
+        <rect id="ckWarmWash" width="1600" height="900" fill="#e8923f" opacity="0" style="mix-blend-mode:soft-light"/>
+        <rect id="ckWarmWash2" width="1600" height="900" fill="#3a1f4d" opacity="0" style="mix-blend-mode:multiply"/>
+      </svg>
+    </div>
+
+    <!-- intro -->
+    <div class="ck-intro" id="ck-intro">
+      <p class="ck-eyebrow">How it works</p>
+      <h2>From Empty Fields To <em>Festival Favourites</em></h2>
+      <p>We bring the food, the team and the energy that keeps festivals moving.</p>
+    </div>
+    <div class="ck-scroll-hint" id="ck-hint">
+      <span>Scroll</span>
+      <span class="ck-line"></span>
+    </div>
+
+    <!-- phase captions -->
+    <div class="ck-caption" data-phase="1">
+      <p class="ck-kicker">01 — Arrival</p>
+      <h3>We Arrive</h3>
+      <p>Fully equipped catering units ready for service.</p>
+    </div>
+    <div class="ck-caption" data-phase="2">
+      <p class="ck-kicker">02 — Setup</p>
+      <h3>We Set Up</h3>
+      <p>Professional equipment, experienced crew and everything needed to feed thousands.</p>
+    </div>
+    <div class="ck-caption" data-phase="3">
+      <p class="ck-kicker">03 — Doors Open</p>
+      <h3>The Energy Builds</h3>
+      <p>As the event comes to life, so do the queues.</p>
+    </div>
+    <div class="ck-caption" data-phase="4">
+      <p class="ck-kicker">04 — The Queue</p>
+      <h3>Food Worth Queuing For</h3>
+      <p>Freshly cooked festival favourites served fast.</p>
+    </div>
+    <div class="ck-caption" data-phase="5">
+      <p class="ck-kicker">05 — Service</p>
+      <h3>Peak Service</h3>
+      <p>Fast moving queues. Freshly cooked food. Happy customers.</p>
+    </div>
+    <div class="ck-caption ck-caption--finale" data-phase="6">
+      <p class="ck-kicker">06 — Golden Hour</p>
+      <h3>One Of The Busiest Spots On Site</h3>
+      <p>We don't just serve food. We create experiences people remember.</p>
+    </div>
+  </div>
+
+  <!-- counters -->
+  <div class="ck-counters" id="ck-counters">
+    <div class="ck-counters-grid">
+      <div class="ck-counter">
+        <span class="ck-num" data-count="2">0</span>
+        <span class="ck-label">Festival Units</span>
+      </div>
+      <div class="ck-counter">
+        <span class="ck-num"><span data-count="100">0</span><sup>+</sup></span>
+        <span class="ck-label">Events Catered</span>
+      </div>
+      <div class="ck-counter">
+        <span class="ck-num" data-word="Thousands">—</span>
+        <span class="ck-label">Served</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="ck-cta">
+    <div class="ck-cta-inner">
+      <h3>Ready To Feed Your Crowd?</h3>
+      <p>From boutique weddings and private events to major UK festivals, Castaway Kitchen delivers unforgettable food experiences.</p>
+      <div class="ck-cta-buttons">
+        <a href="/contact" class="ck-btn ck-btn--primary">Book Castaway Kitchen</a>
+        <a href="/menu" class="ck-btn ck-btn--ghost">View Our Menus</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* =========================================================
+   CASTAWAY KITCHEN — FIELD TO FESTIVAL (scroll story)
+   ========================================================= */
+.ck-story {
+  --ck-black: var(--black, #111111);
+  --ck-white: var(--white, #ffffff);
+  --ck-accent: var(--teal-light, #3a9d8d);
+  --ck-accent-dark: var(--teal-dark, #1e5c52);
+  --ck-teal: var(--teal, #2a7c6f);
+  --ck-sand: var(--sand, #e8dfc8);
+  --ck-gold: #D9A441;            /* scene lighting only — bulbs, sun, glow */
+  --ck-gold-soft: #E8C07A;
+  --ck-display: var(--font-display, 'Bebas Neue', 'Impact', sans-serif);
+  --ck-body: var(--font-body, 'Nunito', 'Helvetica Neue', sans-serif);
+  position: relative;
+  background: var(--ck-black);
+  color: var(--ck-white);
+  font-family: var(--ck-body);
+}
+
+/* ---- pinned stage ---- */
+.ck-stage {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+.ck-scene-wrap {
+  position: absolute; inset: 0;
+  will-change: transform;
+}
+.ck-scene {
+  position: absolute; bottom: 0; left: 0;
+  display: block;
+  will-change: transform;
+}
+
+/* grain + vignette for the cinematic grade */
+.ck-stage::after {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(8,7,5,.55) 100%);
+  z-index: 3;
+}
+
+/* ---- intro headline ---- */
+.ck-intro {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  z-index: 4;
+  padding: 0 24px 16vh;
+  pointer-events: none;
+}
+.ck-eyebrow {
+  font: 800 12px/1 var(--ck-body);
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--ck-accent);
+  margin: 0 0 20px;
+}
+.ck-intro h2 {
+  font-family: var(--ck-display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 7vw, 6.2rem);
+  line-height: .95;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  margin: 0;
+  max-width: 22ch;
+  text-wrap: balance;
+  text-shadow: 0 2px 40px rgba(0,0,0,.45);
+}
+.ck-intro h2 em {
+  font-style: normal;
+  color: var(--ck-accent);
+}
+.ck-intro p {
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.6;
+  color: rgba(255,255,255,.78);
+  max-width: 44ch;
+  margin: 22px 0 0;
+  text-shadow: 0 1px 24px rgba(0,0,0,.5);
+}
+.ck-scroll-hint {
+  position: absolute;
+  left: 50%; bottom: 34px;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  color: rgba(255,255,255,.55);
+  font: 600 10px/1 var(--ck-body);
+  letter-spacing: .28em; text-transform: uppercase;
+  z-index: 4;
+}
+.ck-scroll-hint .ck-line {
+  width: 1px; height: 44px;
+  background: linear-gradient(to bottom, var(--ck-accent), transparent);
+  animation: ck-drop 2.2s ease-in-out infinite;
+  transform-origin: top;
+}
+@keyframes ck-drop {
+  0%   { transform: scaleY(0); opacity: 0; }
+  35%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1) translateY(14px); opacity: 0; }
+}
+
+/* ---- phase captions ---- */
+.ck-caption {
+  position: absolute;
+  left: clamp(20px, 6vw, 96px);
+  bottom: clamp(28px, 9vh, 96px);
+  z-index: 4;
+  max-width: min(520px, 78vw);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.ck-caption .ck-kicker {
+  display: flex; align-items: center; gap: 14px;
+  font: 800 11px/1 var(--ck-body);
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--ck-accent);
+  margin-bottom: 14px;
+}
+.ck-caption .ck-kicker::before {
+  content: ""; width: 34px; height: 1px; background: var(--ck-accent);
+}
+.ck-caption h3 {
+  font-family: var(--ck-display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 5.4vw, 4.4rem);
+  line-height: .95;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+  text-shadow: 0 2px 30px rgba(0,0,0,.55);
+}
+.ck-caption p {
+  margin: 0;
+  font-size: clamp(.95rem, 1.4vw, 1.1rem);
+  line-height: 1.6;
+  color: rgba(255,255,255,.82);
+  text-shadow: 0 1px 18px rgba(0,0,0,.6);
+}
+
+/* phase 6 caption sits centred — the money shot */
+.ck-caption--finale {
+  left: 50%; bottom: clamp(40px, 12vh, 120px);
+  transform: translateX(-50%);
+  text-align: center; max-width: min(640px, 86vw);
+}
+.ck-caption--finale .ck-kicker { justify-content: center; }
+.ck-caption--finale .ck-kicker::after {
+  content: ""; width: 34px; height: 1px; background: var(--ck-accent);
+}
+
+/* ---- counters ---- */
+.ck-counters {
+  position: relative;
+  padding: clamp(72px, 12vh, 140px) 24px;
+  background:
+    radial-gradient(80% 120% at 50% 0%, rgba(58,157,141,.12), transparent 60%),
+    var(--ck-black);
+  text-align: center;
+}
+.ck-counters-grid {
+  display: flex; justify-content: center; align-items: stretch;
+  gap: clamp(28px, 6vw, 96px);
+  flex-wrap: wrap;
+  max-width: 1100px; margin: 0 auto;
+}
+.ck-counter {
+  display: flex; flex-direction: column; gap: 10px; min-width: 200px;
+}
+.ck-counter .ck-num {
+  font-family: var(--ck-display);
+  font-weight: 400;
+  font-size: clamp(3.6rem, 8vw, 6.5rem);
+  letter-spacing: .02em;
+  line-height: 1;
+  color: var(--ck-accent);
+  font-variant-numeric: tabular-nums;
+}
+.ck-counter .ck-num sup { font-size: .5em; color: var(--ck-accent); }
+.ck-counter .ck-label {
+  font: 800 12px/1.4 var(--ck-body);
+  letter-spacing: .24em; text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+}
+
+/* ---- CTA ---- */
+.ck-cta {
+  position: relative;
+  padding: 0 24px clamp(88px, 14vh, 160px);
+  background: var(--ck-black);
+  text-align: center;
+}
+.ck-cta-inner {
+  max-width: 760px; margin: 0 auto;
+  padding-top: clamp(40px, 6vh, 72px);
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+.ck-cta h3 {
+  font-family: var(--ck-display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+  line-height: .95;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+.ck-cta p {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.7;
+  color: rgba(255,255,255,.72);
+  max-width: 56ch;
+  margin: 0 auto 36px;
+}
+.ck-cta-buttons {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+}
+.ck-btn {
+  display: inline-flex; align-items: center;
+  font-family: var(--ck-body);
+  font-size: var(--text-sm, .875rem);
+  font-weight: 800;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: .9rem 2.1rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  transition: all .2s ease;
+  white-space: nowrap;
+}
+.ck-btn--primary {
+  background: var(--ck-teal); color: var(--ck-white);
+  border-color: var(--ck-teal);
+}
+.ck-btn--primary:hover { background: var(--ck-accent-dark); border-color: var(--ck-accent-dark); }
+.ck-btn--ghost {
+  background: transparent;
+  color: var(--ck-white);
+  border-color: var(--ck-white);
+}
+.ck-btn--ghost:hover { background: var(--ck-white); color: var(--ck-black); }
+.ck-btn:focus-visible { outline: 2px solid var(--ck-accent); outline-offset: 3px; }
+
+/* ---- SVG ambient loops (cheap, transform-only) ---- */
+.ck-cloud { animation: ck-cloud-drift linear infinite; }
+.ck-cloud-1 { animation-duration: 90s; }
+.ck-cloud-2 { animation-duration: 130s; animation-delay: -40s; }
+.ck-cloud-3 { animation-duration: 110s; animation-delay: -70s; }
+@keyframes ck-cloud-drift {
+  from { transform: translateX(-120px); }
+  to   { transform: translateX(1720px); }
+}
+.ck-steam-puff { animation: ck-steam 3.4s ease-out infinite; opacity: 0; }
+.ck-steam-puff.s2 { animation-delay: 1.1s; }
+.ck-steam-puff.s3 { animation-delay: 2.2s; }
+@keyframes ck-steam {
+  0%   { transform: translateY(0) scale(.7); opacity: 0; }
+  20%  { opacity: .55; }
+  100% { transform: translateY(-64px) scale(1.5); opacity: 0; }
+}
+.ck-bunting-wave { animation: ck-wave 5s ease-in-out infinite; transform-origin: center top; }
+@keyframes ck-wave {
+  0%, 100% { transform: skewX(0deg); }
+  50%      { transform: skewX(2.4deg); }
+}
+.ck-wheel-spin {
+  animation: ck-spin 80s linear infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes ck-spin { to { transform: rotate(360deg); } }
+
+/* ---- reduced motion: static golden-hour tableau ---- */
+@media (prefers-reduced-motion: reduce) {
+  .ck-cloud, .ck-steam-puff, .ck-bunting-wave, .ck-wheel-spin, .ck-scroll-hint .ck-line { animation: none; }
+  .ck-steam-puff { opacity: .4; }
+}
+.ck-story.ck-static .ck-stage { height: auto; min-height: 100vh; }
+.ck-story.ck-static .ck-caption { display: none; }
+.ck-story.ck-static .ck-scroll-hint { display: none; }
+
+@media (max-width: 640px) {
+  .ck-caption { bottom: clamp(20px, 6vh, 48px); }
+}
+
+</style>
+
+<script>
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+(() => {
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  const story = document.getElementById('ck-story');
+  if (!story) return;
+
+  /* ---------- seeded random so the scene is identical every load ---------- */
+  let seed = 7;
+  const rand = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  const between = (a, b) => a + rand() * (b - a);
+
+  /* ---------- build a person silhouette ---------- */
+  const SKIN = ['#caa176', '#8d6748', '#5c4632', '#d9b08c'];
+  const TOPS = ['#39404c', '#4a4356', '#574a3a', '#3e4d45', '#54403f', '#46505e', '#6b5a45'];
+  // Returns { el, fig } — `el` carries the static placement transform,
+  // `fig` is the inner group GSAP is allowed to animate.
+  function person(x, y, s, opts = {}) {
+    const outer = document.createElementNS(SVG_NS, 'g');
+    const fig = document.createElementNS(SVG_NS, 'g');
+    const lean = between(-3, 3);
+    const top = opts.top || TOPS[Math.floor(rand() * TOPS.length)];
+    const skin = SKIN[Math.floor(rand() * SKIN.length)];
+    outer.setAttribute('transform', `translate(${x} ${y}) scale(${s}) rotate(${lean})`);
+    fig.innerHTML = `
+      <ellipse cx="0" cy="2" rx="22" ry="5.5" fill="#000" opacity=".3"/>
+      <path d="M-8 0 L-6 -42 Q-9 -46 -9 -54 Q-9 -64 0 -64 Q9 -64 9 -54 Q9 -46 6 -42 L8 0 L3 0 L1 -28 L-1 -28 L-3 0 Z" fill="${top}"/>
+      <circle cx="0" cy="-72" r="9" fill="${skin}"/>
+      ${rand() > .55 ? `<path d="M-9 -54 Q-12 -57 -11 -62 Q-5 -68 0 -67 Q6 -68 11 -62 Q12 -57 9 -54 Q0 -60 -9 -54 Z" fill="#1c1812"/>` : ''}
+    `;
+    outer.appendChild(fig);
+    return { el: outer, fig };
+  }
+
+  /* ---------- crowd groups ---------- */
+  const crowdFar = document.getElementById('ckCrowdFar');
+  const crowdNear = document.getElementById('ckCrowdNear');
+  const queueG = document.getElementById('ckQueue');
+  const waves = [[], [], []];
+
+  // wave 1: a few scattered far figures
+  for (let i = 0; i < 7; i++) {
+    const y = between(596, 636);
+    const s = .42 + (y - 590) / 60 * .2;
+    const p = person(between(880, 1540), y, s);
+    crowdFar.appendChild(p.el); waves[0].push(p.fig);
+  }
+  // wave 2: mid density
+  for (let i = 0; i < 13; i++) {
+    const y = between(610, 680);
+    const s = .5 + (y - 600) / 90 * .3;
+    const p = person(between(880, 1560), y, s);
+    (y < 645 ? crowdFar : crowdNear).appendChild(p.el); waves[1].push(p.fig);
+  }
+  // wave 3: groups, closer
+  for (let i = 0; i < 18; i++) {
+    const cx = between(960, 1580), cy = between(616, 700);
+    const y = cy + between(-12, 12);
+    const s = .55 + (y - 610) / 100 * .35;
+    const p = person(cx + between(-26, 26), y, s);
+    crowdNear.appendChild(p.el); waves[2].push(p.fig);
+  }
+
+  /* ---------- the queue: figures lining up toward the hatch ---------- */
+  // hatch front sits ~x=700 in scene space (van translate 150 + counter ~550)
+  const queueFigs = [];
+  for (let i = 0; i < 11; i++) {
+    const x = 700 + i * 58 + between(-5, 5);
+    const y = 716 + between(-3, 3) + i * 2.4;        // gentle perspective drift toward viewer
+    const s = 1.0 + i * .012 + between(-.02, .02);
+    const p = person(x, y, s, { faceLeft: true });
+    queueG.appendChild(p.el); queueFigs.push(p.fig);
+  }
+
+  /* ---------- bunting flags along the curve ---------- */
+  const buntingLine = document.getElementById('ckBuntingLine');
+  const buntingFlags = document.getElementById('ckBuntingFlags');
+  const FLAG_COLS = ['#2a7c6f', '#e8dfc8', '#3a9d8d', '#D9A441'];
+  const bLen = buntingLine.getTotalLength();
+  const flagEls = [];
+  for (let i = 1; i <= 14; i++) {
+    const pt = buntingLine.getPointAtLength((i / 15) * bLen);
+    const f = document.createElementNS(SVG_NS, 'path');
+    f.setAttribute('d', `M${pt.x - 9} ${pt.y} L${pt.x + 9} ${pt.y} L${pt.x} ${pt.y + 17} Z`);
+    f.setAttribute('fill', FLAG_COLS[i % FLAG_COLS.length]);
+    buntingFlags.appendChild(f); flagEls.push(f);
+  }
+
+  /* ---------- festoon bulbs ---------- */
+  const festoonLine = document.getElementById('ckFestoonLine');
+  const festoonBulbs = document.getElementById('ckFestoonBulbs');
+  const fLen = festoonLine.getTotalLength();
+  const bulbEls = [], bulbGlowEls = [];
+  for (let i = 1; i <= 9; i++) {
+    const pt = festoonLine.getPointAtLength((i / 10) * fLen);
+    const glow = document.createElementNS(SVG_NS, 'circle');
+    glow.setAttribute('cx', pt.x); glow.setAttribute('cy', pt.y + 8);
+    glow.setAttribute('r', 14); glow.setAttribute('fill', 'url(#ckBulbGlow)'); glow.setAttribute('opacity', '0');
+    const b = document.createElementNS(SVG_NS, 'circle');
+    b.setAttribute('cx', pt.x); b.setAttribute('cy', pt.y + 8);
+    b.setAttribute('r', 4); b.setAttribute('fill', '#4a443a');
+    festoonBulbs.appendChild(glow); festoonBulbs.appendChild(b);
+    bulbEls.push(b); bulbGlowEls.push(glow);
+  }
+
+  /* ---------- foreground string lights ---------- */
+  const stringBulbs = document.getElementById('ckStringBulbs');
+  const sBulbs = [];
+  ['ckStringL', 'ckStringR'].forEach(id => {
+    const path = document.getElementById(id);
+    const len = path.getTotalLength();
+    for (let i = 0; i <= 12; i++) {
+      const pt = path.getPointAtLength((i / 12) * len);
+      const glow = document.createElementNS(SVG_NS, 'circle');
+      glow.setAttribute('cx', pt.x); glow.setAttribute('cy', pt.y + 10);
+      glow.setAttribute('r', 18); glow.setAttribute('fill', 'url(#ckBulbGlow)');
+      const b = document.createElementNS(SVG_NS, 'circle');
+      b.setAttribute('cx', pt.x); b.setAttribute('cy', pt.y + 10);
+      b.setAttribute('r', 5); b.setAttribute('fill', '#ffd98f');
+      stringBulbs.appendChild(glow); stringBulbs.appendChild(b);
+      sBulbs.push(glow);
+    }
+  });
+
+  /* ---------- ferris wheel cabin lights ---------- */
+  const wheelLights = document.getElementById('ckWheelLights');
+  for (let i = 0; i < 8; i++) {
+    const a = (i / 8) * Math.PI * 2;
+    const c = document.createElementNS(SVG_NS, 'circle');
+    c.setAttribute('cx', Math.cos(a) * 84); c.setAttribute('cy', Math.sin(a) * 84);
+    c.setAttribute('r', 4);
+    wheelLights.appendChild(c);
+  }
+
+  /* =========================================================
+     Reduced motion / no-JS-pin fallback: static golden hour
+     ========================================================= */
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setFinalState() {
+    gsap.set('#ckSkyDayLayer', { opacity: 0 });
+    gsap.set('#ckSkyGoldenLayer, #ckFieldGoldenLayer', { opacity: 1 });
+    gsap.set('#ckFieldDayLayer', { opacity: .35 });
+    gsap.set('#ckSunDawn', { opacity: 0 });
+    gsap.set('#ckSunGolden', { opacity: 1 });
+    gsap.set('#ckVan', { x: 150 });
+    gsap.set('#ckAwningFold', { scaleY: 1 });
+    gsap.set('#ckBuntingG, #ckFestoonG, #ckMenuBoard, #ckPrep, #ckStaff, #ckSteam, #ckStringFG, #ckWheel, #ckTentLights, #ckWheelGlow', { opacity: 1 });
+    gsap.set('#ckMenuBoard, #ckPrep', { y: 0 });
+    gsap.set('#ckHatchLight', { opacity: .8 });
+    gsap.set('#ckCanopyGlowEl', { opacity: 1 });
+    gsap.set('#ckPath', { opacity: .18 });
+    gsap.set('#ckWarmWash', { opacity: .35 });
+    gsap.set('#ckWarmWash2', { opacity: .12 });
+    gsap.set(bulbEls, { fill: '#ffd98f' });
+    gsap.set(bulbGlowEls, { opacity: .9 });
+    gsap.set([...waves[0], ...waves[1], ...waves[2], ...queueFigs], { opacity: 1 });
+    gsap.set('#ck-intro', { autoAlpha: 1 });
+  }
+
+  if (reduceMotion) {
+    story.classList.add('ck-static');
+    const sc = document.getElementById('ck-scene');
+    sc.style.width = '100%'; sc.style.height = 'auto'; sc.style.position = 'relative';
+    if (window.gsap) setFinalState();
+    // counters: set instantly
+    document.querySelectorAll('[data-count]').forEach(el => el.textContent = el.dataset.count);
+    document.querySelectorAll('[data-word]').forEach(el => el.textContent = el.dataset.word);
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* cover-size the scene against the stage (16:9 artwork, anchored to the ground) */
+  const sceneEl = document.getElementById('ck-scene');
+  const stageEl = document.getElementById('ck-stage');
+  function sizeScene() {
+    const vw = stageEl.clientWidth, vh = stageEl.clientHeight;
+    const scale = Math.max(vw / 1600, vh / 900);
+    sceneEl.style.width = (1600 * scale) + 'px';
+    sceneEl.style.height = (900 * scale) + 'px';
+  }
+  sizeScene();
+  ScrollTrigger.addEventListener('refreshInit', sizeScene);
+
+  /* ---------- initial states ---------- */
+  gsap.set('#ckVan', { x: -680 });                       // off screen left (group already at 150)
+  gsap.set('#ckAwningFold', { scaleY: 0, transformOrigin: '50% 0%', svgOrigin: '340 408' });
+  gsap.set('#ckMenuBoard, #ckPrep', { opacity: 0, y: 26 });
+  gsap.set(flagEls, { scale: 0, transformOrigin: '50% 0%' });
+  gsap.set('#ckFestoonLine', { strokeDasharray: fLen, strokeDashoffset: fLen });
+  gsap.set([...waves[0], ...waves[1], ...waves[2]], { opacity: 0, y: 10 });
+  gsap.set(queueFigs, { opacity: 0, x: 60 });
+  gsap.set(sBulbs, { scale: .2, transformOrigin: '50% 50%' });
+
+  const captions = {};
+  document.querySelectorAll('.ck-caption').forEach(c => {
+    captions[c.dataset.phase] = c;
+    gsap.set(c, { autoAlpha: 0, y: 28 });
+  });
+
+  const showCaption = (tl, n, at, leaveAt) => {
+    tl.to(captions[n], { autoAlpha: 1, y: 0, duration: 2.2, ease: 'power2.out' }, at);
+    if (leaveAt) tl.to(captions[n], { autoAlpha: 0, y: -22, duration: 1.8, ease: 'power2.in' }, leaveAt);
+  };
+
+  /* =========================================================
+     MASTER TIMELINE — one continuous scene, scrubbed by scroll
+     total = 100 "units"
+     ========================================================= */
+  const tl = gsap.timeline({
+    defaults: { ease: 'none' },
+    scrollTrigger: {
+      trigger: '#ck-stage',
+      start: 'top top',
+      end: '+=320%',
+      pin: true,
+      scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true
+    }
+  });
+
+  /* --- camera pan: keeps the unit framed early, opens up to the field late --- */
+  const panAmount = () => Math.max(0, parseFloat(sceneEl.style.width || 0) - stageEl.clientWidth);
+  tl.fromTo(sceneEl, { x: 0 }, { x: () => -panAmount() * .85, duration: 52, ease: 'sine.inOut' }, 36);
+
+  /* --- slow ambient parallax across the whole journey --- */
+  tl.fromTo('#ckClouds', { x: 0 }, { x: -90, duration: 100 }, 0);
+  tl.fromTo('#ckFar',    { y: 0 }, { y: -10, duration: 100 }, 0);
+  tl.fromTo('#ckMid',    { y: 14 }, { y: 0,  duration: 100 }, 0);
+
+  /* --- intro out --- */
+  tl.to('#ck-intro', { autoAlpha: 0, y: -60, duration: 6, ease: 'power1.in' }, 0);
+  tl.to('#ck-hint',  { autoAlpha: 0, duration: 3 }, 0);
+
+  /* --- PHASE 1 · ARRIVAL (4 → 20) --- */
+  tl.to('#ckVan', { x: 150, duration: 13, ease: 'power2.out' }, 4);
+  // dust puffs trail the wheels
+  gsap.utils.toArray('#ckDust .d').forEach((d, i) => {
+    tl.fromTo(d, { opacity: 0, scale: .5, x: 80 },
+      { opacity: .5, scale: 1.4, x: -30, duration: 4, ease: 'power1.out' }, 7 + i * 2.4);
+    tl.to(d, { opacity: 0, duration: 3 }, 11 + i * 2.4);
+  });
+  showCaption(tl, 1, 9, 19);
+
+  /* --- PHASE 2 · SETUP (20 → 38) --- */
+  tl.to('#ckAwningFold', { scaleY: 1, duration: 5, ease: 'power2.out' }, 20);
+  tl.to('#ckBuntingG', { opacity: 1, duration: 3 }, 23);
+  tl.to(flagEls, { scale: 1, duration: 2.5, stagger: .22, ease: 'back.out(2)' }, 24);
+  tl.to('#ckMenuBoard', { opacity: 1, y: 0, duration: 4, ease: 'power2.out' }, 26);
+  tl.to('#ckPrep', { opacity: 1, y: 0, duration: 4, ease: 'power2.out' }, 27.5);
+  tl.to('#ckFestoonG', { opacity: 1, duration: 2 }, 27);
+  tl.to('#ckFestoonLine', { strokeDashoffset: 0, duration: 5, ease: 'power1.inOut' }, 27.5);
+  tl.to(bulbEls, { fill: '#ffd98f', duration: .8, stagger: .35 }, 31);
+  tl.to(bulbGlowEls, { opacity: .8, duration: .8, stagger: .35 }, 31);
+  showCaption(tl, 2, 24, 37);
+
+  /* --- PHASE 3 · THE CROWD ARRIVES (38 → 54) --- */
+  tl.to('#ckSkyDayLayer', { opacity: 1, duration: 14, ease: 'sine.inOut' }, 38);
+  tl.to('#ckFieldDayLayer', { opacity: 1, duration: 14, ease: 'sine.inOut' }, 38);
+  tl.to('#ckSunDawn', { opacity: 0, duration: 10 }, 40);
+  tl.to('#ckPath', { opacity: .14, duration: 10 }, 42);
+  tl.to(waves[0], { opacity: 1, y: 0, duration: 3, stagger: .7, ease: 'power1.out' }, 39);
+  tl.to(waves[1], { opacity: 1, y: 0, duration: 3, stagger: .45, ease: 'power1.out' }, 43);
+  tl.to(waves[2], { opacity: 1, y: 0, duration: 3, stagger: .3, ease: 'power1.out' }, 47);
+  showCaption(tl, 3, 41, 53);
+
+  /* --- PHASE 4 · THE QUEUE FORMS (54 → 66) --- */
+  tl.to(queueFigs, { opacity: 1, x: 0, duration: 4, stagger: .9, ease: 'power2.out' }, 54);
+  showCaption(tl, 4, 56, 65);
+
+  /* --- PHASE 5 · SERVICE (66 → 78) --- */
+  tl.to('#ckStaff', { opacity: 1, duration: 3 }, 66);
+  tl.to('#ckHatchLight', { opacity: .7, duration: 4 }, 66);
+  tl.to('#ckCanopyGlowEl', { opacity: .8, duration: 5 }, 67);
+  tl.to('#ckSteam', { opacity: 1, duration: 3 }, 67);
+  // serving gesture: tray slides out and back, twice across the phase
+  tl.fromTo('#ckServe', { x: -14, opacity: 0 }, { x: 0, opacity: 1, duration: 2, ease: 'power2.out' }, 68);
+  tl.to('#ckServe', { x: 10, duration: 2.5, ease: 'sine.inOut' }, 71);
+  tl.to('#ckServe', { x: 0, duration: 2.5, ease: 'sine.inOut' }, 74);
+  showCaption(tl, 5, 68, 77);
+
+  /* --- PHASE 6 · FESTIVAL ATMOSPHERE (78 → 95) --- */
+  tl.to('#ckSkyGoldenLayer', { opacity: 1, duration: 12, ease: 'sine.inOut' }, 78);
+  tl.to('#ckFieldGoldenLayer', { opacity: 1, duration: 12, ease: 'sine.inOut' }, 78);
+  tl.to('#ckFieldDayLayer', { opacity: .35, duration: 12 }, 78);
+  tl.to('#ckSunGolden', { opacity: 1, duration: 10, ease: 'sine.inOut' }, 80);
+  tl.to('#ckWarmWash', { opacity: .35, duration: 10 }, 80);
+  tl.to('#ckWarmWash2', { opacity: .12, duration: 10 }, 82);
+  tl.to('#ckWheel', { opacity: 1, duration: 6 }, 80);
+  tl.to('#ckWheelGlow, #ckTentLights', { opacity: 1, duration: 5 }, 84);
+  tl.to('#ckStringFG', { opacity: 1, duration: 5 }, 82);
+  tl.to(sBulbs, { scale: 1, duration: 2, stagger: { each: .18, from: 'edges' }, ease: 'back.out(2)' }, 83);
+  tl.to(bulbGlowEls, { opacity: 1, duration: 4 }, 84);
+  showCaption(tl, 6, 84, 96.5);
+
+  /* --- settle (95 → 100) --- */
+  tl.to('#ck-scene-wrap', { scale: 1.025, duration: 100, ease: 'none' }, 0); // imperceptible push-in across the journey
+  tl.to({}, { duration: 4 }, 96); // breathing room at the end of the pin
+
+  /* =========================================================
+     COUNTERS — count up once when visible
+     ========================================================= */
+  ScrollTrigger.create({
+    trigger: '#ck-counters',
+    start: 'top 75%',
+    once: true,
+    onEnter: () => {
+      document.querySelectorAll('[data-count]').forEach(el => {
+        const target = +el.dataset.count;
+        const obj = { v: 0 };
+        gsap.to(obj, {
+          v: target, duration: 1.8, ease: 'power3.out',
+          onUpdate: () => el.textContent = Math.round(obj.v)
+        });
+      });
+      document.querySelectorAll('[data-word]').forEach(el => {
+        gsap.fromTo(el, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1, delay: .6, ease: 'power2.out',
+          onStart: () => el.textContent = el.dataset.word });
+      });
+    }
+  });
+
+  /* lazy-decode hint for any future raster assets inside the section */
+  story.querySelectorAll('img').forEach(img => { img.loading = 'lazy'; img.decoding = 'async'; });
+})();
+</script>
