@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+
+<BaseLayout title={post.data.title} description={post.data.excerpt}>
+
+  <!-- ===== HERO ===== -->
+  <section class="post-hero section--dark">
+    <div class="container">
+      <p class="eyebrow">{post.data.tag}</p>
+      <h1 class="display post-hero-title">{post.data.title}</h1>
+      <p class="post-hero-date">{formatDate(post.data.date)}</p>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED IMAGE ===== -->
+  <section class="post-image-section">
+    <div class="container">
+      <img src={post.data.image} alt={post.data.imageAlt} class="post-image" width="1200" height="675" />
+    </div>
+  </section>
+
+  <!-- ===== BODY ===== -->
+  <section class="section post-body-section">
+    <div class="container post-body">
+      <Content />
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section--dark section post-cta">
+    <div class="container post-cta-inner">
+      <h2 class="display post-cta-headline">More from Castaway</h2>
+      <div class="post-cta-buttons">
+        <a href="/blog" class="btn btn--primary">Back to Blog</a>
+        <a href="/festivals" class="btn btn--outline">View Festivals</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .post-hero { padding: var(--space-2xl) 0 var(--space-lg); }
+  .post-hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); margin: var(--space-xs) 0 var(--space-sm); color: var(--white); max-width: 900px; }
+  .post-hero-date { font-size: var(--text-sm); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+
+  .post-image-section { background: var(--black); padding-bottom: var(--space-xl); }
+  .post-image { width: 100%; max-height: 520px; object-fit: cover; border-radius: var(--radius-lg); }
+
+  .post-body { max-width: 720px; margin: 0 auto; }
+  .post-body :global(p) { color: var(--warm-grey); line-height: 1.85; font-size: var(--text-lg); margin-bottom: var(--space-md); }
+  .post-body :global(h2) { font-family: var(--font-display); font-size: var(--text-2xl); margin: var(--space-lg) 0 var(--space-sm); color: var(--black); }
+  .post-body :global(ul), .post-body :global(ol) { color: var(--warm-grey); line-height: 1.8; margin: 0 0 var(--space-md) var(--space-md); }
+  .post-body :global(img) { border-radius: var(--radius-md); margin: var(--space-md) 0; width: 100%; }
+  .post-body :global(a) { color: var(--teal); font-weight: 700; }
+
+  .post-cta-inner { max-width: 640px; text-align: center; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: var(--space-sm); }
+  .post-cta-headline { font-size: clamp(2.25rem, 4.5vw, 3.5rem); color: var(--white); }
+  .post-cta-buttons { display: flex; gap: var(--space-sm); flex-wrap: wrap; justify-content: center; margin-top: var(--space-sm); }
+</style>

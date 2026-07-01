@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+
+<BaseLayout
+  title="Blog"
+  description="Stories, festival updates and food from Castaway Kitchen — family-run festival catering serving music festivals and outdoor events across the UK."
+>
+
+  <!-- ===== HERO ===== -->
+  <section class="blog-hero section--dark">
+    <div class="container">
+      <p class="eyebrow">The Castaway Blog</p>
+      <h1 class="display blog-hero-title">Stories from the Road</h1>
+      <p class="blog-hero-body">
+        Festival updates, seasonal food and life behind the beach-shack units.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== POST GRID ===== -->
+  <section class="section blog-list">
+    <div class="container">
+      {posts.length === 0 ? (
+        <p class="blog-empty">New posts coming soon — check back shortly.</p>
+      ) : (
+        <div class="blog-grid">
+          {posts.map(post => (
+            <a href={`/blog/${post.slug}/`} class="blog-card">
+              <div class="blog-card-image">
+                <img src={post.data.image} alt={post.data.imageAlt} loading="lazy" width="600" height="400" />
+                <span class="blog-card-tag">{post.data.tag}</span>
+              </div>
+              <div class="blog-card-body">
+                <span class="blog-card-date">{formatDate(post.data.date)}</span>
+                <h2 class="display blog-card-title">{post.data.title}</h2>
+                <p class="blog-card-excerpt">{post.data.excerpt}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section--dark section blog-cta">
+    <div class="container blog-cta-inner">
+      <h2 class="display blog-cta-headline">Catch Us at a Festival</h2>
+      <p>See where we're trading next and come say hello.</p>
+      <div class="blog-cta-buttons">
+        <a href="/festivals" class="btn btn--primary">View Festivals</a>
+        <a href="/contact" class="btn btn--outline">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .blog-hero { padding: var(--space-2xl) 0 var(--space-xl); }
+  .blog-hero-title { font-size: clamp(3rem, 8vw, 6rem); margin: var(--space-xs) 0 var(--space-sm); color: var(--white); }
+  .blog-hero-body { font-size: var(--text-lg); color: rgba(255,255,255,0.7); max-width: 620px; line-height: 1.7; }
+
+  .blog-empty { text-align: center; color: var(--warm-grey); font-size: var(--text-lg); padding: var(--space-xl) 0; }
+
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--sand);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .blog-card:hover { transform: translateY(-4px); border-color: var(--teal); }
+
+  .blog-card-image { position: relative; aspect-ratio: 3 / 2; overflow: hidden; }
+  .blog-card-image img { width: 100%; height: 100%; object-fit: cover; }
+  .blog-card-tag {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    background: var(--teal);
+    color: var(--white);
+    font-size: var(--text-xs);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-pill);
+  }
+
+  .blog-card-body { padding: var(--space-md); display: flex; flex-direction: column; gap: 0.5rem; }
+  .blog-card-date { font-size: var(--text-xs); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); }
+  .blog-card-title { font-size: var(--text-xl); line-height: 1.25; }
+  .blog-card-excerpt { font-size: var(--text-sm); color: var(--warm-grey); line-height: 1.6; }
+
+  .blog-cta-inner { max-width: 640px; text-align: center; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: var(--space-sm); }
+  .blog-cta-headline { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--white); }
+  .blog-cta-inner p { color: rgba(255,255,255,0.7); font-size: var(--text-lg); line-height: 1.7; }
+  .blog-cta-buttons { display: flex; gap: var(--space-sm); flex-wrap: wrap; justify-content: center; margin-top: var(--space-sm); }
+
+  @media (max-width: 900px) {
+    .blog-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .blog-grid { grid-template-columns: 1fr; }
+  }
+</style>
