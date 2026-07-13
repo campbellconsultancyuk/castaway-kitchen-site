@@ -5,7 +5,7 @@ import FestivalRoadmap from '../components/FestivalRoadmap.astro';
 const faqs = [
   {
     q: 'Which festivals are you at in 2026?',
-    a: 'Our confirmed 2026 lineup — Cheltenham Jazz Festival, The Big Retreat, 2000trees, Electromagnetic Field, Camp Bestival, Lakefest, Beautiful Days, Forwards Festival and We Have Ways. Nine events from April to September.',
+    a: 'Our confirmed 2026 lineup — Cheltenham Jazz Festival, The Big Retreat, <a href="/blog/2000trees-2026/">2000trees</a>, Electromagnetic Field, Camp Bestival, Lakefest, Beautiful Days, Forwards Festival and We Have Ways. Nine events from April to September. Follow the <a href="/blog">Castaway blog</a> for festival countdowns and updates.',
   },
   {
     q: 'What food do you serve at festivals?',
@@ -29,11 +29,11 @@ const faqs = [
   },
   {
     q: "I'm a festival organiser — how do I book Castaway Kitchen?",
-    a: "Use our contact form and select the festival/event organiser option. Tell us about your event — capacity, dates, location — and we'll get back to you within 24 hours.",
+    a: 'Use our <a href="/contact">contact form</a> and select the festival/event organiser option. Tell us about your event — capacity, dates, location — and we\'ll get back to you within 24 hours.',
   },
   {
     q: 'Do you do private catering as well as festivals?',
-    a: 'Yes — weddings, private parties, corporate events. The same great food, brought to your venue. See our Private Catering page for details.',
+    a: 'Yes — weddings, private parties, corporate events. The same great food, brought to your venue. See our <a href="/private-catering">Private Catering page</a> for details.',
   },
 ];
 ---
@@ -88,7 +88,7 @@ const faqs = [
               <span>{item.q}</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </summary>
-            <p class="faq-answer">{item.a}</p>
+            <p class="faq-answer" set:html={item.a} />
           </details>
         ))}
       </div>
@@ -170,5 +170,6 @@ const faqs = [
   .faq-question::-webkit-details-marker { display: none; }
   .faq-icon { font-size: var(--text-xl); font-weight: 400; color: var(--teal); flex-shrink: 0; transition: transform 0.2s; }
   .faq-item[open] .faq-icon { transform: rotate(45deg); }
-  .faq-answer { padding: 0 var(--space-lg) var(--space-md); font-size: var(--text-sm); color: var(--warm-grey); line-height: 1.7; }
+  ..faq-answer { padding: 0 var(--space-lg) var(--space-md); font-size: var(--text-sm); color: var(--warm-grey); line-height: 1.7; }
+  .faq-answer :global(a) { color: var(--teal); font-weight: 700; }
 </style>
