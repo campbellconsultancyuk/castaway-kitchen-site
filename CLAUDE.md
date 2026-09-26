@@ -14,7 +14,6 @@ Client site for Castaway Kitchen (festival street food and private catering, Mor
 - **Never upgrade `@astrojs/sitemap`.** It is pinned to 3.1.6 in `package-lock.json`. Newer versions break the Cloudflare build. Do not run `npm update` or `npm install` with upgrades.
 - Images live in `public/image-assets/` and are referenced as `/image-assets/name.webp`. Cloudflare is case-sensitive, so filenames must match exactly.
 - Map backgrounds use an `<img>` with absolutely-positioned HTML pins. Do not use SVG-inside-SVG (severe performance problems). Pin pulse effects use CSS `box-shadow`.
-- Dark section backgrounds use the `/hero-bg.svg` overlay at opacity 0.5.
 - On a Mac, Reduce Motion must be OFF or the GSAP animations show their static end state.
 - Keep copy short, punchy and warm. Festival, characterful, not corporate. British English.
 - Brand: teal `#2a7c6f`, black, white. Circular seagull/wave/sun logo.
