@@ -53,19 +53,13 @@ const menuSections = [
         Gyros-led, with Korean and poke bowls alongside. Everything made to order,
         with proper ingredients — no shortcuts.
       </p>
+      <p class="page-hero-body menu-pricing-note">
+        <strong>Pricing for private events:</strong> tell us your requirements and we'll price it up to your budget.
+        <a href="/contact/">Get a quote →</a>
+      </p>
     </div>
   </section>
 
-  <!-- MENU NOTE -->
-  <div class="menu-note">
-    <div class="container">
-      <p>
-        📋 <strong>Prices and full menu details coming soon.</strong>
-        This is a placeholder build — Scott's confirmed menu copy will drop in here.
-        Dietary info, allergen notes and pricing to be confirmed.
-      </p>
-    </div>
-  </div>
 
   <!-- MENU SECTIONS -->
   {menuSections.map((section) => (
@@ -159,7 +153,7 @@ const menuSections = [
 
         <details class="faq-item">
           <summary class="faq-question"><span>Can I see the full menu before an event?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
-          <p class="faq-answer">The menu on this page is our standard offering. Prices are confirmed per event — follow us on social or check back here as the 2026 season gets underway for updated pricing.</p>
+          <p class="faq-answer">Yes, the menu on this page is our standard offering. For private events, tell us your requirements (guest numbers, menu, location and timings) and we'll price it up to your budget. <a href="/contact/">Get a quote</a>.</p>
         </details>
 
         <details class="faq-item">
@@ -273,6 +267,20 @@ const menuSections = [
     color: var(--warm-grey);
     max-width: 520px;
     line-height: 1.6;
+  }
+
+  .menu-pricing-note {
+    margin-top: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    border-left: 3px solid var(--teal-light);
+    background: rgba(255,255,255,0.06);
+    border-radius: var(--radius-sm);
+  }
+
+  .menu-pricing-note a {
+    color: var(--teal-light);
+    font-weight: 800;
+    white-space: nowrap;
   }
 
   .menu-item-price {
