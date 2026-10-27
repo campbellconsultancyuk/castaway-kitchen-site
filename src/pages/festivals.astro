@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FestivalRoadmap from '../components/FestivalRoadmap.astro';
+import FieldToFestival from '../components/fieldtofestival.astro';
 
 const faqs = [
   {
     q: 'Which festivals are you at in 2026?',
-    a: 'Our confirmed 2026 lineup — Cheltenham Jazz Festival, The Big Retreat, <a href="/blog/2000trees-2026/">2000trees</a>, Electromagnetic Field, Camp Bestival, Lakefest, Beautiful Days, Forwards Festival and We Have Ways, wrapping up with the <a href="/blog/cheltenham-literature-festival-2026/">Cheltenham Literature Festival</a> (9–18 October), our last official event of the season. Ten events from April to October. Follow the <a href="/blog">Castaway blog</a> for festival countdowns and updates.',
+    a: 'Our confirmed 2026 lineup — Cheltenham Jazz Festival, The Big Retreat, <a href="/blog/2000trees-2026/">2000trees</a>, Electromagnetic Field, Camp Bestival, Lakefest, Beautiful Days, Forwards Festival and We Have Ways, wrapping up with the <a href="/blog/cheltenham-literature-festival-2026/">Cheltenham Literature Festival</a> (9–18 October), our last official event of the season. Ten events from April to October. Follow the <a href="/blog/">Castaway blog</a> for festival countdowns and updates.',
   },
   {
     q: 'What food do you serve at festivals?',
@@ -29,11 +30,11 @@ const faqs = [
   },
   {
     q: "I'm a festival organiser — how do I book Castaway Kitchen?",
-    a: 'Use our <a href="/contact">contact form</a> and select the festival/event organiser option. Tell us about your event — capacity, dates, location — and we\'ll get back to you within 24 hours.',
+    a: 'Use our <a href="/contact/">contact form</a> and select the festival/event organiser option. Tell us about your event — capacity, dates, location — and we\'ll get back to you within 24 hours.',
   },
   {
     q: 'Do you do private catering as well as festivals?',
-    a: 'Yes — weddings, private parties, corporate events. The same great food, brought to your venue. See our <a href="/private-catering">Private Catering page</a> for details.',
+    a: 'Yes — weddings, private parties, corporate events. The same great food, brought to your venue. See our <a href="/private-catering/">Private Catering page</a> for details.',
   },
 ];
 ---
@@ -46,13 +47,15 @@ const faqs = [
   <!-- HERO -->
   <section class="page-hero section--dark">
     <div class="container">
-      <p class="eyebrow">Season finale coming up</p>
-      <h1 class="display page-hero-title">2026 Festival Tour</h1>
+      <p class="eyebrow">2026 season wrapped</p>
+      <h1 class="display page-hero-title">Our Festival Season</h1>
       <p class="page-hero-body">
-        Ten festivals. Two units. One crew. We're on the road from April to October, and the season finale is Cheltenham Literature Festival, 9–18 October.
+        Ten festivals. Two units. One crew. 2026 ran from April to October and wrapped at Cheltenham Literature Festival. For 2027 we're picking our favourites and keeping more weekends free for <a href="/private-catering/" style="color: var(--teal-light); font-weight: 800; text-decoration: underline">private events</a>.
       </p>
     </div>
   </section>
+
+  <FieldToFestival />
 
   <!-- ROADMAP -->
   <section class="section roadmap-section">
@@ -71,7 +74,7 @@ const faqs = [
           Two fully equipped units, a proven team and a track record at established UK events.
           Get in touch if you'd like us at your festival.
         </p>
-        <a href="/contact" class="btn btn--primary" style="margin-top: var(--space-md)">Get in Touch</a>
+        <a href="/contact/" class="btn btn--primary" style="margin-top: var(--space-md)">Get in Touch</a>
       </div>
     </div>
   </section>

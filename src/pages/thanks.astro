@@ -2,14 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Message Sent">
+<BaseLayout title="Message Sent" noindex={true}>
   <section class="thanks section--dark">
     <div class="container thanks-inner">
       <span class="thanks-emoji" aria-hidden="true">🥙</span>
       <h1 class="display thanks-title">Message received.</h1>
-      <p class="thanks-body">We'll get back to you within 24 hours. In the meantime, why not check out the menu?</p>
+      <p class="thanks-body">Thanks for your enquiry. We'll get back to you within 24 hours with a quote. In the meantime, have a look at the menu.</p>
       <div class="thanks-ctas">
-        <a href="/menu" class="btn btn--primary">See the Menu</a>
+        <a href="/menu/" class="btn btn--primary">See the Menu</a>
         <a href="/" class="btn btn--outline">Back to Home</a>
       </div>
     </div>

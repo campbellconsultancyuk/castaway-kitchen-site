@@ -1,42 +1,56 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
 
 const useCases = [
   {
-    icon: '💼',
-    title: 'Corporate Events',
-    desc: 'Team lunches, away days, client entertaining. We handle the food — properly — so you can focus on the people. No buffet trays, no soggy sandwiches.',
-    details: ['Up to [X] guests', 'Staffed service available', 'Dietary requirements catered for', 'Invoicing available'],
-  },
-  {
     icon: '💍',
+    type: 'wedding',
     title: 'Weddings',
     desc: 'Festival-style food for your big day. We\'ve done wedding receptions that guests are still talking about. The gyros go down better than most sit-down meals.',
     details: ['Evening receptions & full-day catering', 'Custom menu builds', 'Staffed unit with full setup', 'Works alongside or instead of a caterer'],
   },
   {
+    icon: '💼',
+    type: 'corporate',
+    title: 'Corporate Events',
+    desc: 'Summer socials, away days, launches and client entertaining. We handle the food properly so you can focus on the people. No buffet trays, no soggy sandwiches.',
+    details: ['From 30 guests to several hundred', 'Fully staffed service', 'Dietary requirements catered for', 'Invoicing available'],
+  },
+  {
     icon: '🎉',
+    type: 'party',
     title: 'Private Parties',
     desc: 'Birthdays, anniversaries, garden parties, leaving dos. If you\'re feeding a crowd and want it to feel different, we\'re your people.',
     details: ['Flexible guest numbers', 'Outdoor & indoor-friendly setup', 'Can work with marquees and tents', 'BYOB-friendly events welcome'],
+  },
+  {
+    icon: '🎄',
+    type: 'christmas',
+    title: 'Christmas & Winter',
+    desc: 'Works Christmas dos, winter weddings, New Year and bonfire nights. Hot food, made to order, served fast to a cold crowd.',
+    details: ['Hot, hearty and made to order', 'Courtyards, car parks & marquees', 'Own power, no kitchen needed', 'Dietary requirements catered for'],
   },
 ];
 ---
 
 <BaseLayout
   title="Private Catering"
-  description="Festival-style street food for private events across the Cotswolds, Cornwall & South West. Weddings, parties, corporate. Fully staffed, fully self-sufficient. 24hr quote turnaround."
+  description="Festival street food for private events all year round. Weddings, birthdays, corporate and Christmas parties across the Cotswolds, Cornwall and South West. Fully staffed, self-sufficient, quotes within 24 hours."
 >
 
   <!-- HERO -->
   <section class="page-hero section--dark">
     <div class="container">
-      <p class="eyebrow">Private hire</p>
+      <p class="eyebrow">Private events · All year round</p>
       <h1 class="display page-hero-title">We bring<br />the kitchen<br /><span style="color: var(--teal-light)">to you.</span></h1>
       <p class="page-hero-body">
-        Festival-quality street food at your event — fully staffed, fully equipped, completely tailored to your guest list.
+        Festival-quality street food at your wedding, party or works do. Summer or winter, fully staffed, fully self-sufficient and tailored to your guest list.
       </p>
-      <a href="/contact" class="btn btn--primary" style="margin-top: var(--space-lg)">Enquire Now</a>
+      <div style="display:flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg)">
+        <a href="#enquire" class="btn btn--primary">Get a Quote</a>
+        <a href="/menu/" class="btn btn--outline">See the Food</a>
+      </div>
     </div>
   </section>
 
@@ -44,7 +58,7 @@ const useCases = [
   <section class="section use-cases">
     <div class="container">
       <p class="eyebrow">What we cater</p>
-      <h2 class="display use-cases-title">Three types of event.<br />Same great food.</h2>
+      <h2 class="display use-cases-title">Any excuse for a party.<br />Same great food.</h2>
 
       <div class="use-cases-grid">
         {useCases.map((uc) => (
@@ -57,8 +71,29 @@ const useCases = [
                 <li>✓ {detail}</li>
               ))}
             </ul>
+            <a href={`?type=${uc.type}#enquire`} class="use-case-link">Enquire about {uc.title.toLowerCase()} →</a>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SEASONS -->
+  <section class="section seasons section--dark">
+    <div class="container">
+      <p class="eyebrow" style="color: var(--teal-light)">When we work</p>
+      <h2 class="display seasons-title">Summer. Winter. Whenever.</h2>
+      <div class="seasons-grid">
+        <div class="season-card">
+          <span class="season-tag">May – September</span>
+          <h3 class="display">Summer events</h3>
+          <p>Weddings, garden parties, summer staff socials and village fêtes. Fields, barns and marquees are our natural habitat. Summer weekends book up first, so get in early.</p>
+        </div>
+        <div class="season-card season-card--winter">
+          <span class="season-tag">October – April</span>
+          <h3 class="display">Winter events</h3>
+          <p>Christmas parties, winter weddings, New Year and bonfire nights. Hot gyros and steaming bowls go down a storm when it's cold out, and winter dates tend to be easier to grab.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -73,14 +108,14 @@ const useCases = [
           <span class="how-step-num display">1</span>
           <div>
             <h3>Tell us about your event</h3>
-            <p>Drop us a message with the basics — date, location, rough guest numbers, type of event. No commitment needed at this stage.</p>
+            <p>Fill in the form below with the basics: date, location, rough guest numbers, type of event. No commitment needed at this stage.</p>
           </div>
         </div>
         <div class="how-step">
           <span class="how-step-num display">2</span>
           <div>
             <h3>We build the quote</h3>
-            <p>We'll come back with a tailored quote based on your requirements. Menu, staffing, setup — all included. No hidden extras.</p>
+            <p>Within 24 hours we'll come back with a tailored quote. Menu, staffing and setup all included. No hidden extras.</p>
           </div>
         </div>
         <div class="how-step">
@@ -104,9 +139,9 @@ const useCases = [
         Tell us what you're after and we'll make it work.
       </p>
       <div class="menu-pills">
-        <a href="/menu#gyros" class="menu-pill">🥙 Greek & Mediterranean</a>
-        <a href="/menu#korean" class="menu-pill">🍜 Korean Bowls</a>
-        <a href="/menu#poke" class="menu-pill">🐟 Poke Bowls</a>
+        <a href="/menu/#gyros" class="menu-pill">🥙 Greek & Mediterranean</a>
+        <a href="/menu/#korean" class="menu-pill">🍜 Korean Bowls</a>
+        <a href="/menu/#poke" class="menu-pill">🐟 Poke Bowls</a>
         <span class="menu-pill menu-pill--muted">Custom builds on request</span>
       </div>
     </div>
@@ -120,7 +155,7 @@ const useCases = [
     <p class="areas-intro">Based in Moreton-in-Marsh, Gloucestershire — with deep roots in both the Cotswolds and Cornwall. We cover the full South West and can travel further for the right event.</p>
     <div class="areas-grid">
 
-      <a href="/private-catering/cotswolds" class="area-card">
+      <a href="/private-catering/cotswolds/" class="area-card">
         <div class="area-card-top">
           <span class="area-icon">🏡</span>
           <span class="area-tag">Cotswolds & Gloucestershire</span>
@@ -130,7 +165,7 @@ const useCases = [
         <span class="area-link">Full Cotswolds info →</span>
       </a>
 
-      <a href="/private-catering/cornwall" class="area-card">
+      <a href="/private-catering/cornwall/" class="area-card">
         <div class="area-card-top">
           <span class="area-icon">🌊</span>
           <span class="area-tag">Cornwall & Devon</span>
@@ -147,24 +182,27 @@ const useCases = [
         </div>
         <h3 class="display area-title">Everywhere else</h3>
         <p>Bristol, Somerset, Devon, Oxfordshire, Worcestershire — we cover the broader South West and can discuss travel further afield for larger events.</p>
-        <span class="area-link">Get in touch →</span>
+        <a href="#enquire" class="area-link">Get in touch →</a>
       </div>
 
     </div>
   </div>
 </section>
 
-  <!-- ENQUIRY CTA -->
-  <section class="section--teal section enquiry-cta">
+  <!-- ENQUIRY -->
+  <section class="section--teal section enquiry-cta" id="enquire">
     <div class="container enquiry-cta-inner">
-      <div>
-        <p class="eyebrow" style="color: rgba(255,255,255,0.6)">Let's get started</p>
+      <div class="enquiry-copy">
+        <p class="eyebrow" style="color: rgba(255,255,255,0.7)">Let's get started</p>
         <h2 class="display enquiry-title">Tell us about your event</h2>
-        <p style="color: rgba(255,255,255,0.75); margin-top: var(--space-xs)">
-          We'll get back to you within 24 hours with a quote.
+        <p style="color: rgba(255,255,255,0.85); margin-top: var(--space-sm); line-height: 1.7">
+          We'll get back to you within 24 hours with a tailored menu and quote. Prefer email?
+          <a href="mailto:hello@castawaykitchen.co.uk" style="text-decoration: underline; font-weight: 800">hello@castawaykitchen.co.uk</a>
         </p>
       </div>
-      <a href="/contact" class="btn btn--outline">Enquire Now</a>
+      <div class="enquiry-form-card">
+        <EnquiryForm source="private-catering" />
+      </div>
     </div>
   </section>
 
@@ -196,9 +234,54 @@ const useCases = [
     line-height: 1;
   }
 
+  .use-case-link {
+    font-size: var(--text-sm);
+    font-weight: 800;
+    color: var(--teal);
+    margin-top: var(--space-xs);
+  }
+
+  /* SEASONS */
+  .seasons-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    margin: var(--space-sm) 0 var(--space-xl);
+  }
+
+  .seasons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .season-card {
+    background: var(--teal);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .season-card--winter { background: #1c1c1c; border: 2px solid rgba(255,255,255,0.12); }
+  .season-card h3 { font-size: var(--text-3xl); color: var(--white); }
+  .season-card p { color: rgba(255,255,255,0.8); line-height: 1.7; }
+
+  .season-tag {
+    align-self: flex-start;
+    font-size: var(--text-xs);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-pill);
+    background: rgba(255,255,255,0.15);
+    color: var(--white);
+  }
+
   .use-cases-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-md);
   }
 
@@ -419,12 +502,20 @@ a.area-card:hover {
     padding: var(--space-xl) 0;
   }
 
+  .enquiry-cta { scroll-margin-top: var(--nav-height); }
+
   .enquiry-cta-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 0.8fr 1.3fr;
     gap: var(--space-xl);
-    flex-wrap: wrap;
+    align-items: start;
+  }
+
+  .enquiry-form-card {
+    background: var(--off-white);
+    color: var(--black);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
   }
 
   .enquiry-title {
@@ -437,9 +528,12 @@ a.area-card:hover {
     .use-cases-grid {
       grid-template-columns: 1fr;
     }
-    .enquiry-cta-inner {
-      flex-direction: column;
-      align-items: flex-start;
+    .enquiry-cta-inner,
+    .seasons-grid {
+      grid-template-columns: 1fr;
+    }
+    .enquiry-form-card {
+      padding: var(--space-md);
     }
     .how-step {
       gap: var(--space-md);

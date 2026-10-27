@@ -1,13 +1,13 @@
 ---
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/menu', label: 'Food & Menu' },
-  { href: '/festivals', label: 'Festivals' },
-  { href: '/private-catering', label: 'Private Catering' },
-  { href: '/gallery', label: 'Gallery' },
-  { href: '/about', label: 'About' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/private-catering/', label: 'Private Events' },
+  { href: '/menu/', label: 'Food & Menu' },
+  { href: '/festivals/', label: 'Festivals' },
+  { href: '/gallery/', label: 'Gallery' },
+  { href: '/about/', label: 'About' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/contact/', label: 'Contact' },
 ];
 
 const { pathname } = Astro.url;
@@ -15,7 +15,10 @@ const { pathname } = Astro.url;
 // Normalise trailing slashes so "/about/" matches "/about"
 const normalise = (p: string) => (p !== '/' && p.endsWith('/') ? p.slice(0, -1) : p);
 const currentPath = normalise(pathname);
-const isActive = (href: string) => currentPath === normalise(href);
+const isActive = (href: string) => {
+  const h = normalise(href);
+  return h === '/' ? currentPath === '/' : currentPath === h || currentPath.startsWith(`${h}/`);
+};
 ---
 
 <header class="nav-wrapper">
@@ -45,7 +48,7 @@ const isActive = (href: string) => currentPath === normalise(href);
   <a href="https://x.com/jeveready" target="_blank" rel="noopener" aria-label="X (formerly Twitter)" class="nav-social">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
   </a>
-  <a href="/contact" class="btn btn--primary nav-cta">Book Us</a>
+  <a href="/contact/" class="btn btn--primary nav-cta">Get a Quote</a>
 </div>
 
     <!-- Mobile hamburger -->
@@ -61,7 +64,7 @@ const isActive = (href: string) => currentPath === normalise(href);
     {navLinks.map(link => (
       <a href={link.href} class={`nav-mobile-link ${isActive(link.href) ? 'nav-mobile-link--active' : ''}`}>{link.label}</a>
     ))}
-    <a href="/contact" class="btn btn--primary" style="margin-top: 1rem; text-align: center;">Book Us</a>
+    <a href="/contact/" class="btn btn--primary" style="margin-top: 1rem; justify-content: center;">Get a Quote</a>
   </div>
 </header>
 

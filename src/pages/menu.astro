@@ -87,7 +87,7 @@ const menuSections = [
                 <h3 class="menu-item-name">{item.name}</h3>
                 <p class="menu-item-desc">{item.desc}</p>
               </div>
-              <span class="menu-item-price">{item.price}</span>
+              {item.price && item.price !== '£X' && <span class="menu-item-price">{item.price}</span>}
             </div>
           ))}
         </div>
@@ -164,7 +164,7 @@ const menuSections = [
 
         <details class="faq-item">
           <summary class="faq-question"><span>Can you create a bespoke menu for a private event?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
-          <p class="faq-answer">Absolutely. For private catering we can combine menus, adjust portion formats, create sharing platters or incorporate specific dishes on request. <a href="/contact">Get in touch</a> with your requirements and we'll build something around your event.</p>
+          <p class="faq-answer">Absolutely. For private catering we can combine menus, adjust portion formats, create sharing platters or incorporate specific dishes on request. <a href="/contact/">Get in touch</a> with your requirements and we'll build something around your event.</p>
         </details>
 
       </div>
@@ -177,9 +177,9 @@ const menuSections = [
       <div>
         <p class="eyebrow" style="color: rgba(255,255,255,0.6)">Not at a festival?</p>
         <h2 class="display catering-cta-title">We can come to you</h2>
-        <p>Private events, weddings, corporate — we tailor the menu to fit.</p>
+        <p>Weddings, parties, corporate and Christmas dos. We tailor the menu to your crowd.</p>
       </div>
-      <a href="/private-catering" class="btn btn--outline">Private Catering</a>
+      <a href="/private-catering/" class="btn btn--outline">Private Events</a>
     </div>
   </section>
 

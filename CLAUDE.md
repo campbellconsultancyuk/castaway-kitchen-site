@@ -18,6 +18,17 @@ Client site for Castaway Kitchen (festival street food and private catering, Mor
 - Keep copy short, punchy and warm. Festival, characterful, not corporate. British English.
 - Brand: teal `#2a7c6f`, black, white. Circular seagull/wave/sun logo.
 
+## Enquiry form (the money page element)
+
+- One component, `src/components/EnquiryForm.astro`, used on Home (`#enquire`), Private Events and Contact. Edit fields there only.
+- It posts to `/api/enquiry` (`functions/api/enquiry.js`, a Cloudflare Pages Function), which forwards JSON to the Make.com webhook set as `ENQUIRY_WEBHOOK_URL` in Cloudflare Pages → Settings → Environment variables (Production). Without it, visitors see an "email us instead" message.
+- Links like `/?type=wedding#enquire` pre-select the event type (`wedding`, `party`, `garden-party`, `corporate`, `christmas`, `festival`, `other`).
+- Floating WhatsApp button is hidden until `WHATSAPP_NUMBER` is set in `src/layouts/BaseLayout.astro`.
+
+## Positioning (from Oct 2026)
+
+Private events are the lead offer, year round: summer weddings, parties and corporate dos first, winter/Christmas as a bonus. Festivals are a selective handful and act as proof, not the headline. The scroll story (`fieldtofestival.astro`) now lives on the Festivals page.
+
 ## Updating the festival map (do this after every event)
 
 The map lives in `src/components/FestivalRoadmap.astro`. Festival data is written out **twice** and both copies must be edited together:

@@ -5,7 +5,7 @@
   <div class="container footer-inner">
     <div class="footer-brand">
       <img src="/castaway-logo.png" alt="Castaway Kitchen" width="64" height="64" class="footer-logo" />
-      <p class="footer-tagline">Festival street food done properly.<br />Greek, Korean &amp; beyond.</p>
+      <p class="footer-tagline">Festival street food for your event.<br />Weddings, parties &amp; corporate.</p>
       <a href="https://www.ncass.org.uk/" target="_blank" rel="noopener" class="footer-ncass" aria-label="NCASS — Nationwide Caterers Association">
         <img src="/ncass-logo.png" alt="NCASS — Nationwide Caterers Association member" width="150" height="79" />
       </a>
@@ -13,12 +13,15 @@
 
     <nav class="footer-nav" aria-label="Footer navigation">
       <a href="/">Home</a>
-      <a href="/menu">Food &amp; Menu</a>
-      <a href="/festivals">Festivals</a>
-      <a href="/private-catering">Private Catering</a>
-      <a href="/gallery">Gallery</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
+      <a href="/private-catering/">Private Events</a>
+      <a href="/private-catering/cotswolds/">Cotswolds Catering</a>
+      <a href="/private-catering/cornwall/">Cornwall Catering</a>
+      <a href="/menu/">Food &amp; Menu</a>
+      <a href="/festivals/">Festivals</a>
+      <a href="/gallery/">Gallery</a>
+      <a href="/about/">About</a>
+      <a href="/blog/">Blog</a>
+      <a href="/contact/">Contact</a>
     </nav>
 
     <div class="footer-contact">
@@ -99,9 +102,10 @@
   }
 
   .footer-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 0.6rem 2rem;
+    align-content: start;
   }
 
   .footer-nav a {
