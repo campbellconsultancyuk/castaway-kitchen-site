@@ -15,6 +15,10 @@ interface Props {
 }
 const { source, tone = 'light' } = Astro.props;
 
+// Turnstile sitekey — public by design, not a secret. The matching secret
+// (TURNSTILE_SECRET) is verified server-side in functions/api/enquiry.js.
+const TURNSTILE_SITE_KEY = '0x4AAAAAAFyaRniJbKRzK06K';
+
 const eventTypes = [
   { value: 'wedding', label: 'Wedding' },
   { value: 'party', label: 'Birthday or private party' },
@@ -41,6 +45,10 @@ const eventTypes = [
     <div class="enquiry-hp" aria-hidden="true">
       <label>Leave this empty <input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
     </div>
+
+    <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-size="invisible"></div>
+
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
     <div class="enquiry-row">
       <div class="enquiry-field">

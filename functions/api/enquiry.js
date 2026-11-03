@@ -9,10 +9,38 @@
  * The Make scenario then emails Scott and logs the lead to a Google Sheet.
  * On success the visitor lands on /thanks/. On failure they go back to the
  * page they came from with ?enquiry=error so the form can show the email fallback.
+ *
+ * Bot protection: Cloudflare Turnstile (invisible/managed widget). The widget's
+ * secret is set as TURNSTILE_SECRET in Cloudflare Pages → Settings → Environment
+ * variables. If that var is missing, the Turnstile check is skipped (fails open)
+ * so the form keeps working rather than silently breaking — but without it, spam
+ * will get through, so it should always be set.
  */
 
 const REQUIRED = ['name', 'email', 'event_type'];
 const MAX_LEN = 4000;
+const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+
+async function verifyTurnstile(token, secret, ip) {
+  if (!secret) return true; // fail open if not configured
+  if (!token) return false;
+
+  try {
+    const body = new URLSearchParams({ secret, response: token });
+    if (ip) body.set('remoteip', ip);
+
+    const res = await fetch(TURNSTILE_VERIFY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body,
+    });
+    if (!res.ok) return false;
+    const result = await res.json();
+    return result.success === true;
+  } catch {
+    return false;
+  }
+}
 
 function back(request, status) {
   const ref = request.headers.get('referer');
@@ -41,9 +69,15 @@ export async function onRequestPost({ request, env }) {
     return Response.redirect(new URL('/thanks/', request.url).toString(), 303);
   }
 
+  // Turnstile: verify the token the widget produced before doing anything else.
+  const turnstileToken = (form.get('cf-turnstile-response') || '').toString();
+  const clientIp = request.headers.get('CF-Connecting-IP');
+  const human = await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET, clientIp);
+  if (!human) return back(request, 'invalid');
+
   const data = {};
   for (const [key, value] of form.entries()) {
-    if (key === 'company_website') continue;
+    if (key === 'company_website' || key === 'cf-turnstile-response') continue;
     data[key] = value.toString().slice(0, MAX_LEN).trim();
   }
 
